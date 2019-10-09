@@ -5,7 +5,7 @@
 'use strict';
 
 const { ChaincodeStub, ClientIdentity } = require('fabric-shim');
-const { HealthcareLogsContract } = require('..');
+const { HealthcareLogsContract } = require('../lib/healthcare-logs-contract');
 const winston = require('winston');
 
 const chai = require('chai');

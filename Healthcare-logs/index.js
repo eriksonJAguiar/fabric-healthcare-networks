@@ -4,7 +4,7 @@
 
 'use strict';
 
-const HealthcareLogsContract = require('./lib/healthcare-logs-contract');
+const healthcareLogsContract = require('./lib/healthcare-logs-contract');
+module.exports.contracts = [ healthcareLogsContract ];
 
-module.exports.HealthcareLogsContract = HealthcareLogsContract;
-module.exports.contracts = [ HealthcareLogsContract ];
+//module.exports.HealthcareLogsContract = HealthcareLogsContract;
