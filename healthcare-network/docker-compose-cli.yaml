@@ -25,6 +25,8 @@ services:
       service: peer0.hp1.healthcare.com
     networks:
       - byfn
+    depends_on: 
+      - couchdb-hp1
 
   peer0.hp2.healthcare.com:
     container_name: peer0.hp2.healthcare.com
@@ -33,10 +35,34 @@ services:
       service: peer0.hp2.healthcare.com
     networks:
       - byfn
+    depends_on: 
+      - couchdb-hp2
 
+  couchdb-hp1:
+    container_name: couchdb-hp1.healthcare.com
+    image: hyperledger/fabric-couchdb:latest
+    environment:
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
+    ports:
+      - "5984:5984"
+    networks:
+      - byfn
+  
+  couchdb-hp2:
+    container_name: couchdb-hp2.healthcare.com
+    image: hyperledger/fabric-couchdb:latest
+    environment:
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
+    ports:
+      - "6984:5984"
+    networks:
+      - byfn
+  
   cli:
     container_name: cli
-    image: hyperledger/fabric-tools:$IMAGE_TAG
+    image: hyperledger/fabric-tools:1.4.0
     tty: true
     stdin_open: true
     environment:

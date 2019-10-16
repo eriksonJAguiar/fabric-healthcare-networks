@@ -9,7 +9,7 @@ services:
 
   ordererhp.healthcare.com:
     container_name: ordererhp.healthcare.com
-    image: hyperledger/fabric-orderer:$IMAGE_TAG
+    image: hyperledger/fabric-orderer:1.4.0
     environment:
       - ORDERER_GENERAL_LOGLEVEL=INFO
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
@@ -48,11 +48,9 @@ services:
 
 
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb0:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-hp1:5984
       - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
       - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
-    depends_on: 
-      - couchdb-hp1
     volumes:
         - /var/run/:/host/var/run/
         - ../crypto-config/peerOrganizations/hp1.healthcare.com/peers/peer0.hp1.healthcare.com/msp:/etc/hyperledger/fabric/msp
@@ -61,17 +59,6 @@ services:
     ports:
       - 7051:7051
       - 7053:7053
-
-  couchdb-hp1:
-    container_name: couchdb-hp1
-    image: hyperledger/fabric-couchdb:$IMAGE_TAG
-    environment:
-      - COUCHDB_USER=
-      - COUCHDB_PASSWORD=
-    ports:
-      - "5984:5984"
-    networks:
-      - byfn
 
   peer0.hp2.healthcare.com:
     container_name: peer0.hp2.healthcare.com
@@ -86,11 +73,9 @@ services:
       - CORE_PEER_LOCALMSPID=hp2MSP
 
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb0:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-hp2:5985
       - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
       - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
-    depends_on: 
-      - couchdb-hp2
     volumes:
         - /var/run/:/host/var/run/
         - ../crypto-config/peerOrganizations/hp2.healthcare.com/peers/peer0.hp2.healthcare.com/msp:/etc/hyperledger/fabric/msp
@@ -99,14 +84,3 @@ services:
     ports:
       - 9051:7051
       - 9053:7053
-  
-  couchdb-hp2:
-    container_name: couchdb-hp2
-    image: hyperledger/fabric-couchdb:$IMAGE_TAG
-    environment:
-      - COUCHDB_USER=
-      - COUCHDB_PASSWORD=
-    ports:
-      - "6984:5984"
-    networks:
-      - byfn
