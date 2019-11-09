@@ -6,7 +6,7 @@ volumes:
   peer0.hp2.healthcare.com:
 
 networks:
-  byfn:
+  healthnw:
 
 services:
 
@@ -16,7 +16,52 @@ services:
       service: ordererhp.healthcare.com
     container_name: ordererhp.healthcare.com
     networks:
-      - byfn
+      - healthnw
+
+  ca.hp1.healthcare.com:
+    container_name: ca.hp1.healthcare.com
+    image: hyperledger/fabric-ca:$IMAGE_TAG
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.hp1.healthcare.com
+      # - FABRIC_CA_SERVER_REGISTRY_MAXENROLLMENTS=1 # only allow to register one admin
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca/ca.hp1.healthcare.com-cert.pem # default $HOME/ca-key.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ca/${CA0_PRIVATE_KEY} # default $HOME/ca-cert.pem
+      - FABRIC_CA_SERVER_TLS_ENABLED=$CA_TLS_ENABLED # default tls cert $HOME/tls-cert.pem
+      # - FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE=
+      # - FABRIC_CA_SERVER_TLS_CLIENTAUTH_CERTFILES=
+      # - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/cert.pem
+      # - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-tls/key.pem
+    ports:
+      - 7054:7054
+    # -b :bootstrap identity is required to start the Fabric CA server; this identity is the server administrator.
+    command: sh -c 'fabric-ca-server start -b admin:adminpw'
+    volumes:
+      - ./crypto-config/peerOrganizations/hp1.healthcare.com/ca/:/etc/hyperledger/fabric-ca-server-config/ca
+    networks:
+      - healthnw
+
+  ca.hp2.healthcare.com:
+    container_name: ca.hp2.healthcare.com
+    image: hyperledger/fabric-ca:$IMAGE_TAG
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.hp2.healthcare.com
+      # - FABRIC_CA_SERVER_REGISTRY_MAXENROLLMENTS=1 # only allow to register one admin
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca/ca.hp2.healthcare.com-cert.pem # default $HOME/ca-key.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ca/${CA1_PRIVATE_KEY} # default $HOME/ca-cert.pem 
+      - FABRIC_CA_SERVER_TLS_ENABLED=$CA_TLS_ENABLED # default tls cert $HOME/tls-cert.pem
+      # - FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE=
+      # - FABRIC_CA_SERVER_TLS_CLIENTAUTH_CERTFILES=
+      # - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/cert.pem
+      # - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-tls/key.pem
+    ports:
+      - 8054:7054
+    command: sh -c 'fabric-ca-server start -b admin:adminpw'
+    volumes:
+      - ./crypto-config/peerOrganizations/hp2.healthcare.com/ca/:/etc/hyperledger/fabric-ca-server-config/ca
+    networks:
+      - healthnw
 
   peer0.hp1.healthcare.com:
     container_name: peer0.hp1.healthcare.com
@@ -24,7 +69,7 @@ services:
       file:  base/docker-compose-base.yaml
       service: peer0.hp1.healthcare.com
     networks:
-      - byfn
+      - healthnw
     depends_on: 
       - couchdb-hp1
 
@@ -34,7 +79,7 @@ services:
       file:  base/docker-compose-base.yaml
       service: peer0.hp2.healthcare.com
     networks:
-      - byfn
+      - healthnw
     depends_on: 
       - couchdb-hp2
 
@@ -47,7 +92,7 @@ services:
     ports:
       - "5984:5984"
     networks:
-      - byfn
+      - healthnw
   
   couchdb-hp2:
     container_name: couchdb-hp2.healthcare.com
@@ -58,7 +103,7 @@ services:
     ports:
       - "6984:5984"
     networks:
-      - byfn
+      - healthnw
   
   cli:
     container_name: cli
@@ -88,7 +133,9 @@ services:
         - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
     depends_on:
       - ordererhp.healthcare.com
+      - ca.hp1.healthcare.com
+      - ca.hp2.healthcare.com
       - peer0.hp1.healthcare.com
       - peer0.hp2.healthcare.com
     networks:
-      - byfn
+      - healthnw
