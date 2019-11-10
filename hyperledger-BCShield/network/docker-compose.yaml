@@ -30,10 +30,10 @@ services:
       - ORDERER_GENERAL_TLS_ROOTCAS=/var/hyperledger/orderer/tls/ca.crt
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric
     volumes:
-    - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-    - ./crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/msp:/var/hyperledger/orderer/msp
-    - ./crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/tls/:/var/hyperledger/orderer/tls
-    - ordererhp.healthcare.com:/var/hyperledger/production/orderer
+      - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+      - ./crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/msp:/var/hyperledger/orderer/msp
+      - ./crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/tls/:/var/hyperledger/orderer/tls
+      - ordererhp.healthcare.com:/var/hyperledger/production/orderer
     ports:
       - 7050:7050    
     networks:
@@ -46,8 +46,8 @@ services:
         - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
         - FABRIC_CA_SERVER_CA_NAME=ca.hprovider.health.com
         # - FABRIC_CA_SERVER_REGISTRY_MAXENROLLMENTS=1 # only allow to register one admin
-        - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca/ca.hprovider.healthcare.com-cert.pem # default $HOME/ca-key.pem
-        - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ca/${CA0_PRIVATE_KEY} # default $HOME/ca-cert.pem
+        - FABRIC_CA_SERVER_CA_CERTFILE=./crypto-config/peerOrganizations/hprovider.healthcare.com/ca/ca.hprovider.healthcare.com-cert.pem # default $HOME/ca-key.pem
+        - FABRIC_CA_SERVER_CA_KEYFILE=./crypto-config/peerOrganizations/hprovider.healthcare.com/ca/fdea3862fc578eb0510c21cc7fc7895d73f8b605d6c99e0014a439f178376469_sk # default $HOME/ca-cert.pem
         - FABRIC_CA_SERVER_TLS_ENABLED=$CA_TLS_ENABLED # default tls cert $HOME/tls-cert.pem
         #- FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE=
         #- FABRIC_CA_SERVER_TLS_CLIENTAUTH_CERTFILES=
@@ -69,8 +69,8 @@ services:
         - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
         - FABRIC_CA_SERVER_CA_NAME=ca.research.healthcare.com
         - FABRIC_CA_SERVER_REGISTRY_MAXENROLLMENTS=1 # only allow to register one admin
-        - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca/ca.research.healthcare.com-cert.pem # default $HOME/ca-key.pem
-        - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ca/${CA1_PRIVATE_KEY} # default $HOME/ca-cert.pem 
+        - FABRIC_CA_SERVER_CA_CERTFILE=./crypto-config/peerOrganizations/research.healthcare.com/ca/ca.research.healthcare.com-cert.pem # default $HOME/ca-key.pem
+        - FABRIC_CA_SERVER_CA_KEYFILE=./crypto-config/peerOrganizations/research.healthcare.com/ca/350762a6d88c65237927c057a100f018ce37fd7bddcf08a5a4b26ceaefe93ade_sk # default $HOME/ca-cert.pem 
         - FABRIC_CA_SERVER_TLS_ENABLED=$CA_TLS_ENABLED # default tls cert $HOME/tls-cert.pem
           # - FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE=
           # - FABRIC_CA_SERVER_TLS_CLIENTAUTH_CERTFILES=
