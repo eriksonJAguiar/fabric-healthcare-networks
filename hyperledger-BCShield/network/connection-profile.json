@@ -21,7 +21,7 @@
       }
     },
     "channels": {
-      "mychannel": {
+      "HealthChannel": {
         "orderers": ["ordererhp.healthcare.com"],
         "peers": {
           "peer0.hprovider.healthcare.com": {
