@@ -19,7 +19,7 @@ async function hrecords() {
 
             return;
 
-        }
+        }git
 
         const gateway = new Gateway();
         await gateway.connect(ccpPath, { wallet, identity: 'user1', discovery: { enabled: true, asLocalhost: true } });
