@@ -41,4 +41,4 @@ export CORE_PEER_ADDRESS=peer0.research.healthcare.com:7051
 
 export CORE_PEER_LOCALMSPID=ResearchMSP
 
-eer channel update -o ordererhp.healthcare.com:7050 -c healthchannel -f ./channel-artifacts/${CORE_PEER_LOCALMSPID}-anchors.tx
+peer channel update -o ordererhp.healthcare.com:7050 -c healthchannel -f ./channel-artifacts/${CORE_PEER_LOCALMSPID}-anchors.tx
