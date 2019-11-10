@@ -2,7 +2,7 @@
 const { FileSystemWallet, Gateway, X509WalletMixin } = require('fabric-network');
 const path = require('path');
 
-const ccpPath = path.resolve(__dirname, '..', '..', '..', 'hyperledger-fabric-network', 'hurley.networkConfig.json');
+const ccpPath = path.resolve(__dirname, '..', 'hyperledger-BCShield', 'connection-profile.json');
 
 async function registerUser(){
     try{
