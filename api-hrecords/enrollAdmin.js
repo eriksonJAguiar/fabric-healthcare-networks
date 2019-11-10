@@ -4,7 +4,7 @@ const { FileSystemWallet, X509WalletMixin } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
 
-const ccpPath = path.resolve(__dirname, '..', 'hyperledger-BCShield', 'connection-profile.json');
+const ccpPath = path.resolve(__dirname, '..', 'hyperledger-BCShield/network', 'connection-profile.json');
 const ccpJSON = fs.readFileSync(ccpPath, 'utf8');
 const ccp = JSON.parse(ccpJSON);
 
