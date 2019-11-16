@@ -6,8 +6,12 @@ volumes:
   ordererhp.healthcare.com:
   peer0.hprovider.healthcare.com:
   peer1.hprovider.healthcare.com:
+  peer2.hprovider.healthcare.com:
+  peer3.hprovider.healthcare.com:
   peer0.research.healthcare.com:
   peer1.research.healthcare.com:
+  peer2.research.healthcare.com:
+  peer3.research.healthcare.com:
 
 networks:
   healthNetwork:
@@ -91,9 +95,9 @@ services:
      service: peer-base
     environment:
       - CORE_PEER_ID=peer0.hprovider.healthcare.com
-      - CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hprovider.healthcare.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.hprovider.healthcare.com:7051
+      - CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:8031
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hprovider.healthcare.com:8031
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.hprovider.healthcare.com:8031
       - CORE_PEER_LOCALMSPID=HProviderMSP
     volumes:
         - /var/run/:/host/var/run/        
@@ -101,9 +105,9 @@ services:
         - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
         - peer0.hprovider.healthcare.com:/var/hyperledger/production
     ports:
-      - 7051:7051
-      - 7052:7052
-      - 7053:7053
+      - 8031:8031
+      - 8032:8032
+      - 8033:8033
     networks:
       - healthNetwork
 
@@ -114,9 +118,9 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer1.hprovider.healthcare.com
-      - CORE_PEER_ADDRESS=peer1.hprovider.healthcare.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.hprovider.healthcare.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.hprovider.healthcare.com:7051
+      - CORE_PEER_ADDRESS=peer1.hprovider.healthcare.com:8041
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.hprovider.healthcare.com:8041
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hprovider.healthcare.com:8041
       - CORE_PEER_LOCALMSPID=HProviderMSP
     volumes:
         - /var/run/:/host/var/run/        
@@ -124,9 +128,55 @@ services:
         - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer1.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
         - peer1.hprovider.healthcare.com:/var/hyperledger/production
     ports:
+      - 8041:8041
+      - 8042:8042
+      - 8043:8043
+    networks:
+      - healthNetwork
+
+  peer2.hprovider.healthcare.com:
+    container_name: peer2.hprovider.healthcare.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer2.hprovider.healthcare.com
+      - CORE_PEER_ADDRESS=peer2.hprovider.healthcare.com:8051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.hprovider.healthcare.com:8051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer2.hprovider.healthcare.com:8051
+      - CORE_PEER_LOCALMSPID=HProviderMSP
+    volumes:
+        - /var/run/:/host/var/run/        
+        - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer2.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
+        - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer2.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
+        - peer2.hprovider.healthcare.com:/var/hyperledger/production
+    ports:
       - 8051:7051
       - 8052:7052
       - 8053:7053
+    networks:
+      - healthNetwork
+
+  peer3.hprovider.healthcare.com:
+    container_name: peer3.hprovider.healthcare.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer3.hprovider.healthcare.com
+      - CORE_PEER_ADDRESS=peer3.hprovider.healthcare.com:8061
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.hprovider.healthcare.com:8061
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer3.hprovider.healthcare.com:8061
+      - CORE_PEER_LOCALMSPID=HProviderMSP
+    volumes:
+        - /var/run/:/host/var/run/        
+        - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer3.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
+        - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer3.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
+        - peer3.hprovider.healthcare.com:/var/hyperledger/production
+    ports:
+      - 8061:7061
+      - 8062:7062
+      - 8063:7063
     networks:
       - healthNetwork
 
@@ -137,9 +187,9 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer0.research.healthcare.com
-      - CORE_PEER_ADDRESS=peer0.research.healthcare.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.research.healthcare.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.research.healthcare.com:7051
+      - CORE_PEER_ADDRESS=peer0.research.healthcare.com:9031
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.research.healthcare.com:9031
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.research.healthcare.com:9031
       - CORE_PEER_LOCALMSPID=ResearchMSP
     volumes:
         - /var/run/:/host/var/run/        
@@ -147,9 +197,9 @@ services:
         - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
         - peer0.research.healthcare.com:/var/hyperledger/production
     ports:
-      - 9051:7051
-      - 9052:7052
-      - 9053:7053
+      - 9031:9031
+      - 9032:9032
+      - 9033:9033
     networks:
       - healthNetwork
 
@@ -160,9 +210,9 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer1.research.healthcare.com
-      - CORE_PEER_ADDRESS=peer1.research.healthcare.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.research.healthcare.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.research.healthcare.com:7051
+      - CORE_PEER_ADDRESS=peer1.research.healthcare.com:9041
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.research.healthcare.com:9041
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.research.healthcare.com:9041
       - CORE_PEER_LOCALMSPID=ResearchMSP
     volumes:
         - /var/run/:/host/var/run/        
@@ -173,9 +223,57 @@ services:
       - healthNetwork
         
     ports:
-      - 10051:7051
-      - 10052:7052
-      - 10053:7053
+      - 9041:9041
+      - 9042:9042
+      - 9043:9043
+
+  peer2.research.healthcare.com:
+    container_name: peer2.research.healthcare.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer2.research.healthcare.com
+      - CORE_PEER_ADDRESS=peer2.research.healthcare.com:9051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.research.healthcare.com:9051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer2.research.healthcare.com:9051
+      - CORE_PEER_LOCALMSPID=ResearchMSP
+    volumes:
+        - /var/run/:/host/var/run/        
+        - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer2.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
+        - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer2.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
+        - peer2.research.healthcare.com:/var/hyperledger/production
+    networks:
+      - healthNetwork
+        
+    ports:
+      - 9051:9051
+      - 9052:9052
+      - 9053:9053
+
+  peer3.research.healthcare.com:
+    container_name: peer3.research.healthcare.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer3.research.healthcare.com
+      - CORE_PEER_ADDRESS=peer3.research.healthcare.com:9061
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.research.healthcare.com:9061
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer3.research.healthcare.com:9061
+      - CORE_PEER_LOCALMSPID=ResearchMSP
+    volumes:
+        - /var/run/:/host/var/run/        
+        - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer3.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
+        - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer3.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
+        - peer3.research.healthcare.com:/var/hyperledger/production
+    networks:
+      - healthNetwork
+        
+    ports:
+      - 9061:9061
+      - 9062:9062
+      - 9063:9063
 
   cli:
     container_name: cli
@@ -206,8 +304,12 @@ services:
       - ordererhp.healthcare.com
       - peer0.hprovider.healthcare.com
       - peer1.hprovider.healthcare.com
+      - peer2.hprovider.healthcare.com
+      - peer3.hprovider.healthcare.com
       - peer0.research.healthcare.com
       - peer1.research.healthcare.com
+      - peer2.research.healthcare.com
+      - peer3.research.healthcare.com
 
     networks:
       - healthNetwork
