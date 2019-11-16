@@ -24,13 +24,13 @@ Organizations:
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
             - Host: peer0.hprovider.healthcare.com
-              Port: 7051
+              Port: 8031
             - Host: peer2.hprovider.healthcare.com
-              Port: 7051
+              Port: 8041
             - Host: peer3.hprovider.healthcare.com
-              Port: 7051
+              Port: 8051
             - Host: peer4.hprovider.healthcare.com
-              Port: 7051
+              Port: 8061
 
     - &Research        
         Name: ResearchMSP
@@ -42,13 +42,13 @@ Organizations:
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
             - Host: peer0.research.healthcare.com
-              Port: 7051
+              Port: 9031
             - Host: peer1.research.healthcare.com
-              Port: 7051
+              Port: 9041
             - Host: peer2.research.healthcare.com
-              Port: 7051
+              Port: 9051
             - Host: peer3.research.healthcare.com
-              Port: 7051
+              Port: 9061
     
 
     
