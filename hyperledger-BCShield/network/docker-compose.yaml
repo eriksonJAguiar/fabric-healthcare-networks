@@ -81,7 +81,7 @@ services:
         - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/cert.pem
         - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-tls/key.pem
       ports:
-        - 8054:7054
+        - 8054:8054
       command: sh -c 'fabric-ca-server start -b admin:adminpw'
       volumes:
         - ./crypto-config/peerOrganizations/research.healthcare.com/ca/:/etc/hyperledger/fabric-ca-server-config/ca
@@ -214,9 +214,9 @@ services:
     depends_on: 
       - couchdb.peer3.hprovider
     ports:
-      - 8061:7061
-      - 8062:7062
-      - 8063:7063
+      - 8061:8061
+      - 8062:8062
+      - 8063:8063
     networks:
       - healthNetwork
 
