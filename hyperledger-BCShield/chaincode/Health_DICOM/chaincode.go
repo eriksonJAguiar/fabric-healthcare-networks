@@ -11,34 +11,34 @@ import (
 )
 
 type Dicom struct {
-	DicomId               int       `json:"dicomId"`
-	Patient_firstname     string    `json:"patient_firstname"`
-	Patient_lastname      string    `json:"patient_lastname"`
-	Patient_telephone     string    `json:"patient_telephone"`
-	Patient_address       string    `json:"patient_address"`
-	Patient_age           int       `json:"patient_age"`
-	Patient_birth         string    `json:"patient_birth"`
-	Patient_organization  string    `json:"patient_lastname"`
-	Patient_mothername    string    `json:"patient_mothername"`
-	Patient_religion      string    `json:"patient_religion"`
-	Patient_sex           string    `json:"patient_sex"`
-	Patient_gender        string    `json:"patient_gender"`
-	Patient_insuranceplan string    `json:"patient_insuranceplan"`
-	Patient_weigth        int       `json:"patient_weigth"`
-	Patient_heigth        int       `json:"patient_heigth"`
-	Machinemodel          string    `json:"machinemodel"`
-	Timestamp             time.Time `json:"timestamp"`
+	DicomID              int       `json:"dicomId"`
+	PatientFirstname     string    `json:"patient_firstname"`
+	PatientLastname      string    `json:"patient_lastname"`
+	PatientTelephone     string    `json:"patient_telephone"`
+	PatientAddress       string    `json:"patient_address"`
+	PatientAge           int       `json:"patient_age"`
+	PatientBirth         string    `json:"patient_birth"`
+	PatientOrganization  string    `json:"patient_lastname"`
+	PatientMothername    string    `json:"patient_mothername"`
+	PatientReligion      string    `json:"patient_religion"`
+	PatientSex           string    `json:"patient_sex"`
+	PatientGender        string    `json:"patient_gender"`
+	PatientInsuranceplan string    `json:"patient_insuranceplan"`
+	PatientWeigth        int       `json:"patient_weigth"`
+	PatientHeigth        int       `json:"patient_heigth"`
+	Machinemodel         string    `json:"machinemodel"`
+	Timestamp            time.Time `json:"timestamp"`
 }
 
 type Log struct {
-	LogId         int       `json:"dicomId"`
-	Asset_token   string    `json:"asset_token"`
-	Type_asset    string    `json:"type_asset"`
-	Owner_asset   string    `json:"owner_asset"`
-	Hprovider_get string    `json:"hprovider_get"`
-	Timestamp     time.Time `json:"timestamp"`
-	Who_accessed  string    `json:"who_accessed"`
-	Access_level  int       `json:"access_level"`
+	LogID        int       `json:"dicomId"`
+	AssetToken   string    `json:"asset_token"`
+	TypeAsset    string    `json:"type_asset"`
+	OwnerAsset   string    `json:"owner_asset"`
+	HproviderGet string    `json:"hprovider_get"`
+	Timestamp    time.Time `json:"timestamp"`
+	WhoAccessed  string    `json:"who_accessed"`
+	AccessLevel  int       `json:"access_level"`
 }
 
 type HealthcareChaincode struct {
@@ -93,35 +93,35 @@ func (t *HealthcareChaincode) saveDicom(stub shim.ChaincodeStubInterface, args [
 		return shim.Error("17th argument must be a non-empty string")
 	}
 
-	dicomId, err := strconv.Atoi(args[0])
+	dicomID, err := strconv.Atoi(args[0])
 	if err != nil {
 		return shim.Error("1 argument must be a numeric string")
 	}
-	patient_age, err := strconv.Atoi(args[5])
+	patientAge, err := strconv.Atoi(args[5])
 	if err != nil {
 		return shim.Error("7 argument must be a numeric string")
 	}
 	timestamp := time.Now()
-	patient_weigth, err := strconv.Atoi(args[13])
+	patientWeigth, err := strconv.Atoi(args[13])
 	if err != nil {
 		return shim.Error("14 argument must be a numeric string")
 	}
-	patient_heigth, err := strconv.Atoi(args[14])
+	patientHeigth, err := strconv.Atoi(args[14])
 	if err != nil {
 		return shim.Error("15 argument must be a numeric string")
 	}
 
-	patient_firstname := args[1]
-	patient_lastname := args[2]
-	patient_telephone := args[3]
-	patient_address := args[4]
-	patient_birth := args[6]
-	patient_organization := args[7]
-	patient_mothername := args[8]
-	patient_religion := args[9]
-	patient_sex := args[10]
-	patient_gender := args[11]
-	patient_insuranceplan := args[12]
+	patientFirstname := args[1]
+	patientLastname := args[2]
+	patientTelephone := args[3]
+	patientAddress := args[4]
+	patientBirth := args[6]
+	patientOrganization := args[7]
+	patientMothername := args[8]
+	patientReligion := args[9]
+	patientSex := args[10]
+	patientGender := args[11]
+	patientInsuranceplan := args[12]
 	machinemodel := args[15]
 
 	dicomBytes, err := stub.GetState(args[0])
@@ -132,32 +132,32 @@ func (t *HealthcareChaincode) saveDicom(stub shim.ChaincodeStubInterface, args [
 	}
 
 	rec := &Dicom{
-		DicomId:               dicomId,
-		Patient_firstname:     patient_firstname,
-		Patient_lastname:      patient_lastname,
-		Patient_telephone:     patient_telephone,
-		Patient_address:       patient_address,
-		Patient_age:           patient_age,
-		Patient_birth:         patient_birth,
-		Patient_organization:  patient_organization,
-		Patient_mothername:    patient_mothername,
-		Patient_religion:      patient_religion,
-		Patient_sex:           patient_sex,
-		Patient_gender:        patient_gender,
-		Patient_insuranceplan: patient_insuranceplan,
-		Patient_weigth:        patient_weigth,
-		Patient_heigth:        patient_heigth,
-		Machinemodel:          machinemodel,
-		Timestamp:             timestamp,
+		DicomID:              dicomID,
+		PatientFirstname:     patientFirstname,
+		PatientLastname:      patientLastname,
+		PatientTelephone:     patientTelephone,
+		PatientAddress:       patientAddress,
+		PatientAge:           patientAge,
+		PatientBirth:         patientBirth,
+		PatientOrganization:  patientOrganization,
+		PatientMothername:    patientMothername,
+		PatientReligion:      patientReligion,
+		PatientSex:           patientSex,
+		PatientGender:        patientGender,
+		PatientInsuranceplan: patientInsuranceplan,
+		PatientWeigth:        patientWeigth,
+		PatientHeigth:        patientHeigth,
+		Machinemodel:         machinemodel,
+		Timestamp:            timestamp,
 	}
 
-	dicomJson, err := json.Marshal(rec)
+	dicomJSON, err := json.Marshal(rec)
 
 	if err != nil {
 		return shim.Error(err.Error())
 	}
 
-	err = stub.PutState(strconv.Itoa(dicomId), dicomJson)
+	err = stub.PutState(strconv.Itoa(dicomID), dicomJSON)
 	if err != nil {
 		return shim.Error(err.Error())
 	}
@@ -168,21 +168,21 @@ func (t *HealthcareChaincode) saveDicom(stub shim.ChaincodeStubInterface, args [
 }
 
 func (t *HealthcareChaincode) getDicom(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	var dicomId, jsonResp string
+	var dicomID, jsonResp string
 	var err error
 
 	if len(args) != 1 {
 		return shim.Error("Incorrect number of arguments. Expecting dicom number of the Record to query")
 	}
 
-	dicomId = args[0]
+	dicomID = args[0]
 
-	valBytes, err := stub.GetState(dicomId)
+	valBytes, err := stub.GetState(dicomID)
 	if err != nil {
-		jsonResp = "{\"Error\":\"Failed to get state for " + dicomId + "\"}"
+		jsonResp = "{\"Error\":\"Failed to get state for " + dicomID + "\"}"
 		return shim.Error(jsonResp)
 	} else if valBytes == nil {
-		jsonResp = "{\"Error\":\"Record does not exist: " + dicomId + "\"}"
+		jsonResp = "{\"Error\":\"Record does not exist: " + dicomID + "\"}"
 		return shim.Error(jsonResp)
 	}
 
@@ -216,21 +216,21 @@ func (t *HealthcareChaincode) saveLog(stub shim.ChaincodeStubInterface, args []s
 		return shim.Error("8th argument must be a non-empty string")
 	}
 
-	logId, err := strconv.Atoi(args[0])
+	logID, err := strconv.Atoi(args[0])
 	if err != nil {
 		return shim.Error("1 argument must be a numeric string")
 	}
-	access_level, err := strconv.Atoi(args[7])
+	accessLevel, err := strconv.Atoi(args[7])
 	if err != nil {
 		return shim.Error("8 argument must be a numeric string")
 	}
 
-	asset_token := args[1]
-	type_asset := args[2]
-	owner_asset := args[3]
-	hprovider_get := args[4]
+	assetToken := args[1]
+	typeAsset := args[2]
+	ownerAsset := args[3]
+	hproviderGet := args[4]
 	timestamp := time.Now()
-	who_accessed := args[6]
+	whoAccessed := args[6]
 
 	dicomBytes, err := stub.GetState(args[0])
 	if err != nil {
@@ -240,23 +240,23 @@ func (t *HealthcareChaincode) saveLog(stub shim.ChaincodeStubInterface, args []s
 	}
 
 	rec := &Log{
-		LogId:         logId,
-		Asset_token:   asset_token,
-		Type_asset:    type_asset,
-		Owner_asset:   owner_asset,
-		Hprovider_get: hprovider_get,
-		Timestamp:     timestamp,
-		Who_accessed:  who_accessed,
-		Access_level:  access_level,
+		LogID:        logID,
+		AssetToken:   assetToken,
+		TypeAsset:    typeAsset,
+		OwnerAsset:   ownerAsset,
+		HproviderGet: hproviderGet,
+		Timestamp:    timestamp,
+		WhoAccessed:  whoAccessed,
+		AccessLevel:  accessLevel,
 	}
 
-	logJson, err := json.Marshal(rec)
+	logJSON, err := json.Marshal(rec)
 
 	if err != nil {
 		return shim.Error(err.Error())
 	}
 
-	err = stub.PutState(strconv.Itoa(logId), logJson)
+	err = stub.PutState(strconv.Itoa(logID), logJSON)
 	if err != nil {
 		return shim.Error(err.Error())
 	}
@@ -267,21 +267,21 @@ func (t *HealthcareChaincode) saveLog(stub shim.ChaincodeStubInterface, args []s
 }
 
 func (t *HealthcareChaincode) getLog(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	var logId, jsonResp string
+	var logID, jsonResp string
 	var err error
 
 	if len(args) != 1 {
 		return shim.Error("Incorrect number of arguments. Expecting Logs number of the Record to query")
 	}
 
-	logId = args[0]
+	logID = args[0]
 
-	valBytes, err := stub.GetState(logId)
+	valBytes, err := stub.GetState(logID)
 	if err != nil {
-		jsonResp = "{\"Error\":\"Failed to get state for " + logId + "\"}"
+		jsonResp = "{\"Error\":\"Failed to get state for " + logID + "\"}"
 		return shim.Error(jsonResp)
 	} else if valBytes == nil {
-		jsonResp = "{\"Error\":\"Record does not exist: " + logId + "\"}"
+		jsonResp = "{\"Error\":\"Record does not exist: " + logID + "\"}"
 		return shim.Error(jsonResp)
 	}
 
