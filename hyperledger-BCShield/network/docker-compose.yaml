@@ -117,7 +117,7 @@ services:
     
   couchdb.peer0.hprovider:
     container_name: couchdb.peer0.hprovider
-    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    image: hyperledger/fabric-couchdb:latest
     ports:
       - 10010:10010
     environment:
@@ -152,7 +152,7 @@ services:
 
   couchdb.peer1.hprovider:
     container_name: couchdb.peer1.hprovider
-    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    image: hyperledger/fabric-couchdb:latest
     ports:
       - 10020:10020
     environment:
@@ -187,7 +187,7 @@ services:
 
   couchdb.peer2.hprovider:
     container_name: couchdb.peer2.hprovider
-    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    image: hyperledger/fabric-couchdb:latest
     ports:
       - 10030:10030
     environment:
@@ -222,7 +222,7 @@ services:
 
   couchdb.peer3.hprovider:
     container_name: couchdb.peer3.hprovider
-    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    image: hyperledger/fabric-couchdb:latest
     ports:
       - 10040:10040
     environment:
@@ -257,7 +257,7 @@ services:
 
   couchdb.peer0.research:
     container_name: couchdb.peer0.research
-    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    image: hyperledger/fabric-couchdb:latest
     ports:
       - 10050:10050
     environment:
@@ -293,7 +293,7 @@ services:
 
   couchdb.peer1.research:
     container_name: couchdb.peer1.research
-    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    image: hyperledger/fabric-couchdb:latest
     ports:
       - 10060:10060
     environment:
@@ -328,7 +328,7 @@ services:
   
   couchdb.peer2.research:
     container_name: couchdb.peer2.research
-    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    image: hyperledger/fabric-couchdb:latest
     ports:
       - 10070:10070
     environment:
@@ -363,7 +363,7 @@ services:
   
   couchdb.peer3.research:
     container_name: couchdb.peer3.research
-    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    image: hyperledger/fabric-couchdb:latest
     ports:
       - 10080:10080
     environment:
