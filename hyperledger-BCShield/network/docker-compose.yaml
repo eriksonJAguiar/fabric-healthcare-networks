@@ -99,17 +99,29 @@ services:
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hprovider.healthcare.com:8031
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.hprovider.healthcare.com:8031
       - CORE_PEER_LOCALMSPID=HProviderMSP
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.hprovider:10010
     volumes:
         - /var/run/:/host/var/run/        
         - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
         - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
         - peer0.hprovider.healthcare.com:/var/hyperledger/production
+    depends_on: 
+      - couchdb.peer0.hprovider
     ports:
       - 8031:8031
       - 8032:8032
       - 8033:8033
     networks:
       - healthNetwork
+    
+  couchdb.peer0.hprovider:
+    container_name: couchdb.peer0.hprovider
+    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    ports:
+      - 10010:10010
+    environment:
+      DB_URL: http://localhost:10010/member_db
 
   peer1.hprovider.healthcare.com:
     container_name: peer1.hprovider.healthcare.com
@@ -122,17 +134,29 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.hprovider.healthcare.com:8041
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hprovider.healthcare.com:8041
       - CORE_PEER_LOCALMSPID=HProviderMSP
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer1.hprovider:10020
     volumes:
         - /var/run/:/host/var/run/        
         - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer1.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
         - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer1.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
         - peer1.hprovider.healthcare.com:/var/hyperledger/production
+    depends_on: 
+      - couchdb.peer1.hprovider
     ports:
       - 8041:8041
       - 8042:8042
       - 8043:8043
     networks:
       - healthNetwork
+
+  couchdb.peer1.hprovider:
+    container_name: couchdb.peer1.hprovider
+    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    ports:
+      - 10020:10020
+    environment:
+      DB_URL: http://localhost:10020/member_db
 
   peer2.hprovider.healthcare.com:
     container_name: peer2.hprovider.healthcare.com
@@ -145,17 +169,29 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.hprovider.healthcare.com:8051
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer2.hprovider.healthcare.com:8051
       - CORE_PEER_LOCALMSPID=HProviderMSP
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer2.hprovider:10030
     volumes:
         - /var/run/:/host/var/run/        
         - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer2.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
         - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer2.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
         - peer2.hprovider.healthcare.com:/var/hyperledger/production
+    depends_on: 
+      - couchdb.peer2.hprovider
     ports:
       - 8051:7051
       - 8052:7052
       - 8053:7053
     networks:
       - healthNetwork
+
+  couchdb.peer2.hprovider:
+    container_name: couchdb.peer2.hprovider
+    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    ports:
+      - 10030:10030
+    environment:
+      DB_URL: http://localhost:10030/member_db
 
   peer3.hprovider.healthcare.com:
     container_name: peer3.hprovider.healthcare.com
@@ -168,17 +204,29 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.hprovider.healthcare.com:8061
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer3.hprovider.healthcare.com:8061
       - CORE_PEER_LOCALMSPID=HProviderMSP
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer3.hprovider:10040
     volumes:
         - /var/run/:/host/var/run/        
         - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer3.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
         - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer3.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
         - peer3.hprovider.healthcare.com:/var/hyperledger/production
+    depends_on: 
+      - couchdb.peer3.hprovider
     ports:
       - 8061:7061
       - 8062:7062
       - 8063:7063
     networks:
       - healthNetwork
+
+  couchdb.peer3.hprovider:
+    container_name: couchdb.peer3.hprovider
+    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    ports:
+      - 10040:10040
+    environment:
+      DB_URL: http://localhost:10040/member_db
 
   peer0.research.healthcare.com:
     container_name: peer0.research.healthcare.com
@@ -191,17 +239,30 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.research.healthcare.com:9031
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.research.healthcare.com:9031
       - CORE_PEER_LOCALMSPID=ResearchMSP
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.research:10050
     volumes:
         - /var/run/:/host/var/run/        
         - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
         - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
         - peer0.research.healthcare.com:/var/hyperledger/production
+    depends_on: 
+      - couchdb.peer0.research
     ports:
       - 9031:9031
       - 9032:9032
       - 9033:9033
     networks:
       - healthNetwork
+
+  couchdb.peer0.research:
+    container_name: couchdb.peer0.research
+    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    ports:
+      - 10050:10050
+    environment:
+      DB_URL: http://localhost:10050/member_db
+
 
   peer1.research.healthcare.com:
     container_name: peer1.research.healthcare.com
@@ -214,18 +275,29 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.research.healthcare.com:9041
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.research.healthcare.com:9041
       - CORE_PEER_LOCALMSPID=ResearchMSP
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer1.research:10060
     volumes:
         - /var/run/:/host/var/run/        
         - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer1.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
         - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer1.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
         - peer1.research.healthcare.com:/var/hyperledger/production
+    depends_on: 
+      - couchdb.peer1.research
     networks:
-      - healthNetwork
-        
+      - healthNetwork  
     ports:
       - 9041:9041
       - 9042:9042
       - 9043:9043
+
+  couchdb.peer1.research:
+    container_name: couchdb.peer1.research
+    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    ports:
+      - 10060:10060
+    environment:
+      DB_URL: http://localhost:10060/member_db
 
   peer2.research.healthcare.com:
     container_name: peer2.research.healthcare.com
@@ -238,18 +310,29 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.research.healthcare.com:9051
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer2.research.healthcare.com:9051
       - CORE_PEER_LOCALMSPID=ResearchMSP
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer2.research:10070
     volumes:
         - /var/run/:/host/var/run/        
         - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer2.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
         - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer2.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
         - peer2.research.healthcare.com:/var/hyperledger/production
+    depends_on: 
+      - couchdb.peer2.research
     networks:
-      - healthNetwork
-        
+      - healthNetwork  
     ports:
       - 9051:9051
       - 9052:9052
       - 9053:9053
+  
+  couchdb.peer2.research:
+    container_name: couchdb.peer2.research
+    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    ports:
+      - 10070:10070
+    environment:
+      DB_URL: http://localhost:10070/member_db
 
   peer3.research.healthcare.com:
     container_name: peer3.research.healthcare.com
@@ -262,18 +345,30 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.research.healthcare.com:9061
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer3.research.healthcare.com:9061
       - CORE_PEER_LOCALMSPID=ResearchMSP
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer3.research:10080
     volumes:
         - /var/run/:/host/var/run/        
         - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer3.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
         - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer3.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
         - peer3.research.healthcare.com:/var/hyperledger/production
+    depends_on: 
+      - couchdb.peer3.research
     networks:
-      - healthNetwork
-        
+      - healthNetwork 
     ports:
       - 9061:9061
       - 9062:9062
       - 9063:9063
+  
+  couchdb.peer3.research:
+    container_name: couchdb.peer3.research
+    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    ports:
+      - 10080:10080
+    environment:
+      DB_URL: http://localhost:10080/member_db
+
 
   cli:
     container_name: cli
@@ -310,6 +405,5 @@ services:
       - peer1.research.healthcare.com
       - peer2.research.healthcare.com
       - peer3.research.healthcare.com
-
     networks:
       - healthNetwork
