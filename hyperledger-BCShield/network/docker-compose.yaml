@@ -119,7 +119,7 @@ services:
     container_name: couchdb.peer0.hprovider
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
-      - DB_URL: http://localhost:7984/member_db
+      - DB_URL=http://localhost:7984/member_db
       - COUCHDB_USER=admin
       - COUCHDB_PASSWORD=adminpw
     volumes:
@@ -160,7 +160,7 @@ services:
     container_name: couchdb.peer1.hprovider
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
-      - DB_URL: http://localhost:8984/member_db
+      - DB_URL=http://localhost:8984/member_db
       - COUCHDB_USER=peer1Hprovider
       - COUCHDB_PASSWORD=adminpw
     volumes:
@@ -201,7 +201,7 @@ services:
     container_name: couchdb.peer2.hprovider
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
-      - DB_URL: http://localhost:8985/member_db
+      - DB_URL=http://localhost:8985/member_db
       - COUCHDB_USER=peer2Hprovider
       - COUCHDB_PASSWORD=adminpw
     volumes:
@@ -241,7 +241,7 @@ services:
     container_name: couchdb.peer3.hprovider
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
-      - DB_URL: http://localhost:8986/member_db
+      - DB_URL=http://localhost:8986/member_db
       - COUCHDB_USER=peer3Hprovider
       - COUCHDB_PASSWORD=adminpw
     volumes:
@@ -281,7 +281,7 @@ services:
     container_name: couchdb.peer1.research
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
-      - DB_URL: http://localhost:8059/member_db
+      - DB_URL=http://localhost:8059/member_db
       - COUCHDB_USER=peer0Research
       - COUCHDB_PASSWORD=adminpw
     volumes:
@@ -321,7 +321,7 @@ services:
     container_name: couchdb.peer1.research
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
-      - DB_URL: http://localhost:8069/member_db
+      - DB_URL=http://localhost:8069/member_db
       - COUCHDB_USER=peer1Research
       - COUCHDB_PASSWORD=adminpw
     volumes:
@@ -361,7 +361,7 @@ services:
     container_name: couchdb.peer2.research
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
-      - DB_URL: http://localhost:8079/member_db
+      - DB_URL=http://localhost:8079/member_db
       - COUCHDB_USER=peer2Research
       - COUCHDB_PASSWORD=adminpw
     volumes:
@@ -401,7 +401,7 @@ services:
     container_name: couchdb.peer3.research
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
-      - DB_URL: http://localhost:8179/member_db
+      - DB_URL=http://localhost:8179/member_db
       - COUCHDB_USER=peer3Research
       - COUCHDB_PASSWORD=adminpw
     volumes:
