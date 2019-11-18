@@ -2,16 +2,16 @@
 
 version: "2"
 
-volumes:
-  ordererhp.healthcare.com:
-  peer0.hprovider.healthcare.com:
-  peer1.hprovider.healthcare.com:
-  peer2.hprovider.healthcare.com:
-  peer3.hprovider.healthcare.com:
-  peer0.research.healthcare.com:
-  peer1.research.healthcare.com:
-  peer2.research.healthcare.com:
-  peer3.research.healthcare.com:
+# volumes:
+#   ordererhp.healthcare.com:
+#   peer0.hprovider.healthcare.com:
+#   peer1.hprovider.healthcare.com:
+#   peer2.hprovider.healthcare.com:
+#   peer3.hprovider.healthcare.com:
+#   peer0.research.healthcare.com:
+#   peer1.research.healthcare.com:
+#   peer2.research.healthcare.com:
+#   peer3.research.healthcare.com:
 
 networks:
   healthNetwork:
@@ -105,7 +105,7 @@ services:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
       - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
-      - peer0.hprovider.healthcare.com:/var/hyperledger/production
+      - ./channel/crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/:/etc/hyperledger/crypto/peer
     depends_on:
       - couchdb.peer0.hprovider
     ports:
@@ -139,7 +139,7 @@ services:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer1.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
       - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer1.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
-      - peer1.hprovider.healthcare.com:/var/hyperledger/production
+      - ./channel/crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer1.hprovider.healthcare.com/:/etc/hyperledger/crypto/peer
     depends_on:
       - couchdb.peer1.hprovider
     ports:
@@ -173,7 +173,7 @@ services:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer2.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
       - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer2.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
-      - peer2.hprovider.healthcare.com:/var/hyperledger/production
+      - ./channel/crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer2.hprovider.healthcare.com/:/etc/hyperledger/crypto/peer
     depends_on:
       - couchdb.peer2.hprovider
     ports:
@@ -207,7 +207,7 @@ services:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer3.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
       - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer3.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
-      - peer3.hprovider.healthcare.com:/var/hyperledger/production
+      - ./channel/crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer3.hprovider.healthcare.com/:/etc/hyperledger/crypto/peer
     depends_on:
       - couchdb.peer3.hprovider
     ports:
@@ -241,7 +241,7 @@ services:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
       - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
-      - peer0.research.healthcare.com:/var/hyperledger/production
+      - ./channel/crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/:/etc/hyperledger/crypto/peer
     depends_on:
       - couchdb.peer0.research
     ports:
@@ -275,7 +275,7 @@ services:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer1.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
       - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer1.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
-      - peer1.research.healthcare.com:/var/hyperledger/production
+      - ./channel/crypto-config/peerOrganizations/research.healthcare.com/peers/peer1.research.healthcare.com/:/etc/hyperledger/crypto/peer
     depends_on:
       - couchdb.peer1.research
     networks:
@@ -309,7 +309,7 @@ services:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer2.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
       - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer2.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
-      - peer2.research.healthcare.com:/var/hyperledger/production
+      - ./channel/crypto-config/peerOrganizations/research.healthcare.com/peers/peer2.research.healthcare.com/:/etc/hyperledger/crypto/peer
     depends_on:
       - couchdb.peer2.research
     networks:
@@ -343,7 +343,7 @@ services:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer3.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
       - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer3.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
-      - peer3.research.healthcare.com:/var/hyperledger/production
+      - ./channel/crypto-config/peerOrganizations/research.healthcare.com/peers/peer3.research.healthcare.com/:/etc/hyperledger/crypto/peer
     depends_on:
       - couchdb.peer3.research
     networks:
