@@ -17,7 +17,7 @@ PeerOrgs:
     EnableNodeOUs: true
     
     Template:
-      Count: 2
+      Count: 4
        
     Users:
       Count: 4
@@ -28,7 +28,7 @@ PeerOrgs:
     Domain: research.healthcare.com 
     EnableNodeOUs: true
     Template:
-      Count: 2
+      Count: 4
     Users:
       Count: 4
   # ---------------------------------------------------------------------------
