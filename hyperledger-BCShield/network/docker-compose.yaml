@@ -37,7 +37,8 @@ services:
       - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
       - ./crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/msp:/var/hyperledger/orderer/msp
       - ./crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/tls/:/var/hyperledger/orderer/tls
-      - ordererhp.healthcare.com:/var/hyperledger/production/orderer
+      - ./channel/crypto-config/peerOrganizations/hprovider.example.com/peers/peer0.hprovider.example.com/:/etc/hyperledger/crypto/peerOrg1
+      - ./channel/crypto-config/peerOrganizations/research.example.com/peers/peer0.research.example.com/:/etc/hyperledger/crypto/peerOrg2
     ports:
       - 7050:7050
     networks:
