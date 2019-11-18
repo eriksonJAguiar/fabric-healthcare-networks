@@ -1,6 +1,6 @@
 #
 
-version: '2'
+version: "2"
 
 volumes:
   ordererhp.healthcare.com:
@@ -39,82 +39,82 @@ services:
       - ./crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/tls/:/var/hyperledger/orderer/tls
       - ordererhp.healthcare.com:/var/hyperledger/production/orderer
     ports:
-      - 7050:7050    
+      - 7050:7050
     networks:
       - healthNetwork
 
   ca.hprovider.healthcare.com:
-      container_name: ca.hprovider.healthcare.com
-      image: hyperledger/fabric-ca:$IMAGE_TAG
-      environment:
-        - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-        - FABRIC_CA_SERVER_CA_NAME=ca.hprovider.health.com
-        # - FABRIC_CA_SERVER_REGISTRY_MAXENROLLMENTS=1 # only allow to register one admin
-        - FABRIC_CA_SERVER_CA_CERTFILE=./crypto-config/peerOrganizations/hprovider.healthcare.com/ca/ca.hprovider.healthcare.com-cert.pem # default $HOME/ca-key.pem
-        - FABRIC_CA_SERVER_CA_KEYFILE=./crypto-config/peerOrganizations/hprovider.healthcare.com/ca/fdea3862fc578eb0510c21cc7fc7895d73f8b605d6c99e0014a439f178376469_sk # default $HOME/ca-cert.pem
-        - FABRIC_CA_SERVER_TLS_ENABLED=$CA_TLS_ENABLED # default tls cert $HOME/tls-cert.pem
-        #- FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE=
-        #- FABRIC_CA_SERVER_TLS_CLIENTAUTH_CERTFILES=
-        - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/cert.pem
-        - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-tls/key.pem
-      ports:
-            - 7054:7054
-          # -b :bootstrap identity is required to start the Fabric CA server; this identity is the server administrator.
-      command: sh -c 'fabric-ca-server start -b admin:adminpw'
-      volumes:
-        - ./crypto-config/peerOrganizations/hprovider.health.com/ca/:/etc/hyperledger/fabric-ca-server-config/ca
-      networks:
-        - healthNetwork
+    container_name: ca.hprovider.healthcare.com
+    image: hyperledger/fabric-ca:$IMAGE_TAG
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.hprovider.health.com
+      # - FABRIC_CA_SERVER_REGISTRY_MAXENROLLMENTS=1 # only allow to register one admin
+      - FABRIC_CA_SERVER_CA_CERTFILE=./crypto-config/peerOrganizations/hprovider.healthcare.com/ca/ca.hprovider.healthcare.com-cert.pem # default $HOME/ca-key.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=./crypto-config/peerOrganizations/hprovider.healthcare.com/ca/fdea3862fc578eb0510c21cc7fc7895d73f8b605d6c99e0014a439f178376469_sk # default $HOME/ca-cert.pem
+      - FABRIC_CA_SERVER_TLS_ENABLED=$CA_TLS_ENABLED # default tls cert $HOME/tls-cert.pem
+      #- FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE=
+      #- FABRIC_CA_SERVER_TLS_CLIENTAUTH_CERTFILES=
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-tls/key.pem
+    ports:
+      - 7054:7054
+      # -b :bootstrap identity is required to start the Fabric CA server; this identity is the server administrator.
+    command: sh -c 'fabric-ca-server start -b admin:adminpw'
+    volumes:
+      - ./crypto-config/peerOrganizations/hprovider.health.com/ca/:/etc/hyperledger/fabric-ca-server-config/ca
+    networks:
+      - healthNetwork
 
   ca.research.healthcare.com:
-      container_name: ca.research.healthcare.com
-      image: hyperledger/fabric-ca:$IMAGE_TAG
-      environment:
-        - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-        - FABRIC_CA_SERVER_CA_NAME=ca.research.healthcare.com
-        - FABRIC_CA_SERVER_REGISTRY_MAXENROLLMENTS=1 # only allow to register one admin
-        - FABRIC_CA_SERVER_CA_CERTFILE=./crypto-config/peerOrganizations/research.healthcare.com/ca/ca.research.healthcare.com-cert.pem # default $HOME/ca-key.pem
-        - FABRIC_CA_SERVER_CA_KEYFILE=./crypto-config/peerOrganizations/research.healthcare.com/ca/350762a6d88c65237927c057a100f018ce37fd7bddcf08a5a4b26ceaefe93ade_sk # default $HOME/ca-cert.pem 
-        - FABRIC_CA_SERVER_TLS_ENABLED=$CA_TLS_ENABLED # default tls cert $HOME/tls-cert.pem
-          # - FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE=
-          # - FABRIC_CA_SERVER_TLS_CLIENTAUTH_CERTFILES=
-        - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/cert.pem
-        - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-tls/key.pem
-      ports:
-        - 8054:8054
-      command: sh -c 'fabric-ca-server start -b admin:adminpw'
-      volumes:
-        - ./crypto-config/peerOrganizations/research.healthcare.com/ca/:/etc/hyperledger/fabric-ca-server-config/ca
-      networks:
-        - healthNetwork
+    container_name: ca.research.healthcare.com
+    image: hyperledger/fabric-ca:$IMAGE_TAG
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.research.healthcare.com
+      - FABRIC_CA_SERVER_REGISTRY_MAXENROLLMENTS=1 # only allow to register one admin
+      - FABRIC_CA_SERVER_CA_CERTFILE=./crypto-config/peerOrganizations/research.healthcare.com/ca/ca.research.healthcare.com-cert.pem # default $HOME/ca-key.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=./crypto-config/peerOrganizations/research.healthcare.com/ca/350762a6d88c65237927c057a100f018ce37fd7bddcf08a5a4b26ceaefe93ade_sk # default $HOME/ca-cert.pem
+      - FABRIC_CA_SERVER_TLS_ENABLED=$CA_TLS_ENABLED # default tls cert $HOME/tls-cert.pem
+        # - FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE=
+        # - FABRIC_CA_SERVER_TLS_CLIENTAUTH_CERTFILES=
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-tls/key.pem
+    ports:
+      - 8054:8054
+    command: sh -c 'fabric-ca-server start -b admin:adminpw'
+    volumes:
+      - ./crypto-config/peerOrganizations/research.healthcare.com/ca/:/etc/hyperledger/fabric-ca-server-config/ca
+    networks:
+      - healthNetwork
 
   peer0.hprovider.healthcare.com:
     container_name: peer0.hprovider.healthcare.com
     extends:
-     file: peer-base.yaml
-     service: peer-base
+      file: peer-base.yaml
+      service: peer-base
     environment:
       - CORE_PEER_ID=peer0.hprovider.healthcare.com
-      - CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:8031
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hprovider.healthcare.com:8031
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.hprovider.healthcare.com:8031
+      - CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hprovider.healthcare.com:7041
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.hprovider.healthcare.com:7051
       - CORE_PEER_LOCALMSPID=HProviderMSP
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.hprovider:10010
     volumes:
-        - /var/run/:/host/var/run/        
-        - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
-        - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
-        - peer0.hprovider.healthcare.com:/var/hyperledger/production
-    depends_on: 
+      - /var/run/:/host/var/run/
+      - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
+      - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
+      - peer0.hprovider.healthcare.com:/var/hyperledger/production
+    depends_on:
       - couchdb.peer0.hprovider
     ports:
-      - 8031:8031
-      - 8032:8032
-      - 8033:8033
+      - 7051:7051
+      - 7052:7052
+      - 7053:7053
     networks:
       - healthNetwork
-    
+
   couchdb.peer0.hprovider:
     container_name: couchdb.peer0.hprovider
     image: hyperledger/fabric-couchdb:latest
@@ -130,23 +130,23 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer1.hprovider.healthcare.com
-      - CORE_PEER_ADDRESS=peer1.hprovider.healthcare.com:8041
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.hprovider.healthcare.com:8041
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hprovider.healthcare.com:8041
+      - CORE_PEER_ADDRESS=peer1.hprovider.healthcare.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.hprovider.healthcare.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hprovider.healthcare.com:7051
       - CORE_PEER_LOCALMSPID=HProviderMSP
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer1.hprovider:10020
     volumes:
-        - /var/run/:/host/var/run/        
-        - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer1.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
-        - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer1.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
-        - peer1.hprovider.healthcare.com:/var/hyperledger/production
-    depends_on: 
+      - /var/run/:/host/var/run/
+      - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer1.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
+      - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer1.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
+      - peer1.hprovider.healthcare.com:/var/hyperledger/production
+    depends_on:
       - couchdb.peer1.hprovider
     ports:
-      - 8041:8041
-      - 8042:8042
-      - 8043:8043
+      - 7051:7051
+      - 7052:7052
+      - 7053:7053
     networks:
       - healthNetwork
 
@@ -165,23 +165,23 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer2.hprovider.healthcare.com
-      - CORE_PEER_ADDRESS=peer2.hprovider.healthcare.com:8051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.hprovider.healthcare.com:8051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer2.hprovider.healthcare.com:8051
+      - CORE_PEER_ADDRESS=peer2.hprovider.healthcare.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.hprovider.healthcare.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer2.hprovider.healthcare.com:7051
       - CORE_PEER_LOCALMSPID=HProviderMSP
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer2.hprovider:10030
     volumes:
-        - /var/run/:/host/var/run/        
-        - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer2.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
-        - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer2.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
-        - peer2.hprovider.healthcare.com:/var/hyperledger/production
-    depends_on: 
+      - /var/run/:/host/var/run/
+      - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer2.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
+      - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer2.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
+      - peer2.hprovider.healthcare.com:/var/hyperledger/production
+    depends_on:
       - couchdb.peer2.hprovider
     ports:
-      - 8051:7051
-      - 8052:7052
-      - 8053:7053
+      - 7051:7051
+      - 7052:7052
+      - 7053:7053
     networks:
       - healthNetwork
 
@@ -200,23 +200,23 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer3.hprovider.healthcare.com
-      - CORE_PEER_ADDRESS=peer3.hprovider.healthcare.com:8061
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.hprovider.healthcare.com:8061
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer3.hprovider.healthcare.com:8061
+      - CORE_PEER_ADDRESS=peer3.hprovider.healthcare.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.hprovider.healthcare.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer3.hprovider.healthcare.com:7051
       - CORE_PEER_LOCALMSPID=HProviderMSP
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer3.hprovider:10040
     volumes:
-        - /var/run/:/host/var/run/        
-        - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer3.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
-        - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer3.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
-        - peer3.hprovider.healthcare.com:/var/hyperledger/production
-    depends_on: 
+      - /var/run/:/host/var/run/
+      - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer3.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
+      - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer3.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
+      - peer3.hprovider.healthcare.com:/var/hyperledger/production
+    depends_on:
       - couchdb.peer3.hprovider
     ports:
-      - 8061:8061
-      - 8062:8062
-      - 8063:8063
+      - 7051:7051
+      - 7052:7052
+      - 7053:7053
     networks:
       - healthNetwork
 
@@ -235,23 +235,23 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer0.research.healthcare.com
-      - CORE_PEER_ADDRESS=peer0.research.healthcare.com:9031
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.research.healthcare.com:9031
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.research.healthcare.com:9031
+      - CORE_PEER_ADDRESS=peer0.research.healthcare.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.research.healthcare.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.research.healthcare.com:7051
       - CORE_PEER_LOCALMSPID=ResearchMSP
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.research:10050
     volumes:
-        - /var/run/:/host/var/run/        
-        - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
-        - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
-        - peer0.research.healthcare.com:/var/hyperledger/production
-    depends_on: 
+      - /var/run/:/host/var/run/
+      - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
+      - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
+      - peer0.research.healthcare.com:/var/hyperledger/production
+    depends_on:
       - couchdb.peer0.research
     ports:
-      - 9031:9031
-      - 9032:9032
-      - 9033:9033
+      - 7051:7051
+      - 7052:7052
+      - 7053:7053
     networks:
       - healthNetwork
 
@@ -263,7 +263,6 @@ services:
     environment:
       DB_URL: http://localhost:10050/member_db
 
-
   peer1.research.healthcare.com:
     container_name: peer1.research.healthcare.com
     extends:
@@ -271,25 +270,25 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer1.research.healthcare.com
-      - CORE_PEER_ADDRESS=peer1.research.healthcare.com:9041
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.research.healthcare.com:9041
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.research.healthcare.com:9041
+      - CORE_PEER_ADDRESS=peer1.research.healthcare.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.research.healthcare.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.research.healthcare.com:7051
       - CORE_PEER_LOCALMSPID=ResearchMSP
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer1.research:10060
     volumes:
-        - /var/run/:/host/var/run/        
-        - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer1.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
-        - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer1.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
-        - peer1.research.healthcare.com:/var/hyperledger/production
-    depends_on: 
+      - /var/run/:/host/var/run/
+      - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer1.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
+      - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer1.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
+      - peer1.research.healthcare.com:/var/hyperledger/production
+    depends_on:
       - couchdb.peer1.research
     networks:
-      - healthNetwork  
+      - healthNetwork
     ports:
-      - 9041:9041
-      - 9042:9042
-      - 9043:9043
+      - 7051:7051
+      - 7052:7052
+      - 7053:7053
 
   couchdb.peer1.research:
     container_name: couchdb.peer1.research
@@ -306,26 +305,26 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer2.research.healthcare.com
-      - CORE_PEER_ADDRESS=peer2.research.healthcare.com:9051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.research.healthcare.com:9051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer2.research.healthcare.com:9051
+      - CORE_PEER_ADDRESS=peer2.research.healthcare.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.research.healthcare.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer2.research.healthcare.com:7051
       - CORE_PEER_LOCALMSPID=ResearchMSP
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer2.research:10070
     volumes:
-        - /var/run/:/host/var/run/        
-        - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer2.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
-        - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer2.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
-        - peer2.research.healthcare.com:/var/hyperledger/production
-    depends_on: 
+      - /var/run/:/host/var/run/
+      - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer2.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
+      - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer2.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
+      - peer2.research.healthcare.com:/var/hyperledger/production
+    depends_on:
       - couchdb.peer2.research
     networks:
-      - healthNetwork  
+      - healthNetwork
     ports:
-      - 9051:9051
-      - 9052:9052
-      - 9053:9053
-  
+      - 7051:7051
+      - 7052:7052
+      - 7053:7053
+
   couchdb.peer2.research:
     container_name: couchdb.peer2.research
     image: hyperledger/fabric-couchdb:latest
@@ -341,26 +340,26 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer3.research.healthcare.com
-      - CORE_PEER_ADDRESS=peer3.research.healthcare.com:9061
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.research.healthcare.com:9061
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer3.research.healthcare.com:9061
+      - CORE_PEER_ADDRESS=peer3.research.healthcare.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.research.healthcare.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer3.research.healthcare.com:7051
       - CORE_PEER_LOCALMSPID=ResearchMSP
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer3.research:10080
     volumes:
-        - /var/run/:/host/var/run/        
-        - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer3.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
-        - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer3.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
-        - peer3.research.healthcare.com:/var/hyperledger/production
-    depends_on: 
+      - /var/run/:/host/var/run/
+      - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer3.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
+      - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer3.research.healthcare.com/tls:/etc/hyperledger/fabric/tls
+      - peer3.research.healthcare.com:/var/hyperledger/production
+    depends_on:
       - couchdb.peer3.research
     networks:
-      - healthNetwork 
+      - healthNetwork
     ports:
-      - 9061:9061
-      - 9062:9062
-      - 9063:9063
-  
+      - 7051:7051
+      - 7052:7052
+      - 7053:7053
+
   couchdb.peer3.research:
     container_name: couchdb.peer3.research
     image: hyperledger/fabric-couchdb:latest
@@ -368,7 +367,6 @@ services:
       - 10080:10080
     environment:
       DB_URL: http://localhost:10080/member_db
-
 
   cli:
     container_name: cli
@@ -391,10 +389,10 @@ services:
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: /bin/bash
     volumes:
-        - /var/run/:/host/var/run/        
-        - ../chaincode/:/opt/gopath/src/github.com/chaincode
-        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/        
-        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts/
+      - /var/run/:/host/var/run/
+      - ../chaincode/:/opt/gopath/src/github.com/chaincode
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/
+      - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts/
     depends_on:
       - ordererhp.healthcare.com
       - peer0.hprovider.healthcare.com
