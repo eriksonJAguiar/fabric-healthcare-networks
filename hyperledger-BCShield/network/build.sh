@@ -41,7 +41,8 @@ function generateCert() {
 # 2. Create Genesis block with initial consortium definition and anchorPeers
 function generateChannelArtifacts() {
 
-  rm -Rf ./channel-artifacts/*
+  rm -Rf ./channel-artifacts
+  mkdir ./channel-artifacts
 
   # Create Genesis block defined by profile OrgsOrdererGenesis in configtx.yaml
   set -x
