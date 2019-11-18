@@ -394,8 +394,8 @@ services:
     networks:
       - healthNetwork
     ports:
-      - 7085:7051
-      - 7088:7053
+      - 8085:7051
+      - 8088:7053
 
   couchdb.peer3.research:
     container_name: couchdb.peer3.research
