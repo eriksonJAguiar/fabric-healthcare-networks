@@ -278,7 +278,7 @@ services:
       - healthNetwork
 
   couchdb.peer0.research:
-    container_name: couchdb.peer1.research
+    container_name: couchdb.peer0.research
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
       - DB_URL=http://localhost:8059/member_db
