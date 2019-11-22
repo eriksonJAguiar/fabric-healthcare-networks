@@ -1,0 +1,66 @@
+version: '2'
+
+networks:
+    fabric:
+
+services:
+    peer0.research.healthcare.com:
+        extends:
+            file: docker-compose-base.yml
+            service: peer
+        container_name: peer0.research.healthcare.com
+        environment:
+            - CORE_PEER_CHAINCODELISTENADDRESS=peer0.research.healthcare.com:7053
+            - CORE_PEER_ID=peer0.research.healthcare.com
+            - CORE_PEER_ADDRESS=peer0.research.healthcare.com:7051
+            - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.hprovider.healthcare.com:7051
+            - CORE_PEER_GOSSIP_ORGLEADER=false
+            - CORE_PEER_GOSSIP_USELEADERELECTION=true
+            - CORE_PEER_LOCALMSPID=ResearchMSP
+            - CORE_PEER_TLS_CLIENTROOTCAS_FILES=/var/hyperledger/users/Admin@research.healthcare.com/tls/ca.crt
+            - CORE_PEER_TLS_CLIENTCERT_FILE=/var/hyperledger/users/Admin@research.healthcare.com/tls/client.crt
+            - CORE_PEER_TLS_CLIENTKEY_FILE=/var/hyperledger/users/Admin@research.healthcare.com/tls/client.key
+        volumes:
+            - ../crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/msp:/var/hyperledger/msp
+            - ../crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/tls:/var/hyperledger/tls
+            - ../crypto-config/peerOrganizations/research.healthcare.com/users:/var/hyperledger/users
+            - ../channel-artifacts/:/var/hyperledger/configs
+        extra_hosts:
+            - "orderer.healthcare.com:172.31.60.217"
+            - "peer0.hprovider.healthcare.com:172.31.58.209"
+            - "peer0.patient.healthcare.com:172.31.53.42"
+        networks:
+          fabric:
+             aliases:
+               - net
+        ports:
+          - 8051:7051
+          - 8053:7053
+
+    #cli:
+    #    container_name: cli
+    #    image: hyperledger/fabric-tools
+    #    tty: true
+    #    environment:
+    #      - GOPATH=/opt/gopath
+    #      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+    #      - CORE_LOGGING_LEVEL=DEBUG
+    #      - CORE_PEER_ID=cli
+    #      - CORE_PEER_ADDRESS=peer0.research.healthcare.com:7051
+    #      - CORE_PEER_LOCALMSPID=ResearchMSP
+    #      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/research.healthcare.com/users/Admin@research.healthcare.com/msp
+    #      - CORE_CHAINCODE_KEEPALIVE=10
+    #    extra_hosts:
+    #      - "orderer.healthcare.com:172.31.60.217"
+    #    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    #    command: /bin/bash
+    #    volumes:
+    #        - /var/run/:/host/var/run/
+    #        - ../../chaincode/:/opt/gopath/src/github.com/chaincode
+    #        - $GOPATH/src/github.com/hyperledger/fabric/:/opt/gopath/src/github.com/hyperledger/fabric/
+    #        - ../crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+    #        - ../channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts/
+    #    depends_on:
+    #      - peer0.research.healthcare.com
+    #    networks:
+    #        - fabric

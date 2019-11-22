@@ -1,0 +1,28 @@
+version: '2'
+
+networks:
+    fabric:
+
+services:
+
+    orderer.healthcare.com:
+        extends:
+            file: docker-compose-base.yml
+            service: orderer
+        container_name: orderer.healthcare.com
+        environment:
+            - ORDERER_HOST=orderer.healthcare.com
+        extra_hosts:
+            - "peer0.hprovider.healthcare.com:172.31.58.209"
+            - "peer0.research.healthcare.com:172.31.51.44"
+            - "peer0.patient.healthcare.com:172.31.53.42"
+        volumes:
+            - ../crypto-config/ordererOrganizations/healthcare.com/orderers/orderer.healthcare.com/msp:/var/hyperledger/msp
+            - ../crypto-config/ordererOrganizations/healthcare.com/orderers/orderer.healthcare.com/tls:/var/hyperledger/tls
+            - ../channel-artifacts/:/var/hyperledger/configs
+        networks:
+          fabric:
+             aliases:
+               - net
+        ports:
+          - 7050:7050
