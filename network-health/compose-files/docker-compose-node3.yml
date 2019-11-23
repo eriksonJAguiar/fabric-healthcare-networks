@@ -20,6 +20,8 @@ services:
             - CORE_PEER_TLS_CLIENTROOTCAS_FILES=/var/hyperledger/users/Admin@patient.healthcare.com/tls/ca.crt
             - CORE_PEER_TLS_CLIENTCERT_FILE=/var/hyperledger/users/Admin@patient.healthcare.com/tls/client.crt
             - CORE_PEER_TLS_CLIENTKEY_FILE=/var/hyperledger/users/Admin@patient.healthcare.com/tls/client.key
+            - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+            - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.hprovider:7984
         volumes:
             - ../crypto-config/peerOrganizations/patient.healthcare.com/peers/peer0.patient.healthcare.com/msp:/var/hyperledger/msp
             - ../crypto-config/peerOrganizations/patient.healthcare.com/peers/peer0.patient.healthcare.com/tls:/var/hyperledger/tls
@@ -36,6 +38,20 @@ services:
         ports:
           - 9051:7051
           - 9053:7053
+
+    couchdb.peer0.hprovider:
+    container_name: couchdb.peer0.hprovider
+    image: hyperledger/fabric-couchdb:0.4.10
+    environment:
+      - DB_URL=http://localhost:7984/member_db
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=adminpw
+    volumes:
+      - ./couchdbData/couchdb.peer0.hprovider/:/opt/couchdb/data
+    ports:
+      - "7984:5984"
+    networks:
+      - healthNetwork
 
     # cli:
     #     container_name: cli

@@ -25,10 +25,6 @@ services:
             - ../crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/tls:/var/hyperledger/tls
             - ../crypto-config/peerOrganizations/research.healthcare.com/users:/var/hyperledger/users
             - ../channel-artifacts/:/var/hyperledger/configs
-        extra_hosts:
-            - "orderer.healthcare.com:172.31.60.217"
-            - "peer0.hprovider.healthcare.com:172.31.58.209"
-            - "peer0.patient.healthcare.com:172.31.53.42"
         networks:
           fabric:
              aliases:
