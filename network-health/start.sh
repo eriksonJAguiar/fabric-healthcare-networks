@@ -2,7 +2,7 @@
 
 docker-compose -f ./compose-files/docker-compose-orderer.yml up -d
 
-docker-compose -f ./compose-files/docker-compose-node1.yml up -d
+docker-compose -f ./compose-files/docker-compose-cli.yml up -d
 
 #docker-compose -f ./compose-files/docker-compose-node2.yml up -d
 
