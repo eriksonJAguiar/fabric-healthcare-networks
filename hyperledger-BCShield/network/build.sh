@@ -21,7 +21,7 @@ CRYPTO_CONFIG="crypto-config.yaml"
 PROFILE=HealthOrdererGenesis
 CHANNEL_PROFILE=HealthChannel
 CHANNEL_NAME=healthchannel
-ORGANIZATION_NAME=(HProviderMSP ResearchMSP)
+ORGANIZATION_NAME=(HProviderMSP)
 
 # 1. Generate crypto-config Folder containing all CA, PEER, TLS, NETWORK ADMIN, certificate etc.
 function generateCert() {

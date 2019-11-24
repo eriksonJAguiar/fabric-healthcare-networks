@@ -8,9 +8,9 @@
 ################################################################################
 Organizations:
    
-    - &OrdererHp        
-        Name: OrdererHp
-        ID: OrdererHpMSP
+    - &Orderer        
+        Name: Orderer
+        ID: OrdererMSP
         # MSPDir is the filesystem path which contains the MSP configuration
         MSPDir: crypto-config/ordererOrganizations/healthcare.com/msp
 
@@ -25,8 +25,8 @@ Organizations:
             # encoded in the genesis block in the Application section context  
             - Host: peer0.hprovider.healthcare.com
               Port: 7051
-            - Host: peer1.hprovider.healthcare.com
-              Port: 7051
+            # - Host: peer1.hprovider.healthcare.com
+            #   Port: 7051
             #- Host: peer2.hprovider.healthcare.com
             #  Port: 7051
 
@@ -36,14 +36,11 @@ Organizations:
     #     ID: ResearchMSP
     #     MSPDir: crypto-config/peerOrganizations/research.healthcare.com/msp
     #     AnchorPeers:
-    #         # AnchorPeers defines the location of peers which can be used
-    #         # for cross org gossip communication.  Note, this value is only
-    #         # encoded in the genesis block in the Application section context
     #         - Host: peer0.research.healthcare.com
     #           Port: 7051
-            #- Host: peer1.research.healthcare.com
+            # - Host: peer1.research.healthcare.com
             #  Port: 7051
-            #- Host: peer2.research.healthcare.com
+            # - Host: peer2.research.healthcare.com
             #  Port: 7051
     
     # - &Patient       
@@ -122,7 +119,7 @@ Orderer: &OrdererDefaults
     OrdererType: solo
 
     Addresses:
-        - ordererhp.healthcare.com:7050
+        - orderer.healthcare.com:7050
 
     # Batch Timeout: The amount of time to wait before creating a batch
     BatchTimeout: 2s
@@ -168,7 +165,7 @@ Profiles:
         Orderer:
             <<: *OrdererDefaults
             Organizations:
-                - *OrdererHp
+                - *Orderer
             Capabilities:
                 <<: *OrdererCapabilities
         Consortiums:

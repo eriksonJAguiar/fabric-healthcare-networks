@@ -7,9 +7,9 @@ PeerOrgs:
   - Name: HProvider
     Domain: hprovider.healthcare.com
     Template:
-      Count: 1
+      Count: 2
     Users:
-      Count: 1
+      Count: 2
   # - Name: Research
   #   Domain: research.healthcare.com
   #   Template:

@@ -4,6 +4,32 @@ networks:
     fabric:
 
 services:
+    ca.reserach.healthcare.com:
+      container_name: ca.reserach.healthcare.com
+      image: hyperledger/fabric-ca:1.4.0
+      environment:
+        - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+        - FABRIC_CA_SERVER_CA_NAME=ca.reserach.health.com
+        # - FABRIC_CA_SERVER_REGISTRY_MAXENROLLMENTS=1 # only allow to register one admin
+        - FABRIC_CA_SERVER_CA_CERTFILE=./crypto-config/peerOrganizations/reserach.healthcare.com/ca/ca.reserach.healthcare.com-cert.pem # default $HOME/ca-key.pem
+        - FABRIC_CA_SERVER_CA_KEYFILE=./crypto-config/peerOrganizations/reserach.healthcare.com/ca/*_sk # default $HOME/ca-cert.pem
+        - FABRIC_CA_SERVER_TLS_ENABLED=$CA_TLS_ENABLED # default tls cert $HOME/tls-cert.pem
+        #- FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE=
+        #- FABRIC_CA_SERVER_TLS_CLIENTAUTH_CERTFILES=
+        - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/cert.pem
+        - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-tls/key.pem
+      ports:
+        - 7056:7054
+        # -b :bootstrap identity is required to start the Fabric CA server; this identity is the server administrator.
+      command: sh -c 'fabric-ca-server start -b admin:adminpw'
+      volumes:
+        - ./crypto-config/peerOrganizations/reserach.health.com/ca/:/etc/hyperledger/fabric-ca-server-config/ca
+      networks:
+          fabric:
+             aliases:
+               - net
+    
+    
     peer0.research.healthcare.com:
         extends:
             file: docker-compose-base.yml
@@ -13,13 +39,15 @@ services:
             - CORE_PEER_CHAINCODELISTENADDRESS=peer0.research.healthcare.com:7053
             - CORE_PEER_ID=peer0.research.healthcare.com
             - CORE_PEER_ADDRESS=peer0.research.healthcare.com:7051
-            - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.hprovider.healthcare.com:7051
+            - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.reserach.healthcare.com:7051
             - CORE_PEER_GOSSIP_ORGLEADER=false
             - CORE_PEER_GOSSIP_USELEADERELECTION=true
             - CORE_PEER_LOCALMSPID=ResearchMSP
             - CORE_PEER_TLS_CLIENTROOTCAS_FILES=/var/hyperledger/users/Admin@research.healthcare.com/tls/ca.crt
             - CORE_PEER_TLS_CLIENTCERT_FILE=/var/hyperledger/users/Admin@research.healthcare.com/tls/client.crt
             - CORE_PEER_TLS_CLIENTKEY_FILE=/var/hyperledger/users/Admin@research.healthcare.com/tls/client.key
+            - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+            - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.reserach:9984
         volumes:
             - ../crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/msp:/var/hyperledger/msp
             - ../crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/tls:/var/hyperledger/tls
@@ -30,8 +58,22 @@ services:
              aliases:
                - net
         ports:
-          - 8051:7051
-          - 8053:7053
+          - 9051:7051
+          - 9053:7053
+
+    couchdb.peer0.research:
+      container_name: couchdb.peer0.reserach
+      image: hyperledger/fabric-couchdb:0.4.10
+      environment:
+        - DB_URL=http://localhost:9984/member_db
+        - COUCHDB_USER=admin
+        - COUCHDB_PASSWORD=adminpw
+      volumes:
+        - ./couchdbData/couchdb.peer0.reserach/:/opt/couchdb/data
+      ports:
+        - "9984:5984"
+      networks:
+      - fabric
 
     #cli:
     #    container_name: cli

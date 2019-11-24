@@ -25,30 +25,30 @@ Organizations:
             # encoded in the genesis block in the Application section context
             - Host: peer0.hprovider.healthcare.com
               Port: 7051
-            - Host: peer2.hprovider.healthcare.com
-              Port: 7051
-            - Host: peer3.hprovider.healthcare.com
-              Port: 7051
-            - Host: peer4.hprovider.healthcare.com
-              Port: 7051
+            # - Host: peer2.hprovider.healthcare.com
+            #   Port: 7051
+            # - Host: peer3.hprovider.healthcare.com
+            #   Port: 7051
+            # - Host: peer4.hprovider.healthcare.com
+            #   Port: 7051
 
-    - &Research        
-        Name: ResearchMSP
-        # ID to load the MSP definition as
-        ID: ResearchMSP
-        MSPDir: crypto-config/peerOrganizations/research.healthcare.com/msp
-        AnchorPeers:
-            # AnchorPeers defines the location of peers which can be used
-            # for cross org gossip communication.  Note, this value is only
-            # encoded in the genesis block in the Application section context
-            - Host: peer0.research.healthcare.com
-              Port: 7051
-            - Host: peer1.research.healthcare.com
-              Port: 7051
-            - Host: peer2.research.healthcare.com
-              Port: 7051
-            - Host: peer3.research.healthcare.com
-              Port: 7051
+    # - &Research        
+    #     Name: ResearchMSP
+    #     # ID to load the MSP definition as
+    #     ID: ResearchMSP
+    #     MSPDir: crypto-config/peerOrganizations/research.healthcare.com/msp
+    #     AnchorPeers:
+    #         # AnchorPeers defines the location of peers which can be used
+    #         # for cross org gossip communication.  Note, this value is only
+    #         # encoded in the genesis block in the Application section context
+    #         - Host: peer0.research.healthcare.com
+    #           Port: 7051
+    #         - Host: peer1.research.healthcare.com
+    #           Port: 7051
+    #         - Host: peer2.research.healthcare.com
+    #           Port: 7051
+    #         - Host: peer3.research.healthcare.com
+    #           Port: 7051
     
 
     
@@ -163,11 +163,11 @@ Profiles:
             HealthConsortium:
                 Organizations:
                     - *HProvider
-                    - *Research
+                    # - *Research
     HealthChannel:
         Consortium: HealthConsortium
         Application:
             <<: *ApplicationDefaults
             Organizations:
                 - *HProvider
-                - *Research            
+                # - *Research            
