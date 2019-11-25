@@ -27,10 +27,6 @@ services:
             - ../crypto-config/peerOrganizations/patient.healthcare.com/peers/peer0.patient.healthcare.com/tls:/var/hyperledger/tls
             - ../crypto-config/peerOrganizations/patient.healthcare.com/users:/var/hyperledger/users
             - ../channel-artifacts/:/var/hyperledger/configs
-        extra_hosts:
-            - "orderer.healthcare.com:172.31.60.217"
-            - "peer0.hprovider.healthcare.com:172.31.58.209"
-            - "peer0.research.healthcare.com:172.31.51.44"
         networks:
           fabric:
              aliases:
@@ -40,18 +36,18 @@ services:
           - 9053:7053
 
     couchdb.peer0.hprovider:
-    container_name: couchdb.peer0.hprovider
-    image: hyperledger/fabric-couchdb:0.4.10
-    environment:
-      - DB_URL=http://localhost:7984/member_db
-      - COUCHDB_USER=admin
-      - COUCHDB_PASSWORD=adminpw
-    volumes:
-      - ./couchdbData/couchdb.peer0.hprovider/:/opt/couchdb/data
-    ports:
-      - "7984:5984"
-    networks:
-      - healthNetwork
+      container_name: couchdb.peer0.hprovider
+      image: hyperledger/fabric-couchdb:0.4.10
+      environment:
+        - DB_URL=http://localhost:7984/member_db
+        - COUCHDB_USER=admin
+        - COUCHDB_PASSWORD=adminpw
+      volumes:
+        - ./couchdbData/couchdb.peer0.hprovider/:/opt/couchdb/data
+      ports:
+        - "7984:5984"
+      networks:
+        - healthNetwork
 
     # cli:
     #     container_name: cli
@@ -66,8 +62,6 @@ services:
     #       - CORE_PEER_LOCALMSPID=PatientMSP
     #       - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/patient.healthcare.com/users/Admin@patient.healthcare.com/msp
     #       - CORE_CHAINCODE_KEEPALIVE=10
-    #     extra_hosts:
-    #       - "orderer.healthcare.com:172.31.60.217"
     #     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     #     command: /bin/bash
     #     volumes:
