@@ -10,15 +10,15 @@ PeerOrgs:
       Count: 3
     Users:
       Count: 3
-  - Name: Research
-    Domain: research.healthcare.com
-    Template:
-      Count: 3
-    Users:
-      Count: 3
-  - Name: Patient
-    Domain: patient.healthcare.com
-    Template:
-      Count: 3
-    Users:
-      Count: 3
+  # - Name: Research
+  #   Domain: research.healthcare.com
+  #   Template:
+  #     Count: 3
+  #   Users:
+  #     Count: 3
+  # - Name: Patient
+  #   Domain: patient.healthcare.com
+  #   Template:
+  #     Count: 3
+  #   Users:
+  #     Count: 3
