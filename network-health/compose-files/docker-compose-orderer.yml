@@ -1,7 +1,7 @@
 version: '2'
 
 networks:
-    fabric:
+    - healthNetwork
 
 services:
 
@@ -17,8 +17,6 @@ services:
             - ../crypto-config/ordererOrganizations/healthcare.com/orderers/orderer.healthcare.com/tls:/var/hyperledger/tls
             - ../channel-artifacts/:/var/hyperledger/configs
         networks:
-          fabric:
-             aliases:
-               - net
+          - healthNetwork
         ports:
           - 7050:7050

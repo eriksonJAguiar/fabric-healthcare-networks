@@ -1,7 +1,7 @@
 version: '2'
 
 networks:
-    fabric:
+    - healthNetwork
 
 services:
     
@@ -26,9 +26,7 @@ services:
       volumes:
         - ./crypto-config/peerOrganizations/hprovider.health.com/ca/:/etc/hyperledger/fabric-ca-server-config/ca
       networks:
-          fabric:
-             aliases:
-               - net
+        - healthNetwork
     
     peer0.hprovider.healthcare.com:
         extends:
@@ -57,9 +55,7 @@ services:
         depends_on: 
          - couchdb.peer0.hprovider
         networks:
-          fabric:
-             aliases:
-               - net
+          - healthNetwork
         ports:
           - 7051:7051
           - 7053:7053 
@@ -76,7 +72,7 @@ services:
       ports:
         - "7984:5984"
       networks:
-      - fabric
+        - healthNetwork
     
 
     peer1.hprovider.healthcare.com:
@@ -106,9 +102,7 @@ services:
         depends_on: 
             - couchdb.peer1.hprovider
         networks:
-          fabric:
-             aliases:
-               - net
+          - healthNetwork
         ports:
             - 8051:7051
             - 8053:7053 
@@ -125,9 +119,7 @@ services:
       ports:
         - "8984:5984"
       networks:
-        fabric:
-         aliases: 
-          - net
+        - healthNetwork
     
     cli:
         container_name: cli
@@ -155,6 +147,4 @@ services:
           - peer0.hprovider.healthcare.com
           - peer1.hprovider.healthcare.com
         networks:
-          fabric:
-            aliases: 
-              - net
+          - healthNetwork
