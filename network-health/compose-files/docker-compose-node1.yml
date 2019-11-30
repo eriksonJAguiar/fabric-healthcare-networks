@@ -125,6 +125,7 @@ services:
         container_name: cli
         image: hyperledger/fabric-tools
         tty: true
+        dns_search: .
         environment:
           - GOPATH=/opt/gopath
           - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
