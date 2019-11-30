@@ -4,10 +4,40 @@ docker-compose -f ./compose-files/docker-compose-orderer.yml up -d
 
 docker-compose -f ./compose-files/docker-compose-cli.yml up -d
 
-#docker-compose -f ./compose-files/docker-compose-node2.yml up -d
+docker exec -it cli bash
 
-# docker exec -it -e CHANNEL_NAME=healthchannel cli
+# peer channel create -o orderer.healthcare.com:7050 -c healthchannel -f ./channel-artifacts/channel.tx
 
-# docker exec -it -e ORG=hprovider.healthcare.com cli
+# peer channel join -b healthchannel.block
 
-# docker exec -it cli peer channel create -o orderer0.${ORG}:7050 -c $CHANNEL_NAME -f ./channel-artifacts/channel.tx --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/$ORG/orderers/orderer0.${ORG}/msp/tlscacerts/tlsca.${ORG}-cert.pem  
+# export CORE_PEER_ADDRESS=peer1.hprovider.healthcare.com:7051
+
+# peer channel join -b healthchannel.block
+
+# export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/research.healthcare.com/users/Admin@research.healthcare.com/msp
+
+# export CORE_PEER_ADDRESS=peer0.research.healthcare.com:7051
+
+# export CORE_PEER_LOCALMSPID=ResearchMSP
+
+# peer channel join -b healthchannel.block
+
+# export CORE_PEER_ADDRESS=peer1.research.healthcare.com:7051
+
+# peer channel join -b healthchannel.block
+
+# export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hprovider.healthcare.com/users/Admin@hprovider.healthcare.com/msp
+
+# export CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051
+
+# export CORE_PEER_LOCALMSPID=HProviderMSP
+
+# peer channel update -o orderer.healthcare.com:7050 -c healthchannel -f ./channel-artifacts/${CORE_PEER_LOCALMSPID}-anchors.tx
+
+# export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/research.healthcare.com/users/Admin@research.healthcare.com/msp
+
+# export CORE_PEER_ADDRESS=peer0.research.healthcare.com:7051
+
+# export CORE_PEER_LOCALMSPID=researchMSP
+
+# peer channel update -o orderer.healthcare.com:7050 -c healthchannel -f ./channel-artifacts/${CORE_PEER_LOCALMSPID}anchors.tx

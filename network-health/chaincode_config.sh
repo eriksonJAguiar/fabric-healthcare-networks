@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/hprovider.healthcare.com/users/Admin\@hprovider.healthcare.com/msp/
+export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hprovider.healthcare.com/users/Admin@hprovider.healthcare.com/msp/
 
 export CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051
 
@@ -12,7 +12,7 @@ export CORE_PEER_LOCALMSPID=HProviderMSP
 
 peer chaincode install -n Health_DICOM -v 1.0 -l golang -p github.com/chaincode/Health_DICOM
 
-export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/research.healthcare.com/users/Admin\@research.healthcare.com/msp/
+export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/research.healthcare.com/users/Admin@research.healthcare.com/msp/
 
 export CORE_PEER_ADDRESS=peer0.research.healthcare.com:7051
 
@@ -26,7 +26,7 @@ peer chaincode install -n Health_DICOM -v 1.0 -l golang -p github.com/chaincode/
 
 peer chaincode instantiate -o ordererhp.healthcare.com:7050 -C healthchannel -l golang -n Health_DICOM -v 1.0 -c '{"Args":[]}'
 
-export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/hprovider.healthcare.com/users/Admin\@hprovider.healthcare.com/msp/
+export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hprovider.healthcare.com/users/Admin@hprovider.healthcare.com/msp/
 
 export CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051
 
