@@ -43,7 +43,7 @@ services:
             - CORE_PEER_CHAINCODELISTENADDRESS=peer0.hprovider.healthcare.com:7052
             - CORE_PEER_ID=peer0.hprovider.healthcare.com
             - CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051
-            - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.research.healthcare.com:7051
+            - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.hprovider.healthcare.com:7051
             - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.hprovider.healthcare.com:7051
             - CORE_PEER_GOSSIP_ORGLEADER=false
             - CORE_PEER_GOSSIP_USELEADERELECTION=true
@@ -90,7 +90,7 @@ services:
             - CORE_PEER_CHAINCODELISTENADDRESS=peer1.hprovider.healthcare.com:7052
             - CORE_PEER_ID=peer1.hprovider.healthcare.com
             - CORE_PEER_ADDRESS=peer1.hprovider.healthcare.com:7051
-            - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.research.healthcare.com:7051
+            - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hprovider.healthcare.com:7051
             - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.hprovider.healthcare.com:7051
             - CORE_PEER_GOSSIP_ORGLEADER=false
             - CORE_PEER_GOSSIP_USELEADERELECTION=true
