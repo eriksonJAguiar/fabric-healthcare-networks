@@ -1,5 +1,8 @@
 version: '2'
 
+volumes: 
+    orderer.healthcare.com:
+
 networks:
     healthNetwork:
 
