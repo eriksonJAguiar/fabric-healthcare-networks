@@ -14,7 +14,7 @@ docker exec -it cli bash
 
 # peer channel join -b healthchannel.block
 
-# export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/research.healthcare.com/users/Admin@research.healthcare.com/msp
+# export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/research.healthcare.com/users/Admin@research.healthcare.com/msp/
 
 # export CORE_PEER_ADDRESS=peer0.research.healthcare.com:7051
 
@@ -26,7 +26,7 @@ docker exec -it cli bash
 
 # peer channel join -b healthchannel.block
 
-# export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hprovider.healthcare.com/users/Admin@hprovider.healthcare.com/msp
+# export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hprovider.healthcare.com/users/Admin@hprovider.healthcare.com/msp/
 
 # export CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051
 
@@ -34,7 +34,7 @@ docker exec -it cli bash
 
 # peer channel update -o orderer.healthcare.com:7050 -c healthchannel -f ./channel-artifacts/${CORE_PEER_LOCALMSPID}-anchors.tx
 
-# export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/research.healthcare.com/users/Admin@research.healthcare.com/msp
+# export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/research.healthcare.com/users/Admin@research.healthcare.com/msp/
 
 # export CORE_PEER_ADDRESS=peer0.research.healthcare.com:7051
 
