@@ -10,6 +10,7 @@ networks:
 
 services:
     peer0.hprovider.healthcare.com:
+        image: hyperledger/fabric-peer
         container_name: peer0.hprovider.healthcare.com
         environment:
             - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
@@ -67,6 +68,7 @@ services:
     
 
     peer1.hprovider.healthcare.com:
+        image: hyperledger/fabric-peer
         container_name: peer1.hprovider.healthcare.com
         environment:
             - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
