@@ -19,8 +19,6 @@ services:
             - CORE_PEER_NETWORKID=healthNetwork
             - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthNetwork
             - CORE_PEER_ADDRESSAUTODETECT=true
-            - CORE_PEER_GOSSIP_ORGLEADER=false
-            - CORE_PEER_GOSSIP_USELEADERELECTION=true
             - CORE_PEER_PROFILE_ENABLED=true
             - CORE_PEER_MSPCONFIGPATH=/var/hyperledger/msp
             #- CORE_LEDGER_STATE_STATEDATABASE=LevelDB
