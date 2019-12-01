@@ -42,7 +42,6 @@ services:
         environment:
             - ORDERER_HOST=orderer.healthcare.com
         volumes:
-            - ../channel-artifacts/:/var/hyperledger/configs
             - ../crypto-config/ordererOrganizations/healthcare.com/users:/var/hyperledger/users
             - ../crypto-config/ordererOrganizations/healthcare.com/orderers/orderer.healthcare.com/msp:/var/hyperledger/msp
             - ../crypto-config/ordererOrganizations/healthcare.com/orderers/orderer.healthcare.com/tls:/var/hyperledger/tls
