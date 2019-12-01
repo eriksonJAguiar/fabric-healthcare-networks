@@ -37,6 +37,14 @@ services:
         ports:
            - 7051:7051
            - 7053:7053 
+        deploy:
+            mode: replicated
+            replicas: 1
+            restart_policy:
+              condition: on-failure
+            placement:
+                constraints:
+                    - node.hostname == $PATIENT_HOSTNAME
 
     peer1.patient.healthcare.com:
         extends:
@@ -66,6 +74,14 @@ services:
         ports:
             - 8051:7051
             - 8053:7053
+        deploy:
+            mode: replicated
+            replicas: 1
+            restart_policy:
+              condition: on-failure
+            placement:
+                constraints:
+                    - node.hostname == $PATIENT_HOSTNAME
 
     cli:
         container_name: cli
@@ -93,3 +109,11 @@ services:
           - peer1.patient.healthcare.com
         networks:
             - healthNetwork
+        deploy:
+            mode: replicated
+            replicas: 1
+            restart_policy:
+              condition: on-failure
+            placement:
+                constraints:
+                    - node.hostname == $PATIENT_HOSTNAME
