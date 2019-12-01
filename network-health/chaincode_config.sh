@@ -22,7 +22,7 @@ peer chaincode install -n Health_DICOM -v 1.0 -l golang -p github.com/chaincode/
 
 peer chaincode install -n Health_DICOM -v 1.0 -l golang -p github.com/chaincode/Health_DICOM
 
-peer chaincode instantiate -o ordererhp.healthcare.com:7050 -C healthchannel -l golang -n Health_DICOM -v 1.0 -c '{"Args":[]}'
+peer chaincode instantiate -o orderer.healthcare.com:7050 -C healthchannel -l golang -n Health_DICOM -v 1.0 -c '{"Args":[]}'
 
 export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hprovider.healthcare.com/users/Admin@hprovider.healthcare.com/msp/
 

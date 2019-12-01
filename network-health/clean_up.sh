@@ -2,7 +2,7 @@
 
 docker rm -f $(docker ps -a -q)
 
-docker volume -f prune
+docker volume prune
 
-docker network -f prune
+docker network prune
 

@@ -1,10 +1,12 @@
 #!/bin/bash
 
+docker network create -d overlay --attachable healthNetwork
+
 docker-compose -f ./compose-files/docker-compose-orderer.yml up -d
 
 docker-compose -f ./compose-files/docker-compose-cli.yml up -d
 
-docker exec -it cli bash
+#docker exec -it cli bash
 
 # peer channel create -o orderer.healthcare.com:7050 -c healthchannel -f ./channel-artifacts/channel.tx
 
