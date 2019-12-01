@@ -1,8 +1,8 @@
 #!/bin/bash
 
-export RESEARCH_HOSTNAME = $(hostname)
-export HPROVIDER_HOSTNAME = $(hostname)
-export ORDERER_HOSTNAME = $(hostname)
+export RESEARCH_HOSTNAME=$(hostname)
+export HPROVIDER_HOSTNAME=$(hostname)
+export ORDERER_HOSTNAME=$(hostname)
 
 docker network create -d overlay --attachable healthNetwork
 
