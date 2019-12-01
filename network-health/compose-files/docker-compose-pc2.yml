@@ -15,6 +15,24 @@ services:
             service: peer
         container_name: peer0.hprovider.healthcare.com
         environment:
+            - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+            - CORE_PEER_NETWORKID=healthNetwork
+            - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthNetwork
+            - CORE_PEER_ADDRESSAUTODETECT=true
+            - CORE_PEER_GOSSIP_ORGLEADER=false
+            - CORE_PEER_GOSSIP_USELEADERELECTION=true
+            - CORE_PEER_PROFILE_ENABLED=true
+            - CORE_PEER_MSPCONFIGPATH=/var/hyperledger/msp
+            #- CORE_LEDGER_STATE_STATEDATABASE=LevelDB
+            - CORE_LOGGING_LEVEL=DEBUG
+            - CORE_LOGGING_GOSSIP=WARNING
+            - CORE_LOGGING_MSP=DEBUG
+            # TLS settings
+            - CORE_PEER_TLS_ENABLED=false
+            - CORE_PEER_TLS_CLIENTAUTHREQUIRED=false
+            - CORE_PEER_TLS_CERT_FILE=/var/hyperledger/tls/server.crt
+            - CORE_PEER_TLS_KEY_FILE=/var/hyperledger/tls/server.key
+            - CORE_PEER_TLS_ROOTCERT_FILE=/var/hyperledger/tls/ca.crt
             - CORE_PEER_CHAINCODELISTENADDRESS=peer0.hprovider.healthcare.com:7052
             - CORE_PEER_ID=peer0.hprovider.healthcare.com
             - CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051
@@ -29,6 +47,9 @@ services:
             # - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
             # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.hprovider:7984
         volumes:  
+            - /var/run/:/host/var/run/
+            - $GOPATH/src/github.com/hyperledger/fabric/:/opt/gopath/src/github.com/hyperledger/fabric/
+            - ../crypto-config/:/var/hyperledger/configs
             - ../crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/msp:/var/hyperledger/msp
             - ../crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/tls:/var/hyperledger/tls
             - ../crypto-config/peerOrganizations/hprovider.healthcare.com/users:/var/hyperledger/users
@@ -56,6 +77,24 @@ services:
             service: peer
         container_name: peer1.hprovider.healthcare.com
         environment:
+            - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+            - CORE_PEER_NETWORKID=healthNetwork
+            - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthNetwork
+            - CORE_PEER_ADDRESSAUTODETECT=true
+            - CORE_PEER_GOSSIP_ORGLEADER=false
+            - CORE_PEER_GOSSIP_USELEADERELECTION=true
+            - CORE_PEER_PROFILE_ENABLED=true
+            - CORE_PEER_MSPCONFIGPATH=/var/hyperledger/msp
+            #- CORE_LEDGER_STATE_STATEDATABASE=LevelDB
+            - CORE_LOGGING_LEVEL=DEBUG
+            - CORE_LOGGING_GOSSIP=WARNING
+            - CORE_LOGGING_MSP=DEBUG
+            # TLS settings
+            - CORE_PEER_TLS_ENABLED=false
+            - CORE_PEER_TLS_CLIENTAUTHREQUIRED=false
+            - CORE_PEER_TLS_CERT_FILE=/var/hyperledger/tls/server.crt
+            - CORE_PEER_TLS_KEY_FILE=/var/hyperledger/tls/server.key
+            - CORE_PEER_TLS_ROOTCERT_FILE=/var/hyperledger/tls/ca.crt
             - CORE_PEER_CHAINCODELISTENADDRESS=peer1.hprovider.healthcare.com:7052
             - CORE_PEER_ID=peer1.hprovider.healthcare.com
             - CORE_PEER_ADDRESS=peer1.hprovider.healthcare.com:7051
@@ -69,7 +108,11 @@ services:
             - CORE_PEER_TLS_CLIENTKEY_FILE=/var/hyperledger/users/Admin@hprovider.healthcare.com/tls/client.key
             # - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
             # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer1.hprovider:8984
+        command: peer node start --peer-chaincodedev=true
         volumes:
+            - /var/run/:/host/var/run/
+            - $GOPATH/src/github.com/hyperledger/fabric/:/opt/gopath/src/github.com/hyperledger/fabric/
+            - ../crypto-config/:/var/hyperledger/configs
             - ../crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer1.hprovider.healthcare.com/msp:/var/hyperledger/msp
             - ../crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer1.hprovider.healthcare.com/tls:/var/hyperledger/tls
             - ../crypto-config/peerOrganizations/hprovider.healthcare.com/users:/var/hyperledger/users
