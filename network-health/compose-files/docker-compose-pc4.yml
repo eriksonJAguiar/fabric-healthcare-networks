@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 volumes: 
   peer0.patient.healthcare.com:

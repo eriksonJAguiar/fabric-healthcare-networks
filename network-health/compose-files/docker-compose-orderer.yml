@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 volumes: 
     orderer.healthcare.com:
@@ -23,3 +23,11 @@ services:
           - healthNetwork
         ports:
           - 7050:7050
+        deploy:
+            mode: replicated
+            replicas: 1
+            restart_policy:
+              condition: on-failure
+            placement:
+                constraints:
+                    - node.hostname == $ORDERER_HOSTNAME
