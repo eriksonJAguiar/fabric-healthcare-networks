@@ -35,14 +35,6 @@ services:
         command: orderer
         ports:
           - '7050'
-        deploy:
-            mode: replicated
-            replicas: 1
-            restart_policy:
-              condition: on-failure
-            placement:
-                constraints:
-                    - node.hostname == $ORDERER_HOSTNAME
         
 
     peer:
