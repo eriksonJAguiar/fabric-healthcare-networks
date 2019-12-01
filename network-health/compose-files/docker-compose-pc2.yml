@@ -1,7 +1,6 @@
 version: '2'
 
 volumes: 
-  ca.hprovider.healthcare.com:
   peer0.hprovider.healthcare.com:
   peer1.hprovider.healthcare.com:
    
@@ -10,30 +9,6 @@ networks:
     healthNetwork:
 
 services:
-    
-    ca.hprovider.healthcare.com:
-      container_name: ca.hprovider.healthcare.com
-      image: hyperledger/fabric-ca:1.4.0
-      environment:
-        - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-        - FABRIC_CA_SERVER_CA_NAME=ca.hprovider.health.com
-        # - FABRIC_CA_SERVER_REGISTRY_MAXENROLLMENTS=1 # only allow to register one admin
-        - FABRIC_CA_SERVER_CA_CERTFILE=./crypto-config/peerOrganizations/hprovider.healthcare.com/ca/ca.hprovider.healthcare.com-cert.pem # default $HOME/ca-key.pem
-        - FABRIC_CA_SERVER_CA_KEYFILE=./crypto-config/peerOrganizations/hprovider.healthcare.com/ca/*_sk # default $HOME/ca-cert.pem
-        - FABRIC_CA_SERVER_TLS_ENABLED=$CA_TLS_ENABLED # default tls cert $HOME/tls-cert.pem
-        #- FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE=
-        #- FABRIC_CA_SERVER_TLS_CLIENTAUTH_CERTFILES=
-        - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/cert.pem
-        - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-tls/key.pem
-      ports:
-        - 7054:7054
-        # -b :bootstrap identity is required to start the Fabric CA server; this identity is the server administrator.
-      command: sh -c 'fabric-ca-server start -b admin:adminpw'
-      volumes:
-        - ./crypto-config/peerOrganizations/hprovider.health.com/ca/:/etc/hyperledger/fabric-ca-server-config/ca
-      networks:
-        - healthNetwork
-    
     peer0.hprovider.healthcare.com:
         extends:
             file: docker-compose-base.yml
@@ -65,6 +40,7 @@ services:
         ports:
           - 7051:7051
           - 7053:7053 
+    
 
     peer1.hprovider.healthcare.com:
         extends:
@@ -96,7 +72,7 @@ services:
           - healthNetwork
         ports:
             - 8051:7051
-            - 8053:7053 
+            - 8053:7053
     
     cli:
         container_name: cli
@@ -121,7 +97,6 @@ services:
             - ../crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
             - ../channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts/
         depends_on:
-          - ca.hprovider.healthcare.com
           - peer0.hprovider.healthcare.com
           - peer1.hprovider.healthcare.com
         networks:

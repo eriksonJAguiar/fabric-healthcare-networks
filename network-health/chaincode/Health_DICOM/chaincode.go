@@ -305,3 +305,10 @@ func (t *HealthcareChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Respon
 	fmt.Println("invoke did not find func: " + fun) //error
 	return shim.Error("Received unknown function invocation")
 }
+
+func main() {
+	err := shim.Start(new(HealthcareChaincode))
+	if err != nil {
+		panic(err)
+	}
+}
