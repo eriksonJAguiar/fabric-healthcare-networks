@@ -19,7 +19,7 @@ docker-compose -f $COMPOSE_FILE up -d
 sleep 4
 
 # 1. Create the channel
-createChannel
+creatdocker 
 sleep 8
 
 # 2.1 Join all peer to the channel

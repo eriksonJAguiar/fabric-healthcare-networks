@@ -10,7 +10,7 @@ INSTANTIATING_HOST=true
 COMPOSE_FILE=docker-compose-cli.yaml
 #COMPOSE_FILE_RAFT=docker-compose-etcdraft2.yaml
 
-LANGUAGE=node
+LANGUAGE=javascript
 VERSION=1.0.0
 GO_PATH=/opt/gopath/src/
 CHAINECODE_PATH="${GO_PATH}github.com/chaincode/" # defined in volume
