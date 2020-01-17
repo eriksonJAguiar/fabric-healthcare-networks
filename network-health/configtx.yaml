@@ -25,8 +25,8 @@ Organizations:
             # encoded in the genesis block in the Application section context  
             - Host: peer0.hprovider.healthcare.com
               Port: 7051
-            - Host: peer1.hprovider.healthcare.com
-              Port: 7051
+            #- Host: peer1.hprovider.healthcare.com
+            #  Port: 7051
             # - Host: peer2.hprovider.healthcare.com
             #   Port: 7051
 
@@ -38,24 +38,24 @@ Organizations:
         AnchorPeers:
             - Host: peer0.research.healthcare.com
               Port: 7051
-            - Host: peer1.research.healthcare.com
-              Port: 7051
+              #- Host: peer1.research.healthcare.com
+              #Port: 7051
     #         - Host: peer2.research.healthcare.com
     #           Port: 7051
     
-    - &Patient       
-        Name: PatientMSP
+    #- &Patient       
+    #    Name: PatientMSP
         # ID to load the MSP definition as
-        ID: PatientMSP
-        MSPDir: crypto-config/peerOrganizations/patient.healthcare.com/msp
-        AnchorPeers:
+   #     ID: PatientMSP
+   #     MSPDir: crypto-config/peerOrganizations/patient.healthcare.com/msp
+   #     AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
-            - Host: peer0.patient.healthcare.com
-              Port: 7051
-            - Host: peer1.patient.healthcare.com
-              Port: 7051
+            #          - Host: peer0.patient.healthcare.com
+            #           Port: 7051
+            #        - Host: peer1.patient.healthcare.com
+            #          Port: 7051
     #         - Host: peer2.patient.healthcare.com
     #           Port: 7051
     
@@ -173,7 +173,7 @@ Profiles:
                 Organizations:
                     - *HProvider
                     - *Research
-                    - *Patient
+                      # - *Patient
     HealthChannel:
         Consortium: HealthConsortium
         Application:
@@ -181,4 +181,4 @@ Profiles:
             Organizations:
                 - *HProvider
                 - *Research  
-                - *Patient          
+                  # - *Patient          
