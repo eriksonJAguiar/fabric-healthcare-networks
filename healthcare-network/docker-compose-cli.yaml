@@ -92,7 +92,7 @@ services:
       - CORE_PEER_ID=cli
       - CORE_PEER_ADDRESS=peer0.hp1.healthcare.com:7051
       - CORE_PEER_LOCALMSPID=hp1MSP
-      - CORE_PEER_TLS_ENABLED=false
+      - CORE_PEER_TLS_ENABLED=true
       - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hp1.healthcare.com/peers/peer0.hp1.healthcare.com/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hp1.healthcare.com/peers/peer0.hp1.healthcare.com/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hp1.healthcare.com/peers/peer0.hp1.healthcare.com/tls/ca.crt
