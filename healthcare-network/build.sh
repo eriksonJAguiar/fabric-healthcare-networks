@@ -33,7 +33,7 @@ function generateCert() {
   mkdir crypto-config
 
   set -x
-  /Users/erjulioaguiar/fabric-samples/bin/cryptogen generate --config=./$CRYPTO_CONFIG
+  ./bin/cryptogen generate --config=./$CRYPTO_CONFIG
   res=$?
   set +x
   if [ $res -ne 0 ]; then
@@ -54,7 +54,7 @@ function generateChannelArtifacts() {
 
   # Create Genesis block defined by profile OrgsOrdererGenesis in configtx.yaml
   set -x
-  /Users/erjulioaguiar/fabric-samples/bin/configtxgen -profile HealthcareOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
+  ./bin/configtxgen -profile HealthcareOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
   res=$?
   set +x
   if [ $res -ne 0 ]; then
@@ -64,7 +64,7 @@ function generateChannelArtifacts() {
 
   # Create initial channel configuration defined by profile OrgsChannel in configtx.yaml
   set -x
-  /Users/erjulioaguiar/fabric-samples/bin/configtxgen -profile Healthcarechannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
+  ./bin/configtxgen -profile Healthcarechannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
   res=$?
   set +x
   if [ $res -ne 0 ]; then
@@ -75,7 +75,7 @@ function generateChannelArtifacts() {
   # Create anchorPeer configuration defined in profile OneOrgChannel in configtx.yaml
   for i in ${!ORGANIZATION_NAME[@]}; do
     set -x
-    /Users/erjulioaguiar/fabric-samples/bin/configtxgen -profile Healthcarechannel -outputAnchorPeersUpdate ./channel-artifacts/${ORGANIZATION_NAME[$i]}-anchors.tx -channelID $CHANNEL_NAME -asOrg ${ORGANIZATION_NAME[$i]}
+    ./bin/configtxgen -profile Healthcarechannel -outputAnchorPeersUpdate ./channel-artifacts/${ORGANIZATION_NAME[$i]}-anchors.tx -channelID $CHANNEL_NAME -asOrg ${ORGANIZATION_NAME[$i]}
     res=$?
     set +x
     if [ $res -ne 0 ]; then
