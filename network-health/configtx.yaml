@@ -25,8 +25,8 @@ Organizations:
             # encoded in the genesis block in the Application section context  
             - Host: peer0.hprovider.healthcare.com
               Port: 7051
-            #- Host: peer1.hprovider.healthcare.com
-            #  Port: 7051
+            - Host: peer1.hprovider.healthcare.com
+              Port: 8051
             # - Host: peer2.hprovider.healthcare.com
             #   Port: 7051
 
@@ -37,9 +37,9 @@ Organizations:
         MSPDir: crypto-config/peerOrganizations/research.healthcare.com/msp
         AnchorPeers:
             - Host: peer0.research.healthcare.com
-              Port: 7051
-              #- Host: peer1.research.healthcare.com
-              #Port: 7051
+              Port: 9051
+            - Host: peer1.research.healthcare.com
+              Port: 10051
     #         - Host: peer2.research.healthcare.com
     #           Port: 7051
     
