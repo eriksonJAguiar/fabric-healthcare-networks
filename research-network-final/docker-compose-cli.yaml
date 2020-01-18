@@ -1,0 +1,128 @@
+# Blockchain by example
+
+
+version: '2'
+
+volumes:
+  orderer.healthcare.com:
+  peer0.hprovider.healthcare.com:
+  # peer1.hprovider.healthcare.com:
+  # peer2.hprovider.healthcare.com:
+  peer0.research.healthcare.com:
+  # peer1.research.healthcare.com:
+  # peer2.research.healthcare.com:
+
+networks:
+  healthnetwork:
+
+services:
+
+  orderer.healthcare.com:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer.healthcare.com
+    container_name: orderer.healthcare.com
+    environment:
+      - ORDERER_HOST=orderer.healthcare.com
+    networks:
+      - healthnetwork
+  
+  ca.hprovider.healthcare.com:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: ca.hprovider.healthcare.com
+    container_name: ca.hprovider.healthcare.com
+    networks:
+      - healthnetwork
+
+  ca.research.healthcare.com:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: ca.research.healthcare.com
+    container_name: ca.research.healthcare.com
+    networks:
+      - healthnetwork
+
+  peer0.hprovider.healthcare.com:
+    container_name: peer0.hprovider.healthcare.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.hprovider.healthcare.com
+    networks:
+      - healthnetwork
+
+  # peer1.hprovider.healthcare.com:
+  #   container_name: peer1.hprovider.healthcare.com
+  #   extends:
+  #     file:  base/docker-compose-base.yaml
+  #     service: peer1.hprovider.healthcare.com
+  #   networks:
+  #     - healthnetwork
+
+  # peer2.hprovider.healthcare.com:
+  #   container_name: peer2.hprovider.healthcare.com
+  #   extends:
+  #     file:  base/docker-compose-base.yaml
+  #     service: peer2.hprovider.healthcare.com
+  #   networks:
+  #     - healthnetwork
+
+  peer0.research.healthcare.com:
+    container_name: peer0.research.healthcare.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.research.healthcare.com
+    networks:
+      - healthnetwork
+
+  # peer1.research.healthcare.com:
+  #   container_name: peer1.research.healthcare.com
+  #   extends:
+  #     file:  base/docker-compose-base.yaml
+  #     service: peer1.research.healthcare.com
+  #   networks:
+  #     - healthnetwork
+
+  # peer2.research.healthcare.com:
+  #   container_name: peer2.research.healthcare.com
+  #   extends:
+  #     file:  base/docker-compose-base.yaml
+  #     service: peer2.research.healthcare.com
+  #   networks:
+  #     - healthnetwork
+
+  cli:
+    container_name: cli
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_LOGGING_LEVEL=DEBUG
+      #- CORE_LOGGING_LEVEL=INFO
+      - CORE_PEER_ID=cli
+      - CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051
+      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.fsc.com/peers/peer0.hprovider.healthcare.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.fsc.com/peers/peer0.hprovider.healthcare.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.fsc.com/peers/peer0.hprovider.healthcare.com/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.fsc.com/users/Admin@org1.fsc.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash -c './scripts/script.sh ${CHANNEL_NAME} ${DELAY}; sleep $TIMEOUT'
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./chaincode/:/opt/gopath/src/github.com/chaincode
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+        - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+    depends_on:
+      - orderer.healthcare.com
+      - peer0.hprovider.healthcare.com
+      # - peer1.hprovider.healthcare.com
+      # - peer2.hprovider.healthcare.com
+      - peer0.research.healthcare.com
+      # - peer1.research.healthcare.com
+      # - peer2.research.healthcare.com
+    networks:
+      - healthnetwork
