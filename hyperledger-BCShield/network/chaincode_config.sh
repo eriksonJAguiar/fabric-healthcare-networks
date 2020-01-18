@@ -7,6 +7,7 @@ docker exec -it -e  CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051 cli
 docker exec -it -e  CORE_PEER_LOCALMSPID=HProviderMSP cli
 
 docker exec -it cli peer chaincode install -n Health_DICOM -v 1.0 -l golang -p github.com/chaincode/Health_DICOM
+#peer chaincode install -n HRecordes-contract -v 1.0 -l node -p /opt/gopath/src/github.com/chaincode/HRecordes-contract
 
 docker exec -it -e CORE_PEER_ADDRESS=peer1.hprovider.healthcare.com:7051 cli
 
@@ -25,6 +26,8 @@ docker exec -it -e CORE_PEER_ADDRESS=peer1.research.healthcare.com:7051 cli
 docker exec -it cli peer chaincode install -n Health_DICOM -v 1.0 -l golang -p github.com/chaincode/Health_DICOM
 
 docker exec -it cli peer chaincode instantiate -o ordererhp.healthcare.com:7050 -C healthchannel -l golang -n Health_DICOM -v 1.0 -c '{"Args":[]}'
+#/opt/gopath/src/github.com/chaincode/HRecordes-contract
+#peer chaincode instantiate -o ordererhp.healthcare.com:7050 -C healthchannel -l node -n HRecordes-contract -v 1.0 -c '{"Args":[]}'
 
 docker exec -it -e CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/hprovider.healthcare.com/users/Admin\@hprovider.healthcare.com/msp/ cli
 
@@ -33,5 +36,6 @@ docker exec -it -e CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051 cli
 docker exec -it -e CORE_PEER_LOCALMSPID=HProviderMSP cli
 
 peer chaincode invoke -n Health_DICOM -c '{"Args":["123", "222", "Running", "100", "-1828192 121212"], "Function":"initRecord"}' -C healthchannel
+#peer chaincode invoke -n Health_DICOM -c '{"Args":["123", "222", "Running", "100", "-1828192 121212"], "Function":"initRecord"}' -C healthchannel
 
 peer chaincode query -n Health_DICOM -c '{"Args":["123"], "Function":"readRecord"}' -C healthchannel

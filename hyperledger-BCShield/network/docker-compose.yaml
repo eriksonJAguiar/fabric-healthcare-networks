@@ -2,17 +2,6 @@
 
 version: "2"
 
-volumes:
-  ordererhp.healthcare.com:
-  peer0.hprovider.healthcare.com:
-  peer1.hprovider.healthcare.com:
-  peer2.hprovider.healthcare.com:
-  peer3.hprovider.healthcare.com:
-  peer0.research.healthcare.com:
-  peer1.research.healthcare.com:
-  peer2.research.healthcare.com:
-  peer3.research.healthcare.com:
-
 networks:
   healthNetwork:
 
@@ -37,8 +26,8 @@ services:
       - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
       - ./crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/msp:/var/hyperledger/orderer/msp
       - ./crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/tls/:/var/hyperledger/orderer/tls
-      - ./channel/crypto-config/peerOrganizations/hprovider.example.com/peers/peer0.hprovider.example.com/:/etc/hyperledger/crypto/peerOrg1
-      - ./channel/crypto-config/peerOrganizations/research.example.com/peers/peer0.research.example.com/:/etc/hyperledger/crypto/peerOrg2
+      - ./channel/crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/:/etc/hyperledger/crypto/peerOrg1
+      - ./channel/crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/:/etc/hyperledger/crypto/peerOrg2
     ports:
       - 7050:7050
     networks:
@@ -116,19 +105,19 @@ services:
     networks:
       - healthNetwork
 
-  # couchdb.peer0.hprovider:
-  #   container_name: couchdb.peer0.hprovider
-  #   image: hyperledger/fabric-couchdb:0.4.10
-  #   environment:
-  #     - DB_URL=http://localhost:7984/member_db
-  #     - COUCHDB_USER=admin
-  #     - COUCHDB_PASSWORD=adminpw
-  #   volumes:
-  #     - ./couchdbData/couchdb.peer0.hprovider/:/opt/couchdb/data
-  #   ports:
-  #     - "7984:5984"
-  #   networks:
-  #     - healthNetwork
+  couchdb.peer0.hprovider:
+    container_name: couchdb.peer0.hprovider
+    image: hyperledger/fabric-couchdb:0.4.10
+    environment:
+      - DB_URL=http://localhost:7984/member_db
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=adminpw
+    volumes:
+      - ./couchdbData/couchdb.peer0.hprovider/:/opt/couchdb/data
+    ports:
+      - "7984:5984"
+    networks:
+      - healthNetwork
       
 
   peer1.hprovider.healthcare.com:
@@ -157,19 +146,19 @@ services:
     networks:
       - healthNetwork
 
-  # couchdb.peer1.hprovider:
-  #   container_name: couchdb.peer1.hprovider
-  #   image: hyperledger/fabric-couchdb:0.4.10
-  #   environment:
-  #     - DB_URL=http://localhost:8984/member_db
-  #     - COUCHDB_USER=peer1Hprovider
-  #     - COUCHDB_PASSWORD=adminpw
-  #   volumes:
-  #     - ./couchdbData/couchdb.peer1.hprovider/:/opt/couchdb/data
-  #   ports:
-  #     - "8984:5984"
-  #   networks:
-  #     - healthNetwork
+  couchdb.peer1.hprovider:
+    container_name: couchdb.peer1.hprovider
+    image: hyperledger/fabric-couchdb:0.4.10
+    environment:
+      - DB_URL=http://localhost:8984/member_db
+      - COUCHDB_USER=peer1Hprovider
+      - COUCHDB_PASSWORD=adminpw
+    volumes:
+      - ./couchdbData/couchdb.peer1.hprovider/:/opt/couchdb/data
+    ports:
+      - "8984:5984"
+    networks:
+      - healthNetwork
   
   
   peer2.hprovider.healthcare.com:
@@ -198,19 +187,19 @@ services:
     networks:
       - healthNetwork
 
-  # couchdb.peer2.hprovider:
-  #   container_name: couchdb.peer2.hprovider
-  #   image: hyperledger/fabric-couchdb:0.4.10
-  #   environment:
-  #     - DB_URL=http://localhost:8985/member_db
-  #     - COUCHDB_USER=peer2Hprovider
-  #     - COUCHDB_PASSWORD=adminpw
-  #   volumes:
-  #     - ./couchdbData/couchdb.peer1.hprovider/:/opt/couchdb/data
-  #   ports:
-  #     - "8985:5984"
-  #   networks:
-  #     - healthNetwork
+  couchdb.peer2.hprovider:
+    container_name: couchdb.peer2.hprovider
+    image: hyperledger/fabric-couchdb:0.4.10
+    environment:
+      - DB_URL=http://localhost:8985/member_db
+      - COUCHDB_USER=peer2Hprovider
+      - COUCHDB_PASSWORD=adminpw
+    volumes:
+      - ./couchdbData/couchdb.peer1.hprovider/:/opt/couchdb/data
+    ports:
+      - "8985:5984"
+    networks:
+      - healthNetwork
 
   peer3.hprovider.healthcare.com:
     container_name: peer3.hprovider.healthcare.com
@@ -238,19 +227,19 @@ services:
     networks:
       - healthNetwork
 
-  # couchdb.peer3.hprovider:
-  #   container_name: couchdb.peer3.hprovider
-  #   image: hyperledger/fabric-couchdb:0.4.10
-  #   environment:
-  #     - DB_URL=http://localhost:8986/member_db
-  #     - COUCHDB_USER=peer3Hprovider
-  #     - COUCHDB_PASSWORD=adminpw
-  #   volumes:
-  #     - ./couchdbData/couchdb.peer1.hprovider/:/opt/couchdb/data
-  #   ports:
-  #     - "8986:5984"
-  #   networks:
-  #     - healthNetwork
+  couchdb.peer3.hprovider:
+    container_name: couchdb.peer3.hprovider
+    image: hyperledger/fabric-couchdb:0.4.10
+    environment:
+      - DB_URL=http://localhost:8986/member_db
+      - COUCHDB_USER=peer3Hprovider
+      - COUCHDB_PASSWORD=adminpw
+    volumes:
+      - ./couchdbData/couchdb.peer1.hprovider/:/opt/couchdb/data
+    ports:
+      - "8986:5984"
+    networks:
+      - healthNetwork
 
   peer0.research.healthcare.com:
     container_name: peer0.research.healthcare.com
@@ -278,19 +267,19 @@ services:
     networks:
       - healthNetwork
 
-  # couchdb.peer0.research:
-  #   container_name: couchdb.peer0.research
-  #   image: hyperledger/fabric-couchdb:0.4.10
-  #   environment:
-  #     - DB_URL=http://localhost:8059/member_db
-  #     - COUCHDB_USER=peer0Research
-  #     - COUCHDB_PASSWORD=adminpw
-  #   volumes:
-  #     - ./couchdbData/couchdb.peer1.hprovider/:/opt/couchdb/data
-  #   ports:
-  #     - "8059:5984"
-  #   networks:
-  #     - healthNetwork
+  couchdb.peer0.research:
+    container_name: couchdb.peer0.research
+    image: hyperledger/fabric-couchdb:0.4.10
+    environment:
+      - DB_URL=http://localhost:8059/member_db
+      - COUCHDB_USER=peer0Research
+      - COUCHDB_PASSWORD=adminpw
+    volumes:
+      - ./couchdbData/couchdb.peer1.hprovider/:/opt/couchdb/data
+    ports:
+      - "8059:5984"
+    networks:
+      - healthNetwork
 
   peer1.research.healthcare.com:
     container_name: peer1.research.healthcare.com
@@ -318,19 +307,19 @@ services:
       - 7075:7051
       - 7078:7053
 
-  # couchdb.peer1.research:
-  #   container_name: couchdb.peer1.research
-  #   image: hyperledger/fabric-couchdb:0.4.10
-  #   environment:
-  #     - DB_URL=http://localhost:8069/member_db
-  #     - COUCHDB_USER=peer1Research
-  #     - COUCHDB_PASSWORD=adminpw
-  #   volumes:
-  #     - ./couchdbData/couchdb.peer1.hprovider/:/opt/couchdb/data
-  #   ports:
-  #     - "8069:5984"
-  #   networks:
-  #     - healthNetwork
+  couchdb.peer1.research:
+    container_name: couchdb.peer1.research
+    image: hyperledger/fabric-couchdb:0.4.10
+    environment:
+      - DB_URL=http://localhost:8069/member_db
+      - COUCHDB_USER=peer1Research
+      - COUCHDB_PASSWORD=adminpw
+    volumes:
+      - ./couchdbData/couchdb.peer1.hprovider/:/opt/couchdb/data
+    ports:
+      - "8069:5984"
+    networks:
+      - healthNetwork
 
   peer2.research.healthcare.com:
     container_name: peer2.research.healthcare.com
@@ -358,19 +347,19 @@ services:
       - 7081:7051
       - 7083:7053
 
-  # couchdb.peer2.research:
-  #   container_name: couchdb.peer2.research
-  #   image: hyperledger/fabric-couchdb:0.4.10
-  #   environment:
-  #     - DB_URL=http://localhost:8079/member_db
-  #     - COUCHDB_USER=peer2Research
-  #     - COUCHDB_PASSWORD=adminpw
-  #   volumes:
-  #     - ./couchdbData/couchdb.peer2.hprovider/:/opt/couchdb/data
-  #   ports:
-  #     - "8079:5984"
-  #   networks:
-  #     - healthNetwork
+  couchdb.peer2.research:
+    container_name: couchdb.peer2.research
+    image: hyperledger/fabric-couchdb:0.4.10
+    environment:
+      - DB_URL=http://localhost:8079/member_db
+      - COUCHDB_USER=peer2Research
+      - COUCHDB_PASSWORD=adminpw
+    volumes:
+      - ./couchdbData/couchdb.peer2.hprovider/:/opt/couchdb/data
+    ports:
+      - "8079:5984"
+    networks:
+      - healthNetwork
 
   peer3.research.healthcare.com:
     container_name: peer3.research.healthcare.com
@@ -398,19 +387,19 @@ services:
       - 8085:7051
       - 8088:7053
 
-  # couchdb.peer3.research:
-  #   container_name: couchdb.peer3.research
-  #   image: hyperledger/fabric-couchdb:0.4.10
-  #   environment:
-  #     - DB_URL=http://localhost:8175/member_db
-  #     - COUCHDB_USER=peer3Research
-  #     - COUCHDB_PASSWORD=adminpw
-  #   volumes:
-  #     - ./couchdbData/couchdb.peer3.hprovider/:/opt/couchdb/data
-  #   ports:
-  #     - "8175:5984"
-  #   networks:
-  #     - healthNetwork
+  couchdb.peer3.research:
+    container_name: couchdb.peer3.research
+    image: hyperledger/fabric-couchdb:0.4.10
+    environment:
+      - DB_URL=http://localhost:8175/member_db
+      - COUCHDB_USER=peer3Research
+      - COUCHDB_PASSWORD=adminpw
+    volumes:
+      - ./couchdbData/couchdb.peer3.hprovider/:/opt/couchdb/data
+    ports:
+      - "8175:5984"
+    networks:
+      - healthNetwork
 
   cli:
     container_name: cli

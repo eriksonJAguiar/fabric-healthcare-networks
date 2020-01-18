@@ -11,53 +11,53 @@ Organizations:
     - &Orderer        
         Name: Orderer
         ID: OrdererMSP
-        # MSPDir is the filesystem path which contains the MSP configuration
         MSPDir: crypto-config/ordererOrganizations/healthcare.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('OrdererMSP.member')"
+            Writers:
+                Type: Signature
+                Rule: "OR('OrdererMSP.member')"
+            Admins:
+                Type: Signature
+                Rule: "OR('OrdererMSP.admin')"
 
     - &HProvider        
         Name: HProviderMSP
-        # ID to load the MSP definition as
         ID: HProviderMSP
         MSPDir: crypto-config/peerOrganizations/hprovider.healthcare.com/msp
         AnchorPeers:
-            # AnchorPeers defines the location of peers which can be used
-            # for cross org gossip communication.  Note, this value is only
-            # encoded in the genesis block in the Application section context  
             - Host: peer0.hprovider.healthcare.com
               Port: 7051
-            - Host: peer1.hprovider.healthcare.com
-              Port: 8051
-            # - Host: peer2.hprovider.healthcare.com
-            #   Port: 7051
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('HProviderMSP.admin', 'HProviderMSP.peer', 'HProviderMSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('HProviderMSP.admin', 'HProviderMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('HProviderMSP.admin')"
 
     - &Research        
         Name: ResearchMSP
-        # ID to load the MSP definition as
         ID: ResearchMSP
         MSPDir: crypto-config/peerOrganizations/research.healthcare.com/msp
         AnchorPeers:
             - Host: peer0.research.healthcare.com
-              Port: 9051
-            - Host: peer1.research.healthcare.com
-              Port: 10051
-    #         - Host: peer2.research.healthcare.com
-    #           Port: 7051
-    
-    #- &Patient       
-    #    Name: PatientMSP
-        # ID to load the MSP definition as
-   #     ID: PatientMSP
-   #     MSPDir: crypto-config/peerOrganizations/patient.healthcare.com/msp
-   #     AnchorPeers:
-            # AnchorPeers defines the location of peers which can be used
-            # for cross org gossip communication.  Note, this value is only
-            # encoded in the genesis block in the Application section context
-            #          - Host: peer0.patient.healthcare.com
-            #           Port: 7051
-            #        - Host: peer1.patient.healthcare.com
-            #          Port: 7051
-    #         - Host: peer2.patient.healthcare.com
-    #           Port: 7051
+              Port: 7051
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('ResearchMSP.admin', 'ResearchMSP.peer', 'ResearchMSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('ResearchMSP.admin', 'ResearchMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('ResearchMSP.admin')"
     
 
     
@@ -65,19 +65,6 @@ Organizations:
 #
 #   SECTION: Capabilities
 #
-#   - This section defines the capabilities of fabric network. This is a new
-#   concept as of v1.1.0 and should not be utilized in mixed networks with
-#   v1.0.x peers and orderers.  Capabilities define features which must be
-#   present in a fabric binary for that binary to safely participate in the
-#   fabric network.  For instance, if a new MSP type is added, newer binaries
-#   might recognize and validate the signatures from this type, while older
-#   binaries without this support would be unable to validate those
-#   transactions.  This could lead to different versions of the fabric binaries
-#   having different world states.  Instead, defining a capability for a channel
-#   informs those binaries without this capability that they must cease
-#   processing transactions until they have been upgraded.  For v1.0.x if any
-#   capabilities are defined (including a map with all capabilities turned off)
-#   then the v1.0.x peer will deliberately crash.
 #
 ################################################################################
 Capabilities:    
@@ -114,39 +101,21 @@ Application: &ApplicationDefaults
 ################################################################################
 Orderer: &OrdererDefaults
 
-    # Orderer Type: The orderer implementation to start
-    # Available types are "solo" and "kafka"
+
     OrdererType: solo
 
     Addresses:
         - orderer.healthcare.com:7050
-
-    # Batch Timeout: The amount of time to wait before creating a batch
     BatchTimeout: 2s
-
-    # Batch Size: Controls the number of messages batched into a block
     BatchSize:
-
-        # Max Message Count: The maximum number of messages to permit in a batch
         MaxMessageCount: 10
-
-        # Absolute Max Bytes: The absolute maximum number of bytes allowed for
-        # the serialized messages in a batch.
         AbsoluteMaxBytes: 99 MB
-
-        # Preferred Max Bytes: The preferred maximum number of bytes allowed for
-        # the serialized messages in a batch. A message larger than the preferred
-        # max bytes will result in a batch larger than preferred max bytes.
         PreferredMaxBytes: 512 KB
-
     Kafka:
-        # Brokers: A list of Kafka brokers to which the orderer connects
-        # NOTE: Use IP:port notation
         Brokers:
             - 127.0.0.1:9092
 
-    # Organizations is the list of orgs which are defined as participants on
-    # the orderer side of the network
+  
     Organizations:
 
 ################################################################################
@@ -173,7 +142,6 @@ Profiles:
                 Organizations:
                     - *HProvider
                     - *Research
-                      # - *Patient
     HealthChannel:
         Consortium: HealthConsortium
         Application:
@@ -181,4 +149,5 @@ Profiles:
             Organizations:
                 - *HProvider
                 - *Research  
-                  # - *Patient          
+
+#peer channel create -c healthchannel -o orderer.healthcare.com:7050
