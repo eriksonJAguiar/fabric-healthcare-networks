@@ -68,8 +68,8 @@ echo "create channel for peer0.hprovider ..."
 
 
 ${PEER0_HPROVIDER} \
-docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
-docker exec -it cli peer channel join -b ${CHANNEL_NAME}.block
+peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
+peer channel join -b ${CHANNEL_NAME}.block
 
 
 echo "create channel for peer1.hprovider ..."
