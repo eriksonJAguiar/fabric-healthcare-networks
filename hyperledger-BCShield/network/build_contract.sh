@@ -3,6 +3,7 @@
 CHANNEL_NAME=healthchannel
 CONTRACT_PATH=/opt/gopath/src/github.com/chaincode/HRecordes-contract
 CONTRACT_NAME=HRecordes-contract
+PEERS=(PEER0_HPROVIDER PEER1_HPROVIDER PEER2_HPROVIDER PEER0_RESEARCH PEER1_RESEARCH PEER2_RESEARCH)
 
 CONFIG_ROOT=/opt/gopath/src/github.com/hyperledger/fabric/peer
 HPROVIDER_MSPCONFIGPATH=${CONFIG_ROOT}/crypto/peerOrganizations/hprovider.healthcare.com/users/Admin@hprovider.healthcare.com/msp
@@ -10,10 +11,6 @@ HPROVIDER_TLS_ROOTCERT_FILE=${CONFIG_ROOT}/crypto/peerOrganizations/hprovider.he
 RESEARCH_MSPCONFIGPATH=${CONFIG_ROOT}/crypto/peerOrganizations/research.healthcare.com/users/Admin@research.healthcare.com/msp
 RESEARCH_TLS_ROOTCERT_FILE=${CONFIG_ROOT}/crypto/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/tls/ca.crt
 ORDERER_TLS_ROOTCERT_FILE=${CONFIG_ROOT}/crypto/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/msp/tlscacerts/tlsca.healthcare.com-cert.pem
-
-
-
-PEERS = (PEER0_HPROVIDER PEER1_HPROVIDER PEER2_HPROVIDER PEER0_RESEARCH PEER1_RESEARCH PEER2_RESEARCH)
 
 
 PEER0_HPROVIDER="docker exec
@@ -84,6 +81,9 @@ peer
 --orderer=ordererhp.healthcare.com:7050"
 
 
+
+echo "create channel for peers"
+
 for i in ${!PEERS[@]}; do
 
     ${PEERS[$i]} \
@@ -92,6 +92,7 @@ for i in ${!PEERS[@]}; do
 
 done
 
+echo "build install chaincode for peers ..."
 
 for i in ${!PEERS[@]}; do
 
@@ -99,6 +100,8 @@ for i in ${!PEERS[@]}; do
     docker exec -it cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
 
 done
+
+echo "Instatiate chaincode ..."
 
 docker exec -it cli peer chaincode instantiate -o ordererhp.healthcare.com:7050 -C ${CHANNEL_NAME} -l golang -n Health_DICOM -v 1.0 -c '{"Args":[]}'
 
