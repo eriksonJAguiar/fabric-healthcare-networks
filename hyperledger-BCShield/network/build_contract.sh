@@ -17,10 +17,8 @@ PEER0_HPROVIDER="docker exec
 -e CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051
 -e CORE_PEER_MSPCONFIGPATH=${HPROVIDER_MSPCONFIGPATH}
 -e CORE_PEER_TLS_ROOTCERT_FILE=${HPROVIDER_TLS_ROOTCERT_FILE}
-cli
-peer
---cafile=${ORDERER_TLS_ROOTCERT_FILE}
---orderer=ordererhp.healthcare.com:7050"
+cli 
+bash"
 
 PEER1_HPROVIDER="docker exec
 -e CORE_PEER_LOCALMSPID=HProviderMSP
@@ -80,12 +78,13 @@ echo "create channel for peer0.hprovider ..."
 
 
 ${PEER0_HPROVIDER}\
-docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
-docker exec -it cli peer channel join -b ${CHANNEL_NAME}.block \
+peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
+peer channel join -b ${CHANNEL_NAME}.block \
 
 
 echo "create channel for peer1.hprovider ..."
 
+break
 
 ${PEER1_HPROVIDER}\
 docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
