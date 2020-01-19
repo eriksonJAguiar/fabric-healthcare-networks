@@ -3,7 +3,6 @@
 CHANNEL_NAME=healthchannel
 CONTRACT_PATH=/opt/gopath/src/github.com/chaincode/HRecordes-contract
 CONTRACT_NAME=HRecordes-contract
-PEERS=(PEER0_HPROVIDER PEER1_HPROVIDER PEER2_HPROVIDER PEER0_RESEARCH PEER1_RESEARCH PEER2_RESEARCH)
 
 CONFIG_ROOT=/opt/gopath/src/github.com/hyperledger/fabric/peer
 HPROVIDER_MSPCONFIGPATH=${CONFIG_ROOT}/crypto/peerOrganizations/hprovider.healthcare.com/users/Admin@hprovider.healthcare.com/msp
@@ -20,7 +19,6 @@ PEER0_HPROVIDER="docker exec
 -e CORE_PEER_TLS_ROOTCERT_FILE=${HPROVIDER_TLS_ROOTCERT_FILE}
 cli
 peer
---tls=true
 --cafile=${ORDERER_TLS_ROOTCERT_FILE}
 --orderer=ordererhp.healthcare.com:7050"
 
@@ -31,7 +29,6 @@ PEER1_HPROVIDER="docker exec
 -e CORE_PEER_TLS_ROOTCERT_FILE=${HPROVIDER_TLS_ROOTCERT_FILE}
 cli
 peer
---tls=true
 --cafile=${ORDERER_TLS_ROOTCERT_FILE}
 --orderer=ordererhp.healthcare.com:7050"
 
@@ -43,7 +40,6 @@ PEER2_HPROVIDER="docker exec
 -e CORE_PEER_TLS_ROOTCERT_FILE=${HPROVIDER_TLS_ROOTCERT_FILE}
 cli
 peer
---tls=true
 --cafile=${ORDERER_TLS_ROOTCERT_FILE}
 --orderer=ordererhp.healthcare.com:7050"
 
@@ -54,7 +50,6 @@ PEER0_RESEARCH="docker exec
 -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE}
 cli
 peer
---tls=true
 --cafile=${ORDERER_TLS_ROOTCERT_FILE}
 --orderer=ordererhp.healthcare.com:7050"
 
@@ -65,7 +60,6 @@ PEER1_RESEARCH="docker exec
 -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE}
 cli
 peer
---tls=true
 --cafile=${ORDERER_TLS_ROOTCERT_FILE}
 --orderer=ordererhp.healthcare.com:7050"
 
@@ -76,33 +70,94 @@ PEER1_RESEARCH="docker exec
 -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE}
 cli
 peer
---tls=true
 --cafile=${ORDERER_TLS_ROOTCERT_FILE}
 --orderer=ordererhp.healthcare.com:7050"
 
 
+#----------- Create Channel -------------
 
-echo "create channel for peers"
+echo "create channel for peer0.hprovider ..."
 
-for i in ${!PEERS[@]}; do
 
-    ${PEERS[$i]} \
-    docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
-    docker exec -it cli peer channel join -b ${CHANNEL_NAME}.block \
+${PEER0_HPROVIDER}\
+docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
+docker exec -it cli peer channel join -b ${CHANNEL_NAME}.block \
 
-done
 
-echo "build install chaincode for peers ..."
+echo "create channel for peer1.hprovider ..."
 
-for i in ${!PEERS[@]}; do
 
-    ${PEERS[$i]} \
-    docker exec -it cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
+${PEER1_HPROVIDER}\
+docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
+docker exec -it cli peer channel join -b ${CHANNEL_NAME}.block 
 
-done
+echo "create channel for peer2.hprovider ..."
+
+
+${PEER2_HPROVIDER}\
+docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
+docker exec -it cli peer channel join -b ${CHANNEL_NAME}.block 
+
+
+echo "create channel for peer0.research ..."
+
+${PEER0_RESEARCH}\
+docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
+docker exec -it cli peer channel join -b ${CHANNEL_NAME}.block 
+
+
+echo "create channel for peer1.research ..."
+
+${PEER1_RESEARCH}\
+docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
+docker exec -it cli peer channel join -b ${CHANNEL_NAME}.block 
+
+
+echo "create channel for peer2.research ..."
+
+${PEER2_RESEARCH}\
+docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
+docker exec -it cli peer channel join -b ${CHANNEL_NAME}.block 
+
+
+#------------------Install--------------------
+
+echo "Installing chaincode for peer0.hprovider ..."
+
+${PEER0_HPROVIDER}\
+docker exec -it cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
+
+
+echo "Installing chaincode for peer1.hprovider ..."
+
+${PEER1_HPROVIDER}\
+docker exec -it cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
+
+echo "Installing chaincode for peer2.hprovider ..."
+
+${PEER2_HPROVIDER}\
+docker exec -it cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
+
+
+echo "Installing chaincode for peer0.research ..."
+
+${PEER0_RESEARCH}\
+docker exec -it cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
+
+echo "Installing chaincode for peer1.research ..."
+
+${PEER1_RESEARCH}\
+docker exec -it cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
+
+echo "Installing chaincode for peer2.research ..."
+
+${PEER2_RESEARCH}\
+docker exec -it cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
+
+#---------- Instatiate chaincode ------------------
 
 echo "Instatiate chaincode ..."
 
-docker exec -it cli peer chaincode instantiate -o ordererhp.healthcare.com:7050 -C ${CHANNEL_NAME} -l golang -n Health_DICOM -v 1.0 -c '{"Args":[]}'
+docker exec -it cli peer chaincode instantiate -o ordererhp.healthcare.com:7050 -C ${CHANNEL_NAME} -l node -n ${CONTRACT_NAME} -v 1.0 -c '{"Args":[]}'
 
 ${PEER0_HPROVIDER}
