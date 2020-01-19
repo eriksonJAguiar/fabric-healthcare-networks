@@ -45,8 +45,7 @@
         "peers": [
           "peer0.hprovider.healthcare.com", 
           "peer1.hprovider.healthcare.com",
-          "peer2.hprovider.healthcare.com",
-          "peer3.hprovider.healthcare.com"
+          "peer2.hprovider.healthcare.com"
         ],
         "certificateAuthorities": ["ca.hprovider.healthcare.com"]
       },
@@ -55,8 +54,7 @@
         "peers": [
           "peer0.research.healthcare.com",
           "peer1.research.healthcare.com",
-          "peer2.research.healthcare.com",
-          "peer3.research.healthcare.com"
+          "peer2.research.healthcare.com"
         ],
         "certificateAuthorities": ["ca.research.healthcare.com"]
       }
@@ -107,17 +105,6 @@
           "path": "./crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
         }
       },
-      "peer3.hprovider.healthcare.com": {
-        "url": "grpcs://localhost:8051",
-        "eventUrl": "grpcs://localhost:8053",
-        "grpcOptions": {
-          "ssl-target-name-override": "peer3.hprovider.healthcare.com"
-        },
-        "grpc-max-send-message-length": 15,
-        "tlsCACerts": {
-          "path": "./crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
-        }
-      },
       "peer0.research.healthcare.com": {
         "url": "grpcs://localhost:9031",
         "eventUrl": "grpcs://localhost:9033",
@@ -151,18 +138,6 @@
           "path": "./crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
         }
       },
-      "peer3.research.healthcare.com": {
-        "url": "grpcs://localhost:9061",
-        "eventUrl": "grpcs://localhost:9063",
-        "grpcOptions": {
-          "ssl-target-name-override": "peer3.research.healthcare.com"
-        },
-        "grpc-max-send-message-length": 15,
-        "tlsCACerts": {
-          "path": "./crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
-        }
-      }
-    },
     "certificateAuthorities": {
       "ca.hprovider.healthcare.com": {
         "url": "https://localhost:7054",

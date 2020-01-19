@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 // Setting for Hyperledger Fabric
 const { FileSystemWallet, Gateway } = require('fabric-network');
 const path = require('path');
-const ccpPath = path.resolve(__dirname, '..',  'connection.json');
+const ccpPath = path.resolve(__dirname, '..', 'network', 'connection-profile.json');
 
 
 // app.get('/api/queryallcars', async function (req, res) {
