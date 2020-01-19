@@ -36,7 +36,7 @@ async function main() {
                 certificate: enrollment.certificate,
                 privateKey: enrollment.key.toBytes(),
             },
-            mspId: 'Org1MSP',
+            mspId: 'HProviderMSP',
             type: 'X.509',
         };
         await wallet.put('admin', x509Identity);
