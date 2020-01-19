@@ -20,6 +20,9 @@ PEER0_HPROVIDER="docker exec
 cli
 bash"
 
+docker exec  -e CORE_PEER_LOCALMSPID=HProviderMSP -e CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051 -e CORE_PEER_MSPCONFIGPATH=${HPROVIDER_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${HPROVIDER_TLS_ROOTCERT_FILE} cli
+
+
 PEER1_HPROVIDER="docker exec
 -e CORE_PEER_LOCALMSPID=HProviderMSP
 -e CORE_PEER_ADDRESS=peer1.hprovider.healthcare.com:7056
@@ -37,7 +40,7 @@ PEER2_HPROVIDER="docker exec
 cli
 bash"
 
-PEER0_RESEARCH="docker execgot
+PEER0_RESEARCH="docker exec
 -e CORE_PEER_LOCALMSPID=ResearchMSP
 -e CORE_PEER_ADDRESS=peer0.research.healthcare.com:7071
 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH}
@@ -62,28 +65,28 @@ cli
 bash"
 
 
+docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx
+
 #----------- Create Channel -------------
 
 echo "create channel for peer0.hprovider ..."
 
 
 ${PEER0_HPROVIDER} \
-peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
-peer channel join -b ${CHANNEL_NAME}.block
+docker exec -it cli peer channel join -b ${CHANNEL_NAME}.block
 
 
 echo "create channel for peer1.hprovider ..."
 
 
 ${PEER1_HPROVIDER} \
-docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
+
 docker exec -it cli peer channel join -b ${CHANNEL_NAME}.block 
 
 echo "create channel for peer2.hprovider ..."
 
 
 ${PEER2_HPROVIDER} \
-docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
 docker exec -it cli peer channel join -b ${CHANNEL_NAME}.block 
 
 

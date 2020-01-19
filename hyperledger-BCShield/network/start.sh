@@ -38,6 +38,11 @@ docker exec -it -e CORE_PEER_ADDRESS=peer1.research.healthcare.com:7051 cli
 
 docker exec -it cli peer channel join -b healthchannel.block
 
+docker exec -it -e CORE_PEER_ADDRESS=peer2.research.healthcare.com:7051 cli
+
+docker exec -it cli peer channel join -b healthchannel.block
+
+
 docker exec -it -e CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/hprovider.healthcare.com/users/Admin\@hprovider.healthcare.com/msp/ cli
 
 docker exec -it -e CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051 cli
