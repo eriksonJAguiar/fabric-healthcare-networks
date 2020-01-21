@@ -1,5 +1,6 @@
 {
     "name": "hprovider Client",
+    "caName": "ca.hprovider.healthcare.com",
     "version": "1.0",
     "client": {
       "organization": "hprovider",
@@ -67,7 +68,7 @@
         },
         "grpc-max-send-message-length": 15,
         "tlsCACerts": {
-          "path": "./crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/msp/tlscacerts/tlsca.healthcare.com-cert.pem"
+          "path": "../crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/msp/tlscacerts/tlsca.healthcare.com-cert.pem"
         }
       }
     },
@@ -80,7 +81,7 @@
         },
         "grpc-max-send-message-length": 15,
         "tlsCACerts": {
-          "path": "./crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
+          "path": "../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
         }
       },
       "peer1.hprovider.healthcare.com": {
@@ -91,7 +92,7 @@
         },
         "grpc-max-send-message-length": 15,
         "tlsCACerts": {
-          "path": "./crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
+          "path": "../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
         }
       },
       "peer2.hprovider.healthcare.com": {
@@ -102,7 +103,7 @@
         },
         "grpc-max-send-message-length": 15,
         "tlsCACerts": {
-          "path": "./crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
+          "path": "../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
         }
       },
       "peer0.research.healthcare.com": {
@@ -113,7 +114,7 @@
         },
         "grpc-max-send-message-length": 15,
         "tlsCACerts": {
-          "path": "./crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
+          "path": "../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
         }
       },
       "peer1.research.healthcare.com": {
@@ -124,7 +125,7 @@
         },
         "grpc-max-send-message-length": 15,
         "tlsCACerts": {
-          "path": "./crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
+          "path": "../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
         }
       },
       "peer2.research.healthcare.com": {
@@ -135,17 +136,17 @@
         },
         "grpc-max-send-message-length": 15,
         "tlsCACerts": {
-          "path": "./crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
+          "path": "../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
         }
       },
-    "certificateAuthorities": {
+      "certificateAuthorities": {
       "ca.hprovider.healthcare.com": {
         "url": "https://localhost:7054",
         "httpOptions": {
           "verify": false
         },
         "tlsCACerts": {
-          "path": "./crypto-config/peerOrganizations/hprovider.healthcare.com/ca/ca.hprovider.healthcare.com-cert.pem"
+          "path": "../crypto-config/peerOrganizations/hprovider.healthcare.com/ca/ca.hprovider.healthcare.com-cert.pem"
         },
         "registrar": [{ "enrollId": "admin" }, { "enrollSecret": "adminpw" }],
         "caName": "ca.hprovider.healthcare.com"
@@ -156,7 +157,7 @@
           "verify": false
         },
         "tlsCACerts": {
-          "path": "./crypto-config/peerOrganizations/research.healthcare.com/ca/ca.research.healthcare.com-cert.pem"
+          "path": "../crypto-config/peerOrganizations/research.healthcare.com/ca/ca.research.healthcare.com-cert.pem"
         },
         "registrar": [{ "enrollId": "admin" }, { "enrollSecret": "adminpw" }],
         "caName": "ca.research.healthcare.com"
