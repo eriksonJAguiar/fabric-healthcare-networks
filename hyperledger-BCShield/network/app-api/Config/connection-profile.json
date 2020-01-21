@@ -1,0 +1,166 @@
+{
+    "name": "hprovider Client",
+    "version": "1.0",
+    "client": {
+      "organization": "hprovider",
+      "credentialStore": {
+        "path": "./hfc/hfc-kvs",
+        "cryptoStore": {
+          "path": "./hfc/hfc-cvs"
+        }
+      },
+      "connection": {
+        "timeout": {
+          "peer": {
+            "endorser": 120,
+            "eventHub": 60,
+            "eventReg": 3
+          },
+          "orderer": 30
+        }
+      }
+    },
+    "channels": {
+      "HealthChannel": {
+        "orderers": ["ordererhp.healthcare.com"],
+        "peers": {
+          "peer0.hprovider.healthcare.com": {
+            "endorsingPeer": true,
+            "chaincodeQuery": true,
+            "ledgerQuery": true,
+            "eventSource": true
+          },
+          "peer0.research.healthcare.com": {
+            "endorsingPeer": true,
+            "chaincodeQuery": true,
+            "ledgerQuery": true,
+            "eventSource": true
+          }
+        }
+      }
+    },
+    "organizations": {
+      "HProviderMSP": {
+        "mspid": "HProviderMSP",
+        "peers": [
+          "peer0.hprovider.healthcare.com", 
+          "peer1.hprovider.healthcare.com",
+          "peer2.hprovider.healthcare.com"
+        ],
+        "certificateAuthorities": ["ca.hprovider.healthcare.com"]
+      },
+      "ResearchMSP": {
+        "mspid": "ResearchMSP",
+        "peers": [
+          "peer0.research.healthcare.com",
+          "peer1.research.healthcare.com",
+          "peer2.research.healthcare.com"
+        ],
+        "certificateAuthorities": ["ca.research.healthcare.com"]
+      }
+    },
+    "orderers": {
+      "ordererhp.healthcare.com": {
+        "url": "grpcs://localhost:7050",
+        "grpcOptions": {
+          "ssl-target-name-override": "ordererhp.healthcare.com"
+        },
+        "grpc-max-send-message-length": 15,
+        "tlsCACerts": {
+          "path": "./crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/msp/tlscacerts/tlsca.healthcare.com-cert.pem"
+        }
+      }
+    },
+    "peers": {
+      "peer0.hprovider.healthcare.com": {
+        "url": "grpcs://localhost:8031",
+        "eventUrl": "grpcs://localhost:8033",
+        "grpcOptions": {
+          "ssl-target-name-override": "peer0.hprovider.healthcare.com"
+        },
+        "grpc-max-send-message-length": 15,
+        "tlsCACerts": {
+          "path": "./crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
+        }
+      },
+      "peer1.hprovider.healthcare.com": {
+        "url": "grpcs://localhost:8041",
+        "eventUrl": "grpcs://localhost:8043",
+        "grpcOptions": {
+          "ssl-target-name-override": "peer1.hprovider.healthcare.com"
+        },
+        "grpc-max-send-message-length": 15,
+        "tlsCACerts": {
+          "path": "./crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
+        }
+      },
+      "peer2.hprovider.healthcare.com": {
+        "url": "grpcs://localhost:8051",
+        "eventUrl": "grpcs://localhost:8053",
+        "grpcOptions": {
+          "ssl-target-name-override": "peer2.hprovider.healthcare.com"
+        },
+        "grpc-max-send-message-length": 15,
+        "tlsCACerts": {
+          "path": "./crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
+        }
+      },
+      "peer0.research.healthcare.com": {
+        "url": "grpcs://localhost:9031",
+        "eventUrl": "grpcs://localhost:9033",
+        "grpcOptions": {
+          "ssl-target-name-override": "peer0.research.healthcare.com"
+        },
+        "grpc-max-send-message-length": 15,
+        "tlsCACerts": {
+          "path": "./crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
+        }
+      },
+      "peer1.research.healthcare.com": {
+        "url": "grpcs://localhost:9041",
+        "eventUrl": "grpcs://localhost:9043",
+        "grpcOptions": {
+          "ssl-target-name-override": "peer1.research.healthcare.com"
+        },
+        "grpc-max-send-message-length": 15,
+        "tlsCACerts": {
+          "path": "./crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
+        }
+      },
+      "peer2.research.healthcare.com": {
+        "url": "grpcs://localhost:9051",
+        "eventUrl": "grpcs://localhost:9053",
+        "grpcOptions": {
+          "ssl-target-name-override": "peer2.research.healthcare.com"
+        },
+        "grpc-max-send-message-length": 15,
+        "tlsCACerts": {
+          "path": "./crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
+        }
+      },
+    "certificateAuthorities": {
+      "ca.hprovider.healthcare.com": {
+        "url": "https://localhost:7054",
+        "httpOptions": {
+          "verify": false
+        },
+        "tlsCACerts": {
+          "path": "./crypto-config/peerOrganizations/hprovider.healthcare.com/ca/ca.hprovider.healthcare.com-cert.pem"
+        },
+        "registrar": [{ "enrollId": "admin" }, { "enrollSecret": "adminpw" }],
+        "caName": "ca.hprovider.healthcare.com"
+      },
+      "ca.research.healthcare.com": {
+        "url": "https://localhost:8054",
+        "httpOptions": {
+          "verify": false
+        },
+        "tlsCACerts": {
+          "path": "./crypto-config/peerOrganizations/research.healthcare.com/ca/ca.research.healthcare.com-cert.pem"
+        },
+        "registrar": [{ "enrollId": "admin" }, { "enrollSecret": "adminpw" }],
+        "caName": "ca.research.healthcare.com"
+      }
+    }
+  }
+}
