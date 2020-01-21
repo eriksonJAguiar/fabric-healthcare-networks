@@ -19,19 +19,19 @@ async function main() {
 
         // Check to see if we've already enrolled the user.
         var user = 'erikson'
-        const userIdentity = wallet.exists(user);
-        if (userIdentity) {
-            console.log(`An identity for the user "${user}" already exists in the wallet`);
-            return;
-        }
+        // const userIdentity = wallet.exists(user);
+        // if (userIdentity) {
+        //     console.log(`An identity for the user "${user}" already exists in the wallet`);
+        //     return;
+        // }
 
-        // Check to see if we've already enrolled the admin user.
-        const adminIdentity = await wallet.exists('admin');
-        if (!adminIdentity) {
-            console.log('An identity for the admin user "admin" does not exist in the wallet');
-            console.log('Run the enrollAdmin.js application before retrying');
-            return;
-        }
+        // // Check to see if we've already enrolled the admin user.
+        // const adminIdentity = await wallet.exists('admin');
+        // if (!adminIdentity) {
+        //     console.log('An identity for the admin user "admin" does not exist in the wallet');
+        //     console.log('Run the enrollAdmin.js application before retrying');
+        //     return;
+        // }
 
         // Create a new gateway for connecting to our peer node.
         const gateway = new Gateway();
