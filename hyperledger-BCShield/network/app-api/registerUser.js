@@ -13,25 +13,25 @@ async function main() {
     try {
 
         // Create a new file system based wallet for managing identities.
-        const walletPath = path.join('./', '_idwallet');
+        const walletPath = path.join(process.cwd(), '_idwallet');
         const wallet = new FileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
 
         // Check to see if we've already enrolled the user.
         var user = 'erikson'
-        // const userIdentity = wallet.exists(user);
-        // if (userIdentity) {
-        //     console.log(`An identity for the user "${user}" already exists in the wallet`);
-        //     return;
-        // }
+        const userIdentity = wallet.exists(user);
+        if (userIdentity) {
+            console.log(`An identity for the user "${user}" already exists in the wallet`);
+            return;
+        }
 
-        // // Check to see if we've already enrolled the admin user.
-        // const adminIdentity = await wallet.exists('admin');
-        // if (!adminIdentity) {
-        //     console.log('An identity for the admin user "admin" does not exist in the wallet');
-        //     console.log('Run the enrollAdmin.js application before retrying');
-        //     return;
-        // }
+        // Check to see if we've already enrolled the admin user.
+        const adminIdentity = await wallet.exists('admin');
+        if (!adminIdentity) {
+            console.log('An identity for the admin user "admin" does not exist in the wallet');
+            console.log('Run the enrollAdmin.js application before retrying');
+            return;
+        }
 
         // Create a new gateway for connecting to our peer node.
         const gateway = new Gateway();
@@ -45,15 +45,8 @@ async function main() {
         // Register the user, enroll the user, and import the new identity into the wallet.
         const secret = await ca.register({ affiliation: 'hprovider.healthcare.com', enrollmentID: user, role: 'client' }, adminUser);
         const enrollment = await ca.enroll({ enrollmentID: user, enrollmentSecret: secret });
-        const x509Identity = {
-            credentials: {
-                certificate: enrollment.certificate,
-                privateKey: enrollment.key.toBytes(),
-            },
-            mspId: 'HProviderMSP',
-            type: 'X.509',
-        };
-        await wallet.put(user, x509Identity);
+        const userIdentity = X509WalletMixin.createIdentity('HProviderMSP', enrollment.certificate, enrollment.key.toBytes());
+        await wallet.import(user, userIdentity);
         console.log(`Successfully registered and enrolled admin user ${user} and imported it into the wallet`);
 
     } catch (error) {
