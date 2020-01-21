@@ -23,12 +23,12 @@ async function main() {
         const ca = new FabricCAServices(caInfo.url, { trustedRoots: caTLSCACerts, verify: false }, caInfo.caName);
 
         // Create a new file system based wallet for managing identities.
-        //const walletPath = path.join(process.cwd(), 'wallet');
-        const wallet = new FileSystemWallet('./_idwallet');
-        console.log(`Wallet path: ./_idwallet`);
+        const walletPath = path.join('./', '_idwallet');
+        const wallet = new FileSystemWallet(walletPath);
+        console.log(`Wallet path: ${walletPath}`);
 
         // Check to see if we've already enrolled the admin user.
-        const identity = wallet.exists('user1');
+        const identity = wallet.exists('admin');
         if (identity) {
             console.log('An identity for the admin user "admin" already exists in the wallet');
             return;

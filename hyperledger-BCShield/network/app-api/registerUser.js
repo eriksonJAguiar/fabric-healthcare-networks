@@ -13,14 +13,15 @@ async function main() {
     try {
 
         // Create a new file system based wallet for managing identities.
-        //const walletPath = path.join(process.cwd(), 'wallet');
-        const wallet = new FileSystemWallet('./_idwallet');
-        console.log(`Wallet path: ./_idwallet`);
+        const walletPath = path.join('./', '_idwallet');
+        const wallet = new FileSystemWallet(walletPath);
+        console.log(`Wallet path: ${walletPath}`);
 
         // Check to see if we've already enrolled the user.
-        const userIdentity = wallet.exists('user1');
+        var user = 'erikson'
+        const userIdentity = wallet.exists(user);
         if (userIdentity) {
-            console.log('An identity for the user "user1" already exists in the wallet');
+            console.log(`An identity for the user "${user}" already exists in the wallet`);
             return;
         }
 
@@ -42,21 +43,21 @@ async function main() {
         const adminUser = await client.getUserContext('admin', false);
 
         // Register the user, enroll the user, and import the new identity into the wallet.
-        const secret = await ca.register({ affiliation: 'hprovider.healthcare.com', enrollmentID: 'user1', role: 'client' }, adminUser);
-        const enrollment = await ca.enroll({ enrollmentID: 'user1', enrollmentSecret: secret });
+        const secret = await ca.register({ affiliation: 'hprovider.healthcare.com', enrollmentID: user, role: 'client' }, adminUser);
+        const enrollment = await ca.enroll({ enrollmentID: user, enrollmentSecret: secret });
         const x509Identity = {
             credentials: {
                 certificate: enrollment.certificate,
                 privateKey: enrollment.key.toBytes(),
             },
-            mspId: 'Org1MSP',
+            mspId: 'HProviderMSP',
             type: 'X.509',
         };
-        await wallet.put('user1', x509Identity);
-        console.log('Successfully registered and enrolled admin user "user1" and imported it into the wallet');
+        await wallet.put(user, x509Identity);
+        console.log(`Successfully registered and enrolled admin user ${user} and imported it into the wallet`);
 
     } catch (error) {
-        console.error(`Failed to register user "user1": ${error}`);
+        console.error(`Failed to register user ${user}: ${error}`);
         process.exit(1);
     }
 }
