@@ -1,6 +1,5 @@
 {
     "name": "hprovider Client",
-    "caName": "ca.hprovider.healthcare.com",
     "version": "1.0",
     "client": {
       "organization": "hprovider",
@@ -21,25 +20,7 @@
         }
       }
     },
-    "channels": {
-      "HealthChannel": {
-        "orderers": ["ordererhp.healthcare.com"],
-        "peers": {
-          "peer0.hprovider.healthcare.com": {
-            "endorsingPeer": true,
-            "chaincodeQuery": true,
-            "ledgerQuery": true,
-            "eventSource": true
-          },
-          "peer0.research.healthcare.com": {
-            "endorsingPeer": true,
-            "chaincodeQuery": true,
-            "ledgerQuery": true,
-            "eventSource": true
-          }
-        }
-      }
-    },
+    "channel": "healthchannel",
     "organizations": {
       "HProviderMSP": {
         "mspid": "HProviderMSP",
