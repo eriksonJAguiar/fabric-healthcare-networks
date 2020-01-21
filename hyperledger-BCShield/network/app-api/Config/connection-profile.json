@@ -2,40 +2,22 @@
     "name": "hprovider Client",
     "version": "1.0",
     "client": {
-      "organization": "hprovider",
-      "credentialStore": {
-        "path": "./hfc/hfc-kvs",
-        "cryptoStore": {
-          "path": "./hfc/hfc-cvs"
-        }
-      },
+      "organization": "HProvider",
       "connection": {
-        "timeout": {
-          "peer": {
-            "endorser": 120,
-            "eventHub": 60,
-            "eventReg": 3
-          },
-          "orderer": 30
+          "timeout": {
+              "peer": {
+                  "endorser": "300"
+              },
+              "orderer": "300"
+          }
         }
-      }
     },
     "channels": {
       "HealthChannel": {
         "orderers": ["ordererhp.healthcare.com"],
         "peers": {
-          "peer0.hprovider.healthcare.com": {
-            "endorsingPeer": true,
-            "chaincodeQuery": true,
-            "ledgerQuery": true,
-            "eventSource": true
-          },
-          "peer0.research.healthcare.com": {
-            "endorsingPeer": true,
-            "chaincodeQuery": true,
-            "ledgerQuery": true,
-            "eventSource": true
-          }
+          "peer0.hprovider.healthcare.com": {},
+          "peer0.research.healthcare.com": {}
         }
       }
     },
