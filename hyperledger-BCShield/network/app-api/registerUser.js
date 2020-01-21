@@ -4,7 +4,7 @@
 
 'use strict';
 
-const { Gateway, Wallets } = require('fabric-network');
+const { Gateway, FileSystemWallet } = require('fabric-network');
 const path = require('path');
 
 const ccpPath = path.resolve(__dirname, './', 'Config','connection-profile.json');
@@ -14,18 +14,18 @@ async function main() {
 
         // Create a new file system based wallet for managing identities.
         const walletPath = path.join(process.cwd(), 'wallet');
-        const wallet = await Wallets.newFileSystemWallet(walletPath);
+        const wallet = new FileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
 
         // Check to see if we've already enrolled the user.
-        const userIdentity = await wallet.get('user1');
+        const userIdentity = wallet.exists('user1');
         if (userIdentity) {
             console.log('An identity for the user "user1" already exists in the wallet');
             return;
         }
 
         // Check to see if we've already enrolled the admin user.
-        const adminIdentity = await wallet.get('admin');
+        const adminIdentity = await wallet.exists('admin');
         if (!adminIdentity) {
             console.log('An identity for the admin user "admin" does not exist in the wallet');
             console.log('Run the enrollAdmin.js application before retrying');
@@ -42,7 +42,7 @@ async function main() {
         const adminUser = await client.getUserContext('admin', false);
 
         // Register the user, enroll the user, and import the new identity into the wallet.
-        const secret = await ca.register({ affiliation: 'org1.department1', enrollmentID: 'user1', role: 'client' }, adminUser);
+        const secret = await ca.register({ affiliation: 'hprovider.healthcare.com', enrollmentID: 'user1', role: 'client' }, adminUser);
         const enrollment = await ca.enroll({ enrollmentID: 'user1', enrollmentSecret: secret });
         const x509Identity = {
             credentials: {

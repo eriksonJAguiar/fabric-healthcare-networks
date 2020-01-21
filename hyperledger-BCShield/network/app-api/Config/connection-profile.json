@@ -20,7 +20,25 @@
         }
       }
     },
-    "channel": "healthchannel",
+    "channels": {
+      "HealthChannel": {
+        "orderers": ["ordererhp.healthcare.com"],
+        "peers": {
+          "peer0.hprovider.healthcare.com": {
+            "endorsingPeer": true,
+            "chaincodeQuery": true,
+            "ledgerQuery": true,
+            "eventSource": true
+          },
+          "peer0.research.healthcare.com": {
+            "endorsingPeer": true,
+            "chaincodeQuery": true,
+            "ledgerQuery": true,
+            "eventSource": true
+          }
+        }
+      }
+    },
     "organizations": {
       "HProviderMSP": {
         "mspid": "HProviderMSP",
