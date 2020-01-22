@@ -5,11 +5,11 @@ CONTRACT_PATH=/opt/gopath/src/github.com/chaincode/HRecordes-contract
 CONTRACT_NAME=HRecordes-contract
 
 CONFIG_ROOT=/opt/gopath/src/github.com/hyperledger/fabric/peer
-HPROVIDER_MSPCONFIGPATH=${CONFIG_ROOT}/crypto/peerOrganizations/hprovider.healthcare.com/users/Admin@hprovider.healthcare.com/msp
-HPROVIDER_TLS_ROOTCERT_FILE=${CONFIG_ROOT}/crypto/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/tls/ca.crt
-RESEARCH_MSPCONFIGPATH=${CONFIG_ROOT}/crypto/peerOrganizations/research.healthcare.com/users/Admin@research.healthcare.com/msp
-RESEARCH_TLS_ROOTCERT_FILE=${CONFIG_ROOT}/crypto/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/tls/ca.crt
-ORDERER_TLS_ROOTCERT_FILE=${CONFIG_ROOT}/crypto/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/msp/tlscacerts/tlsca.healthcare.com-cert.pem
+HPROVIDER_MSPCONFIGPATH=${CONFIG_ROOT}/crypto-config/peerOrganizations/hprovider.healthcare.com/users/Admin@hprovider.healthcare.com/msp
+HPROVIDER_TLS_ROOTCERT_FILE=${CONFIG_ROOT}/crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/tls/ca.crt
+RESEARCH_MSPCONFIGPATH=${CONFIG_ROOT}/crypto-config/peerOrganizations/research.healthcare.com/users/Admin@research.healthcare.com/msp
+RESEARCH_TLS_ROOTCERT_FILE=${CONFIG_ROOT}/crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/tls/ca.crt
+ORDERER_TLS_ROOTCERT_FILE=${CONFIG_ROOT}/crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/msp/tlscacerts/tlsca.healthcare.com-cert.pem
 
 
 PEER0_HPROVIDER="docker exec
