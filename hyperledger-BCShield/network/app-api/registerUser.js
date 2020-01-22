@@ -17,7 +17,8 @@ async function main() {
         const wallet = new FileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
 
-	    const user = process.argv[2];
+        //const user = process.argv[2];
+          const user = 'user1'
 
         // Check to see if we've already enrolled the user.
         console.log('Consulting if use exists ...');
