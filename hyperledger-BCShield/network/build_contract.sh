@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CHANNEL_NAME=healthchannel
-CONTRACT_PATH=/opt/gopath/src/github.com/chaincode/HRecordes-contract
+CONTRACT_PATH=/opt/gopath/src/github.com/chaincode/HRecords-contract
 CONTRACT_NAME=HRecordes-contract
 
 CONFIG_ROOT=/opt/gopath/src/github.com/hyperledger/fabric/peer
@@ -22,8 +22,7 @@ bash"
 
 echo "Create channel ..."
 
-${PEER0_HPROVIDER}
-docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx
+docker exec -it -e CORE_PEER_LOCALMSPID=HProviderMSP -e CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051 -e CORE_PEER_MSPCONFIGPATH=${HPROVIDER_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${HPROVIDER_TLS_ROOTCERT_FILE} cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx
 
 #----------- Create Channel -------------
 
