@@ -42,6 +42,7 @@ docker exec -it -e CORE_PEER_LOCALMSPID=HProviderMSP cli
 peer chaincode invoke -n Health_DICOM -c '{"Args":["123", "222", "Running", "100", "-1828192 121212"], "Function":"initRecord"}' -C healthchannel
 #peer chaincode invoke -n HRecordes-contract -c '{"Args":['1003', '1001','1001','erikson','Labs Records','1217212121'], "Function":"createHealthcareLabs"}' -C healthchannel
 #docker exec -it cli peer chaincode invoke -o ordererhp.healthcare.com:7050 -C healthchannel -n HRecordes-contract --peerAddresses peer0.hprovider.healthcare.com:7051 --peerAddresses peer0.research.healthcare.com:7051 -c '{"Args":["createHealthcareLabs", "1003", "1001","1001","erikson","Labs Records","1217212121"]}'
+#docker exec -it cli peer chaincode invoke -o ordererhp.healthcare.com:7050 -C healthchannel -n HRecords-contract -c '{"Args":["createHealthcareLabs", "1003", "1001","1001","erikson","Labs Records","1217212121"]}'
 
 peer chaincode query -n Health_DICOM -c '{"Args":["123"], "Function":"readHealthcareLabs"}' -C healthchannel
 #peer chaincode query -n HRecordes-contract -c '{"Args":["readRecord","1003"], "Function":}' -C healthchannel

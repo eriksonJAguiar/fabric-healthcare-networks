@@ -106,14 +106,14 @@
   },
   "certificateAuthorities": {
       "ca.hprovider.healthcare.com": {
-          "url": "https://localhost:7054",
+          "url": "http://localhost:7054",
           "caName": "ca.hprovider.healthcare.com",
           "tlsCACerts": {
             "path": "../../crypto-config/peerOrganizations/hprovider.healthcare.com/ca/ca.hprovider.healthcare.com-cert.pem"
           }
       },
       "ca.research.healthcare.com": { 
-        "url": "https://localhost:8054",
+        "url": "http://localhost:8054",
         "caName": "ca.research.healthcare.com",
         "tlsCACerts": {
           "path": "../../crypto-config/peerOrganizations/research.healthcare.com/ca/ca.research.healthcare.com-cert.pem"
