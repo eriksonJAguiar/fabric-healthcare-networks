@@ -34,17 +34,41 @@ async function main() {
             return;
         }
 
+        // // Create a new gateway for connecting to our peer node.
+        // const gateway = new Gateway();
+        // await gateway.connect(ccpPath, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: true } });
+
+        // // Get the CA client object from the gateway for interacting with the CA.
+        // const ca = gateway.getClient().getCertificateAuthority();
+        // const adminIdentity = gateway.getCurrentIdentity();
+
+        // // Register the user, enroll the user, and import the new identity into the wallet.
+        // const secret = await ca.register({ affiliation: 'hprovider.healthcare.com', enrollmentID: user, role: 'client' }, adminIdentity);
+        // console.log('Successfully registered user ' + user + ' and the secret is ' + secret );
+
         // Create a new gateway for connecting to our peer node.
         const gateway = new Gateway();
         await gateway.connect(ccpPath, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: true } });
 
         // Get the CA client object from the gateway for interacting with the CA.
-        const ca = gateway.getClient().getCertificateAuthority();
-        const adminIdentity = gateway.getCurrentIdentity();
+        const client = gateway.getClient();
+        const ca = client.getCertificateAuthority();
+        const adminUser = await client.getUserContext('admin', false);
 
         // Register the user, enroll the user, and import the new identity into the wallet.
-        const secret = await ca.register({ affiliation: 'hprovider.healthcare.com', enrollmentID: user, role: 'client' }, adminIdentity);
-        console.log('Successfully registered user ' + user + ' and the secret is ' + secret );
+        const secret = await ca.register({ affiliation: 'hprovider.healthcare.com', enrollmentID: user, role: 'client' }, adminUser);
+        const enrollment = await ca.enroll({ enrollmentID: user, enrollmentSecret: secret });
+        const x509Identity = {
+            credentials: {
+                certificate: enrollment.certificate,
+                privateKey: enrollment.key.toBytes(),
+            },
+            mspId: 'HProviderMSP',
+            type: 'X.509',
+        };
+        await wallet.put(user, x509Identity);
+        console.log('Successfully registered and enrolled admin user' + user +' and imported it into the wallet');
+
 
     } catch (error) {
         console.error(`Failed to register user ${user}: ${error}`);
