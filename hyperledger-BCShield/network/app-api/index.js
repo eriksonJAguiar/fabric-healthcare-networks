@@ -69,13 +69,16 @@ app.get('/api/readHealthcareLabs/:index', async function (req, res) {
 
         // Create a new gateway for connecting to our peer node.
         const gateway = new Gateway();
-        await gateway.connect(ccpPath, { wallet, identity: 'erikson2', discovery: { enabled: true, asLocalhost: false } });
+        await gateway.connect(ccpPath, { wallet, identity: 'erikson2', discovery: { enabled: true, asLocalhost: true } });
+        console.log('Gateway criado');
 
         // Get the network (channel) our contract is deployed to.
         const network = await gateway.getNetwork('healthchannel');
+        console.log('canal acessado');
 
         // Get the contract from the network.
         const contract = network.getContract('HRecords-contract');
+        console.log('Contrato acessado');
         //const contract = network.getContract('Healthcare-Labs@0.0.4');
         // Evaluate the specified transaction.
         // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
@@ -83,6 +86,9 @@ app.get('/api/readHealthcareLabs/:index', async function (req, res) {
         const result = await contract.evaluateTransaction('readHealthcareLabs', req.params.index);
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
         res.status(200).json({response: result.toString()});
+
+        // Disconnect from the gateway.
+        await gateway.disconnect();
 
     } catch (error) {
         console.error(`Failed to evaluate transaction: ${error}`);
