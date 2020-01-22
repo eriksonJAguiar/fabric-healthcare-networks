@@ -56,7 +56,7 @@ async function main() {
         const adminUser = await client.getUserContext('admin', false);
 
         // Register the user, enroll the user, and import the new identity into the wallet.
-        const secret = await ca.register({ affiliation: 'hprovider.healthcare.com', enrollmentID: 'user1', role: 'client' }, adminUser);
+        const secret = await ca.register({ affiliation: 'hprovider.department1', enrollmentID: 'user1', role: 'client' }, adminUser);
         const enrollment = await ca.enroll({ enrollmentID: 'user1', enrollmentSecret: secret });
         const x509Identity = {
             credentials: {
