@@ -51,54 +51,54 @@
   },
   "orderers": {
       "ordererhp.healthcare.com": {
-          "url": "grpcs://localhost:7050"
+          "url": "grpc://localhost:7050"
       }
   },
   "peers": {
       "peer0.hprovider.healthcare.com": {
-          "url": "grpcs://localhost:7051",
+          "url": "grpc://localhost:7051",
           "tlsCACerts": {
             "path": "../../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
           }
       },
       "peer1.hprovider.healthcare.com": {
-        "url": "grpcs://localhost:7056",
+        "url": "grpc://localhost:7056",
         "tlsCACerts": {
           "path": "../../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
         }
       },
       "peer2.hprovider.healthcare.com": {
-        "url": "grpcs://localhost:7061",
+        "url": "grpc://localhost:7061",
         "tlsCACerts": {
           "path": "../../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
         }
       },
       "peer3.hprovider.healthcare.com": {
-        "url": "grpcs://localhost:7061",
+        "url": "grpc://localhost:7065",
         "tlsCACerts": {
           "path": "../../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
         }
       },
       "peer0.research.healthcare.com": {
-        "url": "grpcs://localhost:7071",
+        "url": "grpc://localhost:7071",
         "tlsCACerts": {
           "path": "../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
         }
       },
       "peer1.research.healthcare.com": {
-        "url": "grpcs://localhost:7075",
+        "url": "grpc://localhost:7075",
         "tlsCACerts": {
           "path": "../../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
         }
       },
       "peer2.research.healthcare.com": {
-        "url": "grpcs://localhost:8085",
+        "url": "grpc://localhost:8085",
         "tlsCACerts": {
           "path": "../../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
         }
       },
       "peer3.research.healthcare.com": {
-        "url": "grpcs://localhost:8085",
+        "url": "grpc://localhost:8085",
         "tlsCACerts": {
           "path": "../../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
         }
