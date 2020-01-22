@@ -74,7 +74,7 @@ app.get('/api/readHealthcareLabs/:index', async function (req, res) {
 
         // Get the contract from the network.
         const contract = network.getContract('HRecords-contract');
-
+        //const contract = network.getContract('Healthcare-Labs@0.0.4');
         // Evaluate the specified transaction.
         // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
         // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
@@ -113,8 +113,8 @@ app.post('/api/createHealthcareLabs/', async function (req, res) {
         const network = await gateway.getNetwork('healthchannel');
 
         // Get the contract from the network.
-        const contract = network.getContract('HRecords-contract');
-
+        const contract = network.getContract('HRecords-contract'); 
+        //const contract = network.getContract('Healthcare-Labs@0.0.4');
         // Submit the specified transaction.
         // acessUser,  
         // owner,
