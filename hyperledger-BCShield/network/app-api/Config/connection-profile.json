@@ -1,5 +1,5 @@
 {
-  "name": "health-network",
+  "name": "healthNetwork",
   "version": "1.0.0",
   "client": {
       "organization": "HProvider",
@@ -30,8 +30,10 @@
               "peer0.hprovider.healthcare.com",
               "peer1.hprovider.healthcare.com",
               "peer2.hprovider.healthcare.com",
+              "peer3.hprovider.healthcare.com",
               "peer0.research.healthcare.com",
               "peer1.research.healthcare.com",
+              "peer2.research.healthcare.com",
               "peer3.research.healthcare.com"
           ],
           "certificateAuthorities": [
@@ -64,6 +66,12 @@
           "path": "./crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
         }
       },
+      "peer3.hprovider.healthcare.com": {
+        "url": "grpc://localhost:7061",
+        "tlsCACerts": {
+          "path": "./crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
+        }
+      },
       "peer0.research.healthcare.com": {
         "url": "grpc://localhost:7071",
         "tlsCACerts": {
@@ -76,12 +84,18 @@
           "path": "./crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
         }
       },
+      "peer2.research.healthcare.com": {
+        "url": "grpc://localhost:8085",
+        "tlsCACerts": {
+          "path": "./crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
+        }
+      },
       "peer3.research.healthcare.com": {
         "url": "grpc://localhost:8085",
         "tlsCACerts": {
           "path": "./crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
         }
-      }
+    }
   },
   "certificateAuthorities": {
       "ca.hprovider.healthcare.com": {

@@ -38,10 +38,10 @@ services:
     image: hyperledger/fabric-ca:$IMAGE_TAG
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.hprovider.health.com
+      - FABRIC_CA_SERVER_CA_NAME=ca.hprovider.healthcare.com
       # - FABRIC_CA_SERVER_REGISTRY_MAXENROLLMENTS=1 # only allow to register one admin
       - FABRIC_CA_SERVER_CA_CERTFILE=./crypto-config/peerOrganizations/hprovider.healthcare.com/ca/ca.hprovider.healthcare.com-cert.pem # default $HOME/ca-key.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=./crypto-config/peerOrganizations/hprovider.healthcare.com/ca/fdea3862fc578eb0510c21cc7fc7895d73f8b605d6c99e0014a439f178376469_sk # default $HOME/ca-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=./crypto-config/peerOrganizations/hprovider.healthcare.com/ca/*_sk # default $HOME/ca-cert.pem
       - FABRIC_CA_SERVER_TLS_ENABLED=$CA_TLS_ENABLED # default tls cert $HOME/tls-cert.pem
       #- FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE=
       #- FABRIC_CA_SERVER_TLS_CLIENTAUTH_CERTFILES=
@@ -52,7 +52,7 @@ services:
       # -b :bootstrap identity is required to start the Fabric CA server; this identity is the server administrator.
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
     volumes:
-      - ./crypto-config/peerOrganizations/hprovider.health.com/ca/:/etc/hyperledger/fabric-ca-server-config/ca
+      - ./crypto-config/peerOrganizations/hprovider.healthcare.com/ca/:/etc/hyperledger/fabric-ca-server-config/ca
     networks:
       - healthNetwork
 
@@ -64,7 +64,7 @@ services:
       - FABRIC_CA_SERVER_CA_NAME=ca.research.healthcare.com
       - FABRIC_CA_SERVER_REGISTRY_MAXENROLLMENTS=1 # only allow to register one admin
       - FABRIC_CA_SERVER_CA_CERTFILE=./crypto-config/peerOrganizations/research.healthcare.com/ca/ca.research.healthcare.com-cert.pem # default $HOME/ca-key.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=./crypto-config/peerOrganizations/research.healthcare.com/ca/350762a6d88c65237927c057a100f018ce37fd7bddcf08a5a4b26ceaefe93ade_sk # default $HOME/ca-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=./crypto-config/peerOrganizations/research.healthcare.com/ca/*_sk # default $HOME/ca-cert.pem
       - FABRIC_CA_SERVER_TLS_ENABLED=$CA_TLS_ENABLED # default tls cert $HOME/tls-cert.pem
         # - FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE=
         # - FABRIC_CA_SERVER_TLS_CLIENTAUTH_CERTFILES=

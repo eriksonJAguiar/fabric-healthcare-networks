@@ -1,20 +1,17 @@
 #!/bin/bash
 
 CHANNEL_NAME=healthchannel
-ORGS = (hprovider.healthcare.com research.healthcare.com)
-PEERS = (peer0 peer1 peer2)
 
 docker-compose -f docker-compose.yaml down
 docker-compose -f docker-compose.yaml up -d
 
 docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c healthchannel -f ./channel-artifacts/channel.tx
 
-
 docker exec -it cli peer channel join -b healthchannel.block
 
 
 
-docker exec -it -e CORE_PEER_ADDRESS=peer1.hprovider.healthcare.com:7051 cli
+docker exec -it cli -e CORE_PEER_ADDRESS=peer1.hprovider.healthcare.com:7051 
 
 docker exec -it cli peer channel join -b healthchannel.block
 
