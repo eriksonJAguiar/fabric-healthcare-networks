@@ -20,6 +20,7 @@ async function main() {
 	    const user = process.argv[2];
 
         // Check to see if we've already enrolled the user.
+        console.log('Consulting if use exists ...');
         const userExists = await wallet.exists(user);
         if (userExists) {
             console.log('An identity for the user ' + user + ' already exists in the wallet');
@@ -27,6 +28,7 @@ async function main() {
         }
 
         // Check to see if we've already enrolled the admin user.
+        console.log('Consulting if admin exists ...');
         const adminExists = await wallet.exists('admin');
         if (!adminExists) {
             console.log('An identity for the admin user "admin" does not exist in the wallet');
