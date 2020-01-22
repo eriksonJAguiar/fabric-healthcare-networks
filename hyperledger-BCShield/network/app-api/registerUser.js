@@ -66,7 +66,7 @@ async function main() {
             mspId: 'HProviderMSP',
             type: 'X.509',
         };
-        await wallet.put('user1', x509Identity);
+        await wallet.import('user1', x509Identity);
         console.log('Successfully registered and enrolled admin user "user1" and imported it into the wallet');
 
 
