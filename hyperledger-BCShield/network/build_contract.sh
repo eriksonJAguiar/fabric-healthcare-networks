@@ -135,3 +135,5 @@ docker exec  -e CORE_PEER_LOCALMSPID=HProviderMSP -e CORE_PEER_ADDRESS=peer0.hpr
 #docker exec -it cli peer chaincode instantiate -o ordererhp.healthcare.com:7050 -C ${CHANNEL_NAME} -l node -n ${CONTRACT_NAME} -v 1.0 -c '{"Args":[]}'
 
 ${PEER0_HPROVIDER}
+
+docker exec -it cli peer chaincode invoke -o ordererhp.healthcare.com:7050 -C ${CHANNEL_NAME} -n ${CONTRACT_NAME} -c '{"Args":["createHealthcareLabs", "1003", "1001","1001","erikson","Labs Records","1217212121"]}'
