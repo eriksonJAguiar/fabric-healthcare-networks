@@ -17,10 +17,10 @@ async function main() {
         const wallet = new FileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
 
-	    //const user = process.argv[2];
+	    const user = process.argv[2];
 
         // Check to see if we've already enrolled the user.
-        const userExists = await wallet.exists('user1');
+        const userExists = await wallet.exists(user);
         if (userExists) {
             console.log('An identity for the user ' + user + ' already exists in the wallet');
             return;
@@ -56,8 +56,8 @@ async function main() {
         const adminUser = await client.getUserContext('admin', false);
 
         // Register the user, enroll the user, and import the new identity into the wallet.
-        const secret = await ca.register({ affiliation: 'org1.department1', enrollmentID: 'user1', role: 'client' }, adminUser);
-        const enrollment = await ca.enroll({ enrollmentID: 'user1', enrollmentSecret: secret });
+        const secret = await ca.register({ affiliation: 'org1.department1', enrollmentID: user, role: 'client' }, adminUser);
+        const enrollment = await ca.enroll({ enrollmentID: user, enrollmentSecret: secret });
         const x509Identity = {
             credentials: {
                 certificate: enrollment.certificate,
@@ -66,8 +66,8 @@ async function main() {
             mspId: 'HProviderMSP',
             type: 'X.509',
         };
-        await wallet.import('user1', x509Identity);
-        console.log('Successfully registered and enrolled admin user "user1" and imported it into the wallet');
+        await wallet.import(user, x509Identity);s
+        console.log('Successfully registered and enrolled admin user '+ user +' and imported it into the wallet');
 
 
     } catch (error) {
