@@ -95,6 +95,7 @@ services:
       file: peer-base.yaml
       service: peer-base
     environment:
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
       - CORE_PEER_ID=peer0.hprovider.healthcare.com
       - CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051
       # - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hprovider.healthcare.com:7041
