@@ -238,8 +238,8 @@ services:
       - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer3.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
       - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer3.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
       - ./channel/crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer3.hprovider.healthcare.com/:/etc/hyperledger/crypto/peer
-    depends_on:
-      - couchdb.peer3.hprovider
+    # depends_on:
+    #   - couchdb.peer3.hprovider
     ports:
       - 10051:7051
       - 10053:7053
