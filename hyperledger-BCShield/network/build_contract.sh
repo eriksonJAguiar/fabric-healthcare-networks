@@ -60,7 +60,7 @@ sleep 2
 
 echo "join channel for peer0.research ..."
 
-docker exec  -e CORE_PEER_LOCALMSPID=ResearchMSP -e CORE_PEER_ADDRESS=peer0.research.healthcare.com:11051 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE} cli peer channel join -b ${CHANNEL_NAME}.block
+docker exec  -e CORE_PEER_LOCALMSPID=ResearchMSP -e CORE_PEER_ADDRESS=peer0.research.healthcare.com:7051 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE} cli peer channel join -b ${CHANNEL_NAME}.block
 #${PEER0_RESEARCH} \
 #docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
 #docker exec -it cli peer channel join -b ${CHANNEL_NAME}.block 
@@ -69,7 +69,7 @@ sleep 2
 
 echo "join channel for peer1.research ..."
 
-docker exec  -e CORE_PEER_LOCALMSPID=ResearchMSP -e CORE_PEER_ADDRESS=peer1.research.healthcare.com:11051 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE} cli peer channel join -b ${CHANNEL_NAME}.block
+docker exec  -e CORE_PEER_LOCALMSPID=ResearchMSP -e CORE_PEER_ADDRESS=peer1.research.healthcare.com:7051 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE} cli peer channel join -b ${CHANNEL_NAME}.block
 #${PEER1_RESEARCH} \
 #docker exec -it cli peer channel join -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
 #docker exec -it cli peer channel join -b ${CHANNEL_NAME}.block 
@@ -78,7 +78,7 @@ sleep 2
 
 echo "join channel for peer2.research ..."
 
-docker exec  -e CORE_PEER_LOCALMSPID=ResearchMSP -e CORE_PEER_ADDRESS=peer2.research.healthcare.com:11051 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE} cli peer channel join -b ${CHANNEL_NAME}.block
+docker exec  -e CORE_PEER_LOCALMSPID=ResearchMSP -e CORE_PEER_ADDRESS=peer2.research.healthcare.com:7051 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE} cli peer channel join -b ${CHANNEL_NAME}.block
 #${PEER2_RESEARCH} \
 #docker exec -it cli peer channel create -o ordererhp.healthcare.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx \
 #docker exec -it cli peer channel join -b ${CHANNEL_NAME}.block 
@@ -87,7 +87,7 @@ sleep 2
 
 echo "join channel for peer3.research ..."
 
-docker exec  -e CORE_PEER_LOCALMSPID=ResearchMSP -e CORE_PEER_ADDRESS=peer3.research.healthcare.com:11051 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE} cli peer channel join -b ${CHANNEL_NAME}.block
+docker exec  -e CORE_PEER_LOCALMSPID=ResearchMSP -e CORE_PEER_ADDRESS=peer3.research.healthcare.com:7051 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE} cli peer channel join -b ${CHANNEL_NAME}.block
 
 sleep 2
 
@@ -125,7 +125,7 @@ sleep 2
 
 echo "Installing chaincode for peer0.research ..."
 
-docker exec  -e CORE_PEER_LOCALMSPID=ResearchMSP -e CORE_PEER_ADDRESS=peer0.research.healthcare.com:11051 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE} cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
+docker exec  -e CORE_PEER_LOCALMSPID=ResearchMSP -e CORE_PEER_ADDRESS=peer0.research.healthcare.com:7051 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE} cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
 #${PEER0_RESEARCH} \
 #docker exec -it cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
 
@@ -133,7 +133,7 @@ sleep 2
 
 echo "Installing chaincode for peer1.research ..."
 
-docker exec  -e CORE_PEER_LOCALMSPID=ResearchMSP -e CORE_PEER_ADDRESS=peer1.research.healthcare.com:11051 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE} cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
+docker exec  -e CORE_PEER_LOCALMSPID=ResearchMSP -e CORE_PEER_ADDRESS=peer1.research.healthcare.com:7051 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE} cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
 #${PEER1_RESEARCH} \
 #docker exec -it cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
 
@@ -141,7 +141,7 @@ sleep 2
 
 echo "Installing chaincode for peer2.research ..."
 
-docker exec  -e CORE_PEER_LOCALMSPID=ResearchMSP -e CORE_PEER_ADDRESS=peer2.research.healthcare.com:11051 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE} cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
+docker exec  -e CORE_PEER_LOCALMSPID=ResearchMSP -e CORE_PEER_ADDRESS=peer2.research.healthcare.com:7051 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE} cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
 #${PEER2_RESEARCH} \
 #docker exec -it cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
 
@@ -149,7 +149,7 @@ sleep 2
 
 echo "Installing chaincode for peer3.research ..."
 
-docker exec  -e CORE_PEER_LOCALMSPID=ResearchMSP -e CORE_PEER_ADDRESS=peer3.research.healthcare.com:11051 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE} cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
+docker exec  -e CORE_PEER_LOCALMSPID=ResearchMSP -e CORE_PEER_ADDRESS=peer3.research.healthcare.com:7051 -e CORE_PEER_MSPCONFIGPATH=${RESEARCH_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${RESEARCH_TLS_ROOTCERT_FILE} cli peer chaincode install -n ${CONTRACT_NAME} -v 1.0 -l node -p ${CONTRACT_PATH}
 
 sleep 2
 
@@ -159,10 +159,6 @@ echo "Instatiate chaincode ..."
 
 docker exec  -e CORE_PEER_LOCALMSPID=HProviderMSP -e CORE_PEER_ADDRESS=peer0.hprovider.healthcare.com:7051 -e CORE_PEER_MSPCONFIGPATH=${HPROVIDER_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${HPROVIDER_TLS_ROOTCERT_FILE} cli peer chaincode instantiate -o ordererhp.healthcare.com:7050 -C ${CHANNEL_NAME} -l node -n ${CONTRACT_NAME} -v 1.0 -c '{"Args":[]}'
 #docker exec -it cli peer chaincode instantiate -o ordererhp.healthcare.com:7050 -C ${CHANNEL_NAME} -l node -n ${CONTRACT_NAME} -v 1.0 -c '{"Args":[]}'
-
-sleep 2
-
-docker exec  -e CORE_PEER_LOCALMSPID=HProviderMSP -e CORE_PEER_ADDRESS=peer0.research.healthcare.com:11051 -e CORE_PEER_MSPCONFIGPATH=${HPROVIDER_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${HPROVIDER_TLS_ROOTCERT_FILE} cli peer chaincode instantiate -o ordererhp.healthcare.com:7050 -C ${CHANNEL_NAME} -l node -n ${CONTRACT_NAME} -v 1.0 -c '{"Args":[]}'
 
 sleep 2
 
