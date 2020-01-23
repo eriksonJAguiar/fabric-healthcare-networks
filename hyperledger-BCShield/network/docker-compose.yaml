@@ -108,8 +108,8 @@ services:
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
       - DB_URL=http://localhost:5984/member_db
-      - COUCHDB_USER=admin
-      - COUCHDB_PASSWORD=adminpw
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
     volumes:
       - ./couchdbData/couchdb.peer0.hprovider/:/opt/couchdb/data
     ports:
