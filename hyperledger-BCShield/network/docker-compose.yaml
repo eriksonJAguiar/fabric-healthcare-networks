@@ -40,7 +40,7 @@ services:
       # - FABRIC_CA_SERVER_REGISTRY_MAXENROLLMENTS=1 # only allow to register one admin
       - FABRIC_CA_SERVER_CA_CERTFILE=./crypto-config/peerOrganizations/hprovider.healthcare.com/ca/ca.hprovider.healthcare.com-cert.pem # default $HOME/ca-key.pem
       - FABRIC_CA_SERVER_CA_KEYFILE=./crypto-config/peerOrganizations/hprovider.healthcare.com/ca/*_sk # default $HOME/ca-cert.pem
-      - FABRIC_CA_SERVER_TLS_ENABLED=$CA_TLS_ENABLED # default tls cert $HOME/tls-cert.pem
+      - FABRIC_CA_SERVER_TLS_ENABLED=true # default tls cert $HOME/tls-cert.pem
       #- FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE=
       #- FABRIC_CA_SERVER_TLS_CLIENTAUTH_CERTFILES=
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/cert.pem
@@ -63,7 +63,7 @@ services:
       - FABRIC_CA_SERVER_REGISTRY_MAXENROLLMENTS=1 # only allow to register one admin
       - FABRIC_CA_SERVER_CA_CERTFILE=./crypto-config/peerOrganizations/research.healthcare.com/ca/ca.research.healthcare.com-cert.pem # default $HOME/ca-key.pem
       - FABRIC_CA_SERVER_CA_KEYFILE=./crypto-config/peerOrganizations/research.healthcare.com/ca/*_sk # default $HOME/ca-cert.pem
-      - FABRIC_CA_SERVER_TLS_ENABLED=$CA_TLS_ENABLED # default tls cert $HOME/tls-cert.pem
+      - FABRIC_CA_SERVER_TLS_ENABLED=true # default tls cert $HOME/tls-cert.pem
         # - FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE=
         # - FABRIC_CA_SERVER_TLS_CLIENTAUTH_CERTFILES=
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/cert.pem
