@@ -36,7 +36,7 @@ docker exec  -e CORE_PEER_LOCALMSPID=HProviderMSP -e CORE_PEER_ADDRESS=peer0.hpr
 echo "join channel for peer1.hprovider ..."
 
 
-docker exec  -e CORE_PEER_LOCALMSPID=HProviderMSP -e CORE_PEER_ADDRESS=peer1.hprovider.healthcare.com:8051 -e CORE_PEER_MSPCONFIGPATH=${HPROVIDER_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${HPROVIDER_TLS_ROOTCERT_FILE} cli peer channel join -b ${CHANNEL_NAME}.block
+docker exec  -e CORE_PEER_LOCALMSPID=HProviderMSP -e CORE_PEER_ADDRESS=peer1.hprovider.healthcare.com:7051 -e CORE_PEER_MSPCONFIGPATH=${HPROVIDER_MSPCONFIGPATH} -e CORE_PEER_TLS_ROOTCERT_FILE=${HPROVIDER_TLS_ROOTCERT_FILE} cli peer channel join -b ${CHANNEL_NAME}.block
 #docker exec -it cli peer channel join -b ${CHANNEL_NAME}.block 
 
 echo "join channel for peer2.hprovider ..."
