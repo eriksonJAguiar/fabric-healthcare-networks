@@ -110,7 +110,7 @@ services:
 
   couchdb.peer0.hprovider:
     container_name: couchdb.peer0.hprovider
-    image: hyperledger/fabric-couchdb:0.4.10
+    image: hyperledger/fabric-couchdb:0.4.18
     environment:
       - DB_URL=http://localhost:5984/member_db
       - COUCHDB_USER=
@@ -155,7 +155,7 @@ services:
 
   couchdb.peer1.hprovider:
     container_name: couchdb.peer1.hprovider
-    image: hyperledger/fabric-couchdb:0.4.10
+    image: hyperledger/fabric-couchdb:0.4.18
     environment:
       - DB_URL=http://localhost:6984/member_db
       - COUCHDB_USER=
@@ -200,7 +200,7 @@ services:
 
   couchdb.peer2.hprovider:
     container_name: couchdb.peer2.hprovider
-    image: hyperledger/fabric-couchdb:0.4.10
+    image: hyperledger/fabric-couchdb:0.4.18
     environment:
       - DB_URL=http://localhost:7984/member_db
       - COUCHDB_USER=
@@ -244,7 +244,7 @@ services:
 
   couchdb.peer3.hprovider:
     container_name: couchdb.peer3.hprovider
-    image: hyperledger/fabric-couchdb:0.4.10
+    image: hyperledger/fabric-couchdb:0.4.18
     environment:
       - DB_URL=http://localhost:8984/member_db
       - COUCHDB_USER=
@@ -288,7 +288,7 @@ services:
 
   couchdb.peer0.research:
     container_name: couchdb.peer0.research
-    image: hyperledger/fabric-couchdb:0.4.10
+    image: hyperledger/fabric-couchdb:0.4.18
     environment:
       - DB_URL=http://localhost:9984/member_db
       - COUCHDB_USER=
@@ -333,7 +333,7 @@ services:
 
   couchdb.peer1.research:
     container_name: couchdb.peer1.research
-    image: hyperledger/fabric-couchdb:0.4.10
+    image: hyperledger/fabric-couchdb:0.4.18
     environment:
       - DB_URL=http://localhost:10984/member_db
       - COUCHDB_USER=peer1Research
@@ -377,7 +377,7 @@ services:
 
   couchdb.peer2.research:
     container_name: couchdb.peer2.research
-    image: hyperledger/fabric-couchdb:0.4.10
+    image: hyperledger/fabric-couchdb:0.4.18
     environment:
       - DB_URL=http://localhost:11984/member_db
       - COUCHDB_USER=
@@ -421,7 +421,7 @@ services:
 
   couchdb.peer3.research:
     container_name: couchdb.peer3.research
-    image: hyperledger/fabric-couchdb:0.4.10
+    image: hyperledger/fabric-couchdb:0.4.18
     environment:
       - DB_URL=http://localhost:12984/member_db
       - COUCHDB_USER=
