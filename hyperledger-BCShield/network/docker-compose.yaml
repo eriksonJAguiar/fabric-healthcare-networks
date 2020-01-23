@@ -200,7 +200,7 @@ services:
 
   couchdb.peer2.hprovider:
     container_name: couchdb.peer2.hprovider
-    image: hyperledger/fabric-couchdb:2.3
+    image: hyperledger/fabric-couchdb:0.4.18
     environment:
       - DB_URL=http://localhost:7984/member_db
       - COUCHDB_USER=
