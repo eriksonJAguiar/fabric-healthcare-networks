@@ -139,7 +139,7 @@ services:
     depends_on:
       - couchdb.peer1.hprovider
     ports:
-      - 8051:8051
+      - 8051:7051
     networks:
       - healthNetwork
 
@@ -179,7 +179,7 @@ services:
     depends_on:
       - couchdb.peer2.hprovider
     ports:
-      - 9051:9051
+      - 9051:7051
     networks:
       - healthNetwork
 
@@ -218,7 +218,7 @@ services:
     depends_on:
       - couchdb.peer3.hprovider
     ports:
-      - 10051:10051
+      - 10051:7051
     networks:
       - healthNetwork
 
@@ -257,7 +257,7 @@ services:
     depends_on:
       - couchdb.peer0.research
     ports:
-      - 11051:11051
+      - 11051:7051
     networks:
       - healthNetwork
 
@@ -296,7 +296,7 @@ services:
     depends_on:
       - couchdb.peer1.research
     ports:
-      - 12051:12051
+      - 12051:7051
     networks:
       - healthNetwork
    
@@ -338,7 +338,7 @@ services:
     networks:
       - healthNetwork
     ports:
-      - 13051:13051
+      - 13051:7051
 
   couchdb.peer2.research:
     container_name: couchdb.peer2.research
@@ -377,7 +377,7 @@ services:
     networks:
       - healthNetwork
     ports:
-      - 14051:14051
+      - 14051:7051
 
   couchdb.peer3.research:
     container_name: couchdb.peer3.research
