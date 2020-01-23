@@ -16,6 +16,11 @@ const ccp = JSON.parse(ccpJSON);
 async function main() {
     try {
 
+        if(process.argv.length < 2){
+            console('Digite the parameter user and password');
+            return;
+        }
+        
         // Create a new CA client for interacting with the CA.
         const caInfo = ccp.certificateAuthorities['ca.hprovider.healthcare.com'];
         const caTLSCACerts = caInfo.tlsCACerts.pem;
