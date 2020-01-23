@@ -73,12 +73,12 @@ app.get('/api/readHealthcareLabs/:index', async function (req, res) {
         console.log('Gateway criado');
 
         // Get the network (channel) our contract is deployed to.
-        const network = await gateway.getNetwork('healthchannel');
+        const network = await gateway.getNetwork('healthchannel'); 
         console.log('canal acessado');
 
         // Get the contract from the network.
         const contract = network.getContract('HRecords-contract');
-        console.log('Contrato acessado');
+        console.log('canal acessado');
         //const contract = network.getContract('Healthcare-Labs@0.0.4');
         // Evaluate the specified transaction.
         // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
