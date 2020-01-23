@@ -146,8 +146,8 @@ services:
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
       - DB_URL=http://localhost:6984/member_db
-      - COUCHDB_USER=peer1Hprovider
-      - COUCHDB_PASSWORD=adminpw
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
     volumes:
       - ./couchdbData/couchdb.peer1.hprovider/:/opt/couchdb/data
     ports:
@@ -186,8 +186,8 @@ services:
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
       - DB_URL=http://localhost:7984/member_db
-      - COUCHDB_USER=peer2Hprovider
-      - COUCHDB_PASSWORD=adminpw
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
     volumes:
       - ./couchdbData/couchdb.peer1.hprovider/:/opt/couchdb/data
     ports:
@@ -225,8 +225,8 @@ services:
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
       - DB_URL=http://localhost:8984/member_db
-      - COUCHDB_USER=peer3Hprovider
-      - COUCHDB_PASSWORD=adminpw
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
     volumes:
       - ./couchdbData/couchdb.peer1.hprovider/:/opt/couchdb/data
     ports:
@@ -264,8 +264,8 @@ services:
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
       - DB_URL=http://localhost:9984/member_db
-      - COUCHDB_USER=peer0Research
-      - COUCHDB_PASSWORD=adminpw
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
     volumes:
       - ./couchdbData/couchdb.peer1.hprovider/:/opt/couchdb/data
     ports:
@@ -304,8 +304,8 @@ services:
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
       - DB_URL=http://localhost:10984/member_db
-      - COUCHDB_USER=peer1Research
-      - COUCHDB_PASSWORD=adminpw
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
     volumes:
       - ./couchdbData/couchdb.peer1.hprovider/:/opt/couchdb/data
     ports:
@@ -343,8 +343,8 @@ services:
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
       - DB_URL=http://localhost:11984/member_db
-      - COUCHDB_USER=peer2Research
-      - COUCHDB_PASSWORD=adminpw
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
     volumes:
       - ./couchdbData/couchdb.peer2.hprovider/:/opt/couchdb/data
     ports:
@@ -382,8 +382,8 @@ services:
     image: hyperledger/fabric-couchdb:0.4.10
     environment:
       - DB_URL=http://localhost:12984/member_db
-      - COUCHDB_USER=peer3Research
-      - COUCHDB_PASSWORD=adminpw
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
     volumes:
       - ./couchdbData/couchdb.peer3.hprovider/:/opt/couchdb/data
     ports:
