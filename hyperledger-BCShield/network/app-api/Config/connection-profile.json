@@ -68,37 +68,37 @@
         }
       },
       "peer2.hprovider.healthcare.com": {
-        "url": "grpc://localhost:8051",
-        "tlsCACerts": {
-          "path": "../../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
-        }
-      },
-      "peer3.hprovider.healthcare.com": {
         "url": "grpc://localhost:9051",
         "tlsCACerts": {
           "path": "../../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
         }
       },
-      "peer0.research.healthcare.com": {
+      "peer3.hprovider.healthcare.com": {
         "url": "grpc://localhost:10051",
+        "tlsCACerts": {
+          "path": "../../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
+        }
+      },
+      "peer0.research.healthcare.com": {
+        "url": "grpc://localhost:11051",
         "tlsCACerts": {
           "path": "../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
         }
       },
       "peer1.research.healthcare.com": {
-        "url": "grpc://localhost:11051",
-        "tlsCACerts": {
-          "path": "../../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
-        }
-      },
-      "peer2.research.healthcare.com": {
         "url": "grpc://localhost:12051",
         "tlsCACerts": {
           "path": "../../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
         }
       },
-      "peer3.research.healthcare.com": {
+      "peer2.research.healthcare.com": {
         "url": "grpc://localhost:13051",
+        "tlsCACerts": {
+          "path": "../../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
+        }
+      },
+      "peer3.research.healthcare.com": {
+        "url": "grpc://localhost:14051",
         "tlsCACerts": {
           "path": "../../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
         }
