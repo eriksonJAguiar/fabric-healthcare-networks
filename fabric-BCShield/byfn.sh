@@ -116,7 +116,7 @@ BLACKLISTED_VERSIONS="^1\.0\. ^1\.1\.0-preview ^1\.1\.0-alpha"
 function checkPrereqs() {
   # Note, we check configtxlator externally because it does not require a config file, and peer in the
   # docker image because of FAB-8551 that makes configtxlator return 'development version' in docker
-  LOCAL_VERSION=$(configtxlator version | sed -ne 's/ Version: //p')
+  LOCAL_VERSION=$(./bin/configtxlator version | sed -ne 's/ Version: //p')
   DOCKER_IMAGE_VERSION=$(docker run --rm hyperledger/fabric-tools:$IMAGETAG peer version | sed -ne 's/ Version: //p'|head -1)
 
   echo "LOCAL_VERSION=$LOCAL_VERSION"
@@ -148,7 +148,7 @@ function checkPrereqs() {
 function networkUp () {
   checkPrereqs
   # generate artifacts if they don't exist
-  if [ ! -d "crypto-config" ]; then
+  if [ ! -d "./bin/crypto-config" ]; then
     generateCerts
     replacePrivateKey
     generateChannelArtifacts
@@ -302,7 +302,7 @@ function replacePrivateKey () {
 
 # Generates Org certs using cryptogen tool
 function generateCerts (){
-  which cryptogen
+  #which cryptogen
   if [ "$?" -ne 0 ]; then
     echo "cryptogen tool not found. exiting"
     exit 1
@@ -316,7 +316,7 @@ function generateCerts (){
     rm -Rf crypto-config
   fi
   set -x
-  cryptogen generate --config=./crypto-config.yaml
+  ./bin/cryptogen generate --config=./crypto-config.yaml
   res=$?
   set +x
   if [ $res -ne 0 ]; then
@@ -365,7 +365,7 @@ function generateCerts (){
 # Generate orderer genesis block, channel configuration transaction and
 # anchor peer update transactions
 function generateChannelArtifacts() {
-  which configtxgen
+  #which configtxgen
   if [ "$?" -ne 0 ]; then
     echo "configtxgen tool not found. exiting"
     exit 1
@@ -377,7 +377,7 @@ function generateChannelArtifacts() {
   # Note: For some unknown reason (at least for now) the block file can't be
   # named orderer.genesis.block or the orderer will fail to launch!
   set -x
-  configtxgen -profile HealthOrdererGenesis -outputBlock ./channel-artifacts/genesis.block -channelID $CHANNEL_NAME
+  ./bin/configtxgen -profile HealthOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
   res=$?
   set +x
   if [ $res -ne 0 ]; then
@@ -389,7 +389,7 @@ function generateChannelArtifacts() {
   echo "### Generating channel configuration transaction 'channel.tx' ###"
   echo "#################################################################"
   set -x
-  configtxgen -profile HealthChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
+  ./bin/configtxgen -profile HealthChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
   res=$?
   set +x
   if [ $res -ne 0 ]; then
@@ -402,7 +402,7 @@ function generateChannelArtifacts() {
   echo "#######    Generating anchor peer update for HProviderMSP   ##########"
   echo "#################################################################"
   set -x
-  configtxgen -profile HealthChannel -outputAnchorPeersUpdate ./channel-artifacts/HProviderMSPanchors.tx -channelID $CHANNEL_NAME -asOrg HProviderMSP
+  ./bin/configtxgen -profile HealthChannel -outputAnchorPeersUpdate ./channel-artifacts/HProviderMSPanchors.tx -channelID $CHANNEL_NAME -asOrg HProviderMSP
   res=$?
   set +x
   if [ $res -ne 0 ]; then
@@ -415,7 +415,7 @@ function generateChannelArtifacts() {
   echo "#######    Generating anchor peer update for ResearchMSP   ##########"
   echo "#################################################################"
   set -x
-  configtxgen -profile HealthChannel -outputAnchorPeersUpdate \
+  ./bin/configtxgen -profile HealthChannel -outputAnchorPeersUpdate \
   ./channel-artifacts/ResearchMSPanchors.tx -channelID $CHANNEL_NAME -asOrg ResearchMSP
   res=$?
   set +x
