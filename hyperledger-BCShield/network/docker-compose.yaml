@@ -151,8 +151,8 @@ services:
       - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer1.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
       - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer1.hprovider.healthcare.com/tls:/etc/hyperledger/fabric/tls
       - ./channel/crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer1.hprovider.healthcare.com/:/etc/hyperledger/crypto/peer
-    depends_on:
-      - couchdb.peer1.hprovider
+    # depends_on:
+    #   - couchdb.peer1.hprovider
     ports:
       - 8051:7051
       - 8053:7053
