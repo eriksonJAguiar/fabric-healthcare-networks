@@ -1,3 +1,7 @@
 ./network-health/channel-artifacts
 ./network-health/bin
 ./network-health/crypto-config
+./hyperledger-BCShield/network/channel-artifacts
+./hyperledger-BCShield/network/crypto-config
+./hyperledger-BCShield/network/app-api/node_modules
+./hyperledger-BCShield/network/wallet
