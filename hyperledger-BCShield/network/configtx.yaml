@@ -33,10 +33,10 @@ Organizations:
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('HProviderMSP.member')"
+                Rule: "OR('HProviderMSP.admin', 'HProviderMSP.peer', 'HProviderMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('HProviderMSP.member')"
+                Rule: "OR('HProviderMSP.admin', 'HProviderMSP.client')"
             Admins:
                 Type: Signature
                 Rule: "OR('HProviderMSP.admin')"
@@ -55,10 +55,10 @@ Organizations:
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('ResearchMSP.member')"
+                Rule: "OR('ResearchMSP.admin', 'ResearchMSP.peer', 'ResearchMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('ResearchMSP.member')"
+                Rule: "OR('ResearchMSP.admin', 'ResearchMSP.client')"
             Admins:
                 Type: Signature
                 Rule: "OR('ResearchMSP.admin')"
@@ -135,6 +135,22 @@ Application: &ApplicationDefaults
     # Organizations is the list of orgs which are defined as participants on
     # the application side of the network
     Organizations:
+    Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+        LifecycleEndorsement:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Endorsement"
+        Endorsement:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Endorsement"
 
 ################################################################################
 #
@@ -177,10 +193,71 @@ Orderer: &OrdererDefaults
         Brokers:
             - 127.0.0.1:9092
 
-    # Organizations is the list of orgs which are defined as participants on
+    EtcdRaft:
+        # The set of Raft replicas for this network. For the etcd/raft-based
+        # implementation, we expect every replica to also be an OSN. Therefore,
+        # a subset of the host:port items enumerated in this list should be
+        # replicated under the Orderer.Addresses key above.
+        Consenters:
+            - Host: ordererhp.healthcare.com
+              Port: 7050
+              ClientTLSCert: crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/tls/server.crt
+              ServerTLSCert: crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/tls/server.crt
+    
+    
+            # Organizations is the list of orgs which are defined as participants on
     # the orderer side of the network
     Organizations:
-   
+    Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+        # BlockValidation specifies what signatures must be included in the block
+        # from the orderer for the peer to validate it.
+        BlockValidation:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+################################################################################
+#
+#   CHANNEL
+#
+#   This section defines the values to encode into a config transaction or
+#   genesis block for channel related parameters.
+#
+################################################################################
+Channel: &ChannelDefaults
+    # Policies defines the set of policies at this level of the config tree
+    # For Channel policies, their canonical path is
+    #   /Channel/<PolicyName>
+    Policies:
+        # Who may invoke the 'Deliver' API
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        # Who may invoke the 'Broadcast' API
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        # By default, who may modify elements at this config level
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+
+    # Capabilities describes the channel level capabilities, see the
+    # dedicated Capabilities section elsewhere in this file for a full
+    # description
+    Capabilities:
+        <<: *ChannelCapabilities
+
+            
+
+
 ################################################################################
 #
 #   Profile
@@ -201,6 +278,15 @@ Profiles:
                 - *OrdererHp
             Capabilities:
                 <<: *OrdererCapabilities
+            OrdererType: etcdraft
+            EtcdRaft:
+                Consenters:
+                    - Host: ordererhp.healthcare.com
+                      Port: 7050
+                      ClientTLSCert: crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/tls/server.crt
+                      ServerTLSCert: crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/tls/server.crt
+            Addresses:
+                - ordererhp.healthcare.com:7050
         Consortiums:
             HealthConsortium:
                 Organizations:
