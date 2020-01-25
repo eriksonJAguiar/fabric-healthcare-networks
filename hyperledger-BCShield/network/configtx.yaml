@@ -33,10 +33,10 @@ Organizations:
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('HProviderMSP.admin', 'HProviderMSP.peer', 'HProviderMSP.client')"
+                Rule: "OR('HProviderMSP.member')"
             Writers:
                 Type: Signature
-                Rule: "OR('HProviderMSP.admin', 'HProviderMSP.client')"
+                Rule: "OR('HProviderMSP.member')"
             Admins:
                 Type: Signature
                 Rule: "OR('HProviderMSP.admin')"
@@ -55,10 +55,10 @@ Organizations:
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('ResearchMSP.admin', 'ResearchMSP.peer', 'ResearchMSP.client')"
+                Rule: "OR('ResearchMSP.member')"
             Writers:
                 Type: Signature
-                Rule: "OR('ResearchMSP.admin', 'ResearchMSP.client')"
+                Rule: "OR('ResearchMSP.member')"
             Admins:
                 Type: Signature
                 Rule: "OR('ResearchMSP.admin')"
@@ -135,22 +135,6 @@ Application: &ApplicationDefaults
     # Organizations is the list of orgs which are defined as participants on
     # the application side of the network
     Organizations:
-    Policies:
-        Readers:
-            Type: ImplicitMeta
-            Rule: "ANY Readers"
-        Writers:
-            Type: ImplicitMeta
-            Rule: "ANY Writers"
-        Admins:
-            Type: ImplicitMeta
-            Rule: "MAJORITY Admins"
-        LifecycleEndorsement:
-            Type: ImplicitMeta
-            Rule: "MAJORITY Endorsement"
-        Endorsement:
-            Type: ImplicitMeta
-            Rule: "MAJORITY Endorsement"
 
 ################################################################################
 #
@@ -196,21 +180,6 @@ Orderer: &OrdererDefaults
     # Organizations is the list of orgs which are defined as participants on
     # the orderer side of the network
     Organizations:
-    Policies:
-        Readers:
-            Type: ImplicitMeta
-            Rule: "ANY Readers"
-        Writers:
-            Type: ImplicitMeta
-            Rule: "ANY Writers"
-        Admins:
-            Type: ImplicitMeta
-            Rule: "MAJORITY Admins"
-        # BlockValidation specifies what signatures must be included in the block
-        # from the orderer for the peer to validate it.
-        BlockValidation:
-            Type: ImplicitMeta
-            Rule: "ANY Writers"
    
 ################################################################################
 #
