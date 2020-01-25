@@ -192,17 +192,6 @@ Orderer: &OrdererDefaults
         # NOTE: Use IP:port notation
         Brokers:
             - 127.0.0.1:9092
-
-    EtcdRaft:
-        # The set of Raft replicas for this network. For the etcd/raft-based
-        # implementation, we expect every replica to also be an OSN. Therefore,
-        # a subset of the host:port items enumerated in this list should be
-        # replicated under the Orderer.Addresses key above.
-        Consenters:
-            - Host: ordererhp.healthcare.com
-              Port: 7050
-              ClientTLSCert: crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/tls/server.crt
-              ServerTLSCert: crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/tls/server.crt
     
     
             # Organizations is the list of orgs which are defined as participants on
@@ -278,15 +267,6 @@ Profiles:
                 - *OrdererHp
             Capabilities:
                 <<: *OrdererCapabilities
-            OrdererType: etcdraft
-            EtcdRaft:
-                Consenters:
-                    - Host: ordererhp.healthcare.com
-                      Port: 7050
-                      ClientTLSCert: crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/tls/server.crt
-                      ServerTLSCert: crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/tls/server.crt
-            Addresses:
-                - ordererhp.healthcare.com:7050
         Consortiums:
             HealthConsortium:
                 Organizations:
