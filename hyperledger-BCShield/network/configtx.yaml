@@ -14,9 +14,6 @@ Organizations:
         # MSPDir is the filesystem path which contains the MSP configuration
         MSPDir: crypto-config/ordererOrganizations/healthcare.com/msp
         Policies:
-            System:
-                Type: Signature
-                Rule: "OR('ResearchMSP.admin')"
             Readers:
                 Type: Signature
                 Rule: "OR('OrdererHpMSP.member')"
@@ -34,16 +31,15 @@ Organizations:
         ID: HProviderMSP
         MSPDir: crypto-config/peerOrganizations/hprovider.healthcare.com/msp
         Policies:
-            Policies:
-                Readers:
-                    Type: Signature
-                    Rule: "OR('HProviderMSP.admin', 'HProviderMSP.peer', 'HProviderMSP.client')"
-                Writers:
-                    Type: Signature
-                    Rule: "OR('HProviderMSP.admin','HProviderMSP.peer', 'HProviderMSP.client')"
-                Admins:
-                    Type: Signature
-                    Rule: "OR('HProviderMSP.admin')"
+            Readers:
+                Type: Signature
+                Rule: "OR('HProviderMSP.admin', 'HProviderMSP.peer', 'HProviderMSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('HProviderMSP.admin','HProviderMSP.peer', 'HProviderMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('HProviderMSP.admin')"
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
@@ -57,16 +53,15 @@ Organizations:
         ID: ResearchMSP
         MSPDir: crypto-config/peerOrganizations/research.healthcare.com/msp
         Policies:
-            Policies:
-                Readers:
-                    Type: Signature
-                    Rule: "OR('ResearchMSP.admin', 'ResearchMSP.peer', 'ResearchMSP.client')"
-                Writers:
-                    Type: Signature
-                    Rule: "OR('ResearchMSP.admin','ResearchMSP.peer', 'ResearchMSP.client')"
-                Admins:
-                    Type: Signature
-                    Rule: "OR('ResearchMSP.admin')"
+            Readers:
+                Type: Signature
+                Rule: "OR('ResearchMSP.admin', 'ResearchMSP.peer', 'ResearchMSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('ResearchMSP.admin','ResearchMSP.peer', 'ResearchMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('ResearchMSP.admin')"
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
