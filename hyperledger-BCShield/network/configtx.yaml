@@ -31,21 +31,37 @@ Organizations:
         ID: HProviderMSP
         MSPDir: crypto-config/peerOrganizations/hprovider.healthcare.com/msp
         Policies:
+            # Readers:
+            #     Type: Signature
+            #     Rule: "OR('HProviderMSP.admin', 'HProviderMSP.peer', 'HProviderMSP.client')"
+            # Writers:
+            #     Type: Signature
+            #     Rule: "OR('HProviderMSP.admin','HProviderMSP.peer', 'HProviderMSP.client')"
+            # Admins:
+            #     Type: Signature
+            #     Rule: "OR('HProviderMSP.admin')"
             Readers:
                 Type: Signature
-                Rule: "OR('HProviderMSP.admin', 'HProviderMSP.peer', 'HProviderMSP.client')"
+                Rule: "OR('HProviderMSP.member')"
             Writers:
                 Type: Signature
-                Rule: "OR('HProviderMSP.admin','HProviderMSP.peer', 'HProviderMSP.client')"
+                Rule: "OR('HProviderMSP.member')"
             Admins:
                 Type: Signature
                 Rule: "OR('HProviderMSP.admin')"
+
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
             - Host: peer0.hprovider.healthcare.com
               Port: 7051
+            - Host: peer1.hprovider.healthcare.com
+              Port: 8051
+            - Host: peer2.hprovider.healthcare.com
+              Port: 9051
+            - Host: peer3.hprovider.healthcare.com
+              Port: 10051
 
     - &Research        
         Name: ResearchMSP
@@ -53,12 +69,21 @@ Organizations:
         ID: ResearchMSP
         MSPDir: crypto-config/peerOrganizations/research.healthcare.com/msp
         Policies:
+            # Readers:
+            #     Type: Signature
+            #     Rule: "OR('ResearchMSP.admin', 'ResearchMSP.peer', 'ResearchMSP.client')"
+            # Writers:
+            #     Type: Signature
+            #     Rule: "OR('ResearchMSP.admin','ResearchMSP.peer', 'ResearchMSP.client')"
+            # Admins:
+            #     Type: Signature
+            #     Rule: "OR('ResearchMSP.admin')"
             Readers:
                 Type: Signature
-                Rule: "OR('ResearchMSP.admin', 'ResearchMSP.peer', 'ResearchMSP.client')"
+                Rule: "OR('ResearchMSP.member')"
             Writers:
                 Type: Signature
-                Rule: "OR('ResearchMSP.admin','ResearchMSP.peer', 'ResearchMSP.client')"
+                Rule: "OR('ResearchMSP.member')"
             Admins:
                 Type: Signature
                 Rule: "OR('ResearchMSP.admin')"
@@ -68,6 +93,12 @@ Organizations:
             # encoded in the genesis block in the Application section context
             - Host: peer0.research.healthcare.com
               Port: 11051
+            - Host: peer1.research.healthcare.com
+              Port: 12051
+            - Host: peer2.research.healthcare.com
+              Port: 13051
+            - Host: peer3.research.healthcare.com
+              Port: 14051
     
 
     
