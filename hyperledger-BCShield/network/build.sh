@@ -46,7 +46,7 @@ function generateChannelArtifacts() {
 
   # Create Genesis block defined by profile OrgsOrdererGenesis in configtx.yaml
   set -x
-  ../bin/configtxgen -profile $PROFILE -outputBlock ./channel-artifacts/genesis.block
+  ../bin/configtxgen -profile $PROFILE -outputBlock ./channel-artifacts/genesis.block -channelID $CHANNEL_NAME
   res=$?
   set +x
   if [ $res -ne 0 ]; then
