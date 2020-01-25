@@ -14,6 +14,9 @@ Organizations:
         # MSPDir is the filesystem path which contains the MSP configuration
         MSPDir: crypto-config/ordererOrganizations/healthcare.com/msp
         Policies:
+            System:
+                Type: Signature
+                Rule: "OR('ResearchMSP.admin')"
             Readers:
                 Type: Signature
                 Rule: "OR('OrdererHpMSP.member')"
@@ -34,10 +37,10 @@ Organizations:
             Policies:
                 Readers:
                     Type: Signature
-                    Rule: "OR('HProviderMSP.member')"
+                    Rule: "OR('HProviderMSP.admin', 'HProviderMSP.peer', 'HProviderMSP.client')"
                 Writers:
                     Type: Signature
-                    Rule: "OR('HProviderMSP.member')"
+                    Rule: "OR('HProviderMSP.admin','HProviderMSP.peer', 'HProviderMSP.client')"
                 Admins:
                     Type: Signature
                     Rule: "OR('HProviderMSP.admin')"
@@ -57,10 +60,10 @@ Organizations:
             Policies:
                 Readers:
                     Type: Signature
-                    Rule: "OR('ResearchMSP.member')"
+                    Rule: "OR('ResearchMSP.admin', 'ResearchMSP.peer', 'ResearchMSP.client')"
                 Writers:
                     Type: Signature
-                    Rule: "OR('ResearchMSP.member')"
+                    Rule: "OR('ResearchMSP.admin','ResearchMSP.peer', 'ResearchMSP.client')"
                 Admins:
                     Type: Signature
                     Rule: "OR('ResearchMSP.admin')"
@@ -261,8 +264,7 @@ Channel: &ChannelDefaults
 Profiles:
 
     HealthOrdererGenesis:
-        Capabilities:
-            <<: *ChannelCapabilities
+        <<: *ChannelDefaults
         Orderer:
             <<: *OrdererDefaults
             Organizations:
@@ -275,6 +277,7 @@ Profiles:
                     - *HProvider
                     - *Research
     HealthChannel:
+        <<: *ChannelDefaults
         Consortium: HealthConsortium
         Application:
             <<: *ApplicationDefaults
