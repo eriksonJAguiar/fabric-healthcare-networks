@@ -31,15 +31,16 @@ Organizations:
         ID: HProviderMSP
         MSPDir: crypto-config/peerOrganizations/hprovider.healthcare.com/msp
         Policies:
-            Readers:
-                Type: Signature
-                Rule: "OR('HProviderMSP.admin', 'HProviderMSP.peer', 'HProviderMSP.client')"
-            Writers:
-                Type: Signature
-                Rule: "OR('HProviderMSP.admin', 'HProviderMSP.client')"
-            Admins:
-                Type: Signature
-                Rule: "OR('HProviderMSP.admin')"
+            Policies:
+                Readers:
+                    Type: Signature
+                    Rule: "OR('HProviderMSP.member')"
+                Writers:
+                    Type: Signature
+                    Rule: "OR('HProviderMSP.member')"
+                Admins:
+                    Type: Signature
+                    Rule: "OR('HProviderMSP.admin')"
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
@@ -53,15 +54,16 @@ Organizations:
         ID: ResearchMSP
         MSPDir: crypto-config/peerOrganizations/research.healthcare.com/msp
         Policies:
-            Readers:
-                Type: Signature
-                Rule: "OR('ResearchMSP.admin', 'ResearchMSP.peer', 'ResearchMSP.client')"
-            Writers:
-                Type: Signature
-                Rule: "OR('ResearchMSP.admin', 'ResearchMSP.client')"
-            Admins:
-                Type: Signature
-                Rule: "OR('ResearchMSP.admin')"
+            Policies:
+                Readers:
+                    Type: Signature
+                    Rule: "OR('ResearchMSP.member')"
+                Writers:
+                    Type: Signature
+                    Rule: "OR('ResearchMSP.member')"
+                Admins:
+                    Type: Signature
+                    Rule: "OR('ResearchMSP.admin')"
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
