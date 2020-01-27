@@ -57,10 +57,15 @@ app.get('/api/readHealthcareLabs/:index', async function (req, res) {
 
         //req.params.index
 
-        const peer = 'peer0.hrecords.healthcare.com';
+        const cmd = 'docker exec -it cli peer chaincode query -n HRecords-contract -c '; 
+	    
+	const cmd2 = `'{"Args":["readHealthcareLabs","${req.params.index}"]}'`;
+	
+	const cmd3 = ' -C healthchannel';
 
-        
-        exec(`docker exec -it cli peer chaincode query -n HRecords-contract -c '{"Args":["readHealthcareLabs","${eq.params.index}"]}' -C healthchannel`, (err, stdout, stderr) => {
+	const fullcmd = cmd + cmd2.toString() + cmd3;
+
+        exec('ls', (err, stdout, stderr) => {
             if (err) {
                 console.error(err)
             } else {
