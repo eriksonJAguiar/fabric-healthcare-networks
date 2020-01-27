@@ -102,6 +102,7 @@ services:
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.hprovider.healthcare.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.hprovider.healthcare.com:7051
       - CORE_PEER_LOCALMSPID=HProviderMSP
+      - CORE_PEER_CHAINCODEADDRESS=peer0.hprovider.healthcare.com:7052
       # - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.hprovider:5984
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
@@ -138,10 +139,11 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer1.hprovider.healthcare.com
-      - CORE_PEER_ADDRESS=peer1.hprovider.healthcare.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.hprovider.healthcare.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hprovider.healthcare.com:7051
+      - CORE_PEER_ADDRESS=peer1.hprovider.healthcare.com:8051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.hprovider.healthcare.com:8051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hprovider.healthcare.com:8051
       - CORE_PEER_LOCALMSPID=HProviderMSP
+      - CORE_PEER_CHAINCODEADDRESS=peer1.hprovider.healthcare.com:8052
       # - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer1.hprovider:6984
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
@@ -178,10 +180,11 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer2.hprovider.healthcare.com
-      - CORE_PEER_ADDRESS=peer2.hprovider.healthcare.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.hprovider.healthcare.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer2.hprovider.healthcare.com:7051
+      - CORE_PEER_ADDRESS=peer2.hprovider.healthcare.com:9051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.hprovider.healthcare.com:9051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer2.hprovider.healthcare.com:9051
       - CORE_PEER_LOCALMSPID=HProviderMSP
+      - CORE_PEER_CHAINCODEADDRESS=peer2.hprovider.healthcare.com:9052
       # - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer2.hprovider:7984
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
@@ -217,10 +220,11 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer3.hprovider.healthcare.com
-      - CORE_PEER_ADDRESS=peer3.hprovider.healthcare.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.hprovider.healthcare.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer3.hprovider.healthcare.com:7051
+      - CORE_PEER_ADDRESS=peer3.hprovider.healthcare.com:10051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.hprovider.healthcare.com:10051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer3.hprovider.healthcare.com:10051
       - CORE_PEER_LOCALMSPID=HProviderMSP
+      - CORE_PEER_CHAINCODEADDRESS=peer3.hprovider.healthcare.com:10052
       # - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer3.hprovider:8984
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
@@ -256,10 +260,11 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer0.research.healthcare.com
-      - CORE_PEER_ADDRESS=peer0.research.healthcare.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.research.healthcare.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.research.healthcare.com:7051
+      - CORE_PEER_ADDRESS=peer0.research.healthcare.com:11051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.research.healthcare.com:11051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.research.healthcare.com:11051
       - CORE_PEER_LOCALMSPID=ResearchMSP
+      - CORE_PEER_CHAINCODEADDRESS=peer0.research.healthcare.com:11052
       # - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.research:9984
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
@@ -295,10 +300,11 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer1.research.healthcare.com
-      - CORE_PEER_ADDRESS=peer1.research.healthcare.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.research.healthcare.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.research.healthcare.com:7051
+      - CORE_PEER_ADDRESS=peer1.research.healthcare.com:12051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.research.healthcare.com:12051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.research.healthcare.com:12051
       - CORE_PEER_LOCALMSPID=ResearchMSP
+      - CORE_PEER_CHAINCODEADDRESS=peer1.research.healthcare.com:12052
       # - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer1.research:10984
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
@@ -334,10 +340,11 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer2.research.healthcare.com
-      - CORE_PEER_ADDRESS=peer2.research.healthcare.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.research.healthcare.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer2.research.healthcare.com:7051
+      - CORE_PEER_ADDRESS=peer2.research.healthcare.com:13051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.research.healthcare.com:13051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer2.research.healthcare.com:13051
       - CORE_PEER_LOCALMSPID=ResearchMSP
+      - CORE_PEER_CHAINCODEADDRESS=peer2.research.healthcare.com:13052
       # - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer2.research:11984
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
@@ -373,10 +380,11 @@ services:
       service: peer-base
     environment:
       - CORE_PEER_ID=peer3.research.healthcare.com
-      - CORE_PEER_ADDRESS=peer3.research.healthcare.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.research.healthcare.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer3.research.healthcare.com:7051
+      - CORE_PEER_ADDRESS=peer3.research.healthcare.com:14051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.research.healthcare.com:14051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer3.research.healthcare.com:14051
       - CORE_PEER_LOCALMSPID=ResearchMSP
+      - CORE_PEER_CHAINCODEADDRESS=peer3.research.healthcare.com:14052
       # - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer3.research:12984
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
