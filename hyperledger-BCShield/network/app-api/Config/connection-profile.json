@@ -69,7 +69,7 @@
             "request-timeout": 12000
           },
           "tlsCACerts": {
-            "path": "../../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
+            "path": "../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
           }
       },
       "peer1.hprovider.healthcare.com": {
@@ -79,7 +79,7 @@
           "request-timeout": 12000
         },
         "tlsCACerts": {
-          "path": "../../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
+          "path": "../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
         }
       },
       "peer2.hprovider.healthcare.com": {
@@ -89,7 +89,7 @@
           "request-timeout": 12000
         },
         "tlsCACerts": {
-          "path": "../../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
+          "path": "../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
         }
       },
       "peer3.hprovider.healthcare.com": {
@@ -99,7 +99,7 @@
           "request-timeout": 12000
         },
         "tlsCACerts": {
-          "path": "../../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
+          "path": "../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem"
         }
       },
       "peer0.research.healthcare.com": {
@@ -119,7 +119,7 @@
           "request-timeout": 12000
         },
         "tlsCACerts": {
-          "path": "../../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
+          "path": "../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
         }
       },
       "peer2.research.healthcare.com": {
@@ -129,7 +129,7 @@
           "request-timeout": 12000
         },
         "tlsCACerts": {
-          "path": "../../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
+          "path": "../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
         }
       },
       "peer3.research.healthcare.com": {
@@ -139,7 +139,7 @@
           "request-timeout": 12000
         },
         "tlsCACerts": {
-          "path": "../../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
+          "path": "../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem"
         }
     }
   },
@@ -148,26 +148,26 @@
           "url": "http://localhost:7054",
           "caName": "ca.hprovider.healthcare.com",
           "tlsCACerts": {
-            "path": "../../crypto-config/peerOrganizations/hprovider.healthcare.com/ca/ca.hprovider.healthcare.com-cert.pem"
+            "path": "../crypto-config/peerOrganizations/hprovider.healthcare.com/ca/ca.hprovider.healthcare.com-cert.pem"
           },
           "adminPrivateKey": {
-            "path": "../../crypto-config/peerOrganizations/hprovider.healthcare.com/users/Admin@hprovider.healthcare.com/msp/keystore/*_sk"
+            "path": "../crypto-config/peerOrganizations/hprovider.healthcare.com/users/Admin@hprovider.healthcare.com/msp/keystore/*_sk"
           },
           "signedCert": {
-            "path": "../../crypto-config/peerOrganizations/hprovider.healthcare.com/users/Admin@hprovider.healthcare.com/msp/signcerts/Admin@hprovider.healthcare.com-cert.pem"
+            "path": "../crypto-config/peerOrganizations/hprovider.healthcare.com/users/Admin@hprovider.healthcare.com/msp/signcerts/Admin@hprovider.healthcare.com-cert.pem"
           }
       },
       "ca.research.healthcare.com": { 
         "url": "http://localhost:8054",
         "caName": "ca.research.healthcare.com",
         "tlsCACerts": {
-          "path": "../../crypto-config/peerOrganizations/research.healthcare.com/ca/ca.research.healthcare.com-cert.pem"
+          "path": "../crypto-config/peerOrganizations/research.healthcare.com/ca/ca.research.healthcare.com-cert.pem"
         },
         "adminPrivateKey": {
-          "path": "../../crypto-config/peerOrganizations/research.healthcare.com/users/Admin@research.healthcare.com/msp/keystore/*_sk"
+          "path": "../crypto-config/peerOrganizations/research.healthcare.com/users/Admin@research.healthcare.com/msp/keystore/*_sk"
         },
         "signedCert": {
-          "path": "../../crypto-config/peerOrganizations/research.healthcare.com/users/Admin@research.healthcare.com/msp/signcerts/Admin@research.healthcare.com-cert.pem"
+          "path": "../crypto-config/peerOrganizations/research.healthcare.com/users/Admin@research.healthcare.com/msp/signcerts/Admin@research.healthcare.com-cert.pem"
         }
         
     }

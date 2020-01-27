@@ -23,8 +23,10 @@ async function main() {
         
         // Create a new CA client for interacting with the CA.
         const caInfo = ccp.certificateAuthorities['ca.hprovider.healthcare.com'];
-        const caTLSCACerts = caInfo.tlsCACerts.pem;
-        const ca = new FabricCAServices(caInfo.url, { trustedRoots: caTLSCACerts, verify: false }, caInfo.caName);
+        const caTLSCACerts = caInfo.tlsCACerts.path;
+        const cert = fs.readFileSync(caTLSCACerts,'utf8')
+
+	const ca = new FabricCAServices(caInfo.url, { trustedRoots: cert, verify: false }, caInfo.caName);
 
         // Create a new file system based wallet for managing identities.
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -43,8 +45,17 @@ async function main() {
 
         // Enroll the admin user, and import the new identity into the wallet.
         const enrollment = await ca.enroll({ enrollmentID: user, enrollmentSecret: secret });
-        const identity = X509WalletMixin.createIdentity('HProviderMSP', enrollment.certificate, enrollment.key.toBytes());
-        await wallet.import(user, identity);
+	console.log(enrollment.key.toBytes());
+	//const identity = X509WalletMixin.createIdentity('HProviderMSP', enrollment.certificate, enrollment.key.toBytes());
+	const identity = {
+            credentials: {
+                certificate: enrollment.certificate,
+                privateKey: enrollment.key.toBytes(),
+            },
+            mspId: 'HProviderMSP',
+            type: 'X.509',
+        };
+	await wallet.import(user, identity);
         console.log(`Successfully enrolled user ${user} and imported it into the wallet`);
 
     } catch (error) {
