@@ -1,0 +1,101 @@
+{
+  "name": "hurley_dev_net",
+  "version": "1.0.0",
+  "client": {
+      "organization": "Org1",
+      "connection": {
+          "timeout": {
+              "peer": {
+                  "endorser": "300"
+              },
+              "orderer": "300"
+          }
+      }
+  },
+  "channels": {
+      "ch1": {
+          "orderers": [
+              "orderer.hurley.lab"
+          ],
+          "peers": {
+              "peer0.org1.hurley.lab": {}
+          }
+      }
+  },
+  "organizations": {
+      "Org1": {
+          "mspid": "Org1MSP",
+          "peers": [
+              "peer0.org1.hurley.lab"
+          ],
+          "certificateAuthorities": [
+              "ca.org1.hurley.lab"
+          ]
+      },
+      "Org2":{
+        "mspid":"Org2MSP",
+        "peers":[
+          "peer0.org2.hurley.lab"
+        ],
+        "certificateAuthorities": [
+          "ca.org2.hurley.lab"
+        ]
+    }
+  },
+  "orderers": {
+      "ordererhp.hurley.lab": {
+          "url": "grpc://localhost:7050"
+      }
+  },
+  "peers": {
+      "peer0.org1.hurley.lab": {
+          "url": "grpc://localhost:7051",
+          "grpcOptions": {
+            "ssl-target-name-override": "peer0.org1.hurley.lab",
+            "request-timeout": 12000
+          },
+          "tlsCACerts": {
+            "path": "../artifacts/crypto-config/peerOrganizations/org1.hurley.lab/tlsca/tlsca.org1.hurley.lab-cert.pem"
+          }
+        },
+      "peer0.org2.hurley.lab": {
+        "url": "grpc://localhost:12051",
+        "grpcOptions": {
+          "ssl-target-name-override": "peer1.org2.hurley.lab",
+          "request-timeout": 12000
+        },
+        "tlsCACerts": {
+          "path": "../artifacts/crypto-config/peerOrganizations/org2.hurley.lab/tlsca/tlsca.org2.hurley.lab-cert.pem"
+        }
+      }
+  },
+  "certificateAuthorities": {
+      "ca.org1.hurley.lab": {
+          "url": "http://localhost:7054",
+          "caName": "ca.org1.hurley.lab",
+          "tlsCACerts": {
+            "path": "../artifacts/crypto-config/peerOrganizations/org1.hurley.lab/ca/ca.org1.hurley.lab-cert.pem"
+          },
+          "adminPrivateKey": {
+            "path": "../artifacts/crypto-config/peerOrganizations/org1.hurley.lab/users/Admin@org1.hurley.lab/msp/keystore/*_sk"
+          },
+          "signedCert": {
+            "path": "../artifacts/crypto-config/peerOrganizations/org1.hurley.lab/users/Admin@org1.hurley.lab/msp/signcerts/Admin@org1.hurley.lab-cert.pem"
+          }
+      },
+      "ca.org2.hurley.lab": { 
+        "url": "http://localhost:7154",
+        "caName": "ca.org2.hurley.lab",
+        "tlsCACerts": {
+          "path": "../artifacts/crypto-config/peerOrganizations/org2.hurley.lab/ca/ca.org2.hurley.lab-cert.pem"
+        },
+        "adminPrivateKey": {
+          "path": "../artifacts/crypto-config/peerOrganizations/org2.hurley.lab/users/Admin@org2.hurley.lab/msp/keystore/*_sk"
+        },
+        "signedCert": {
+          "path": "../artifacts/crypto-config/peerOrganizations/org2.hurley.lab/users/Admin@org2.hurley.lab/msp/signcerts/Admin@org2.hurley.lab-cert.pem"
+        }
+        
+    }
+  }
+}
