@@ -44,5 +44,5 @@ peer chaincode invoke -n Health_DICOM -c '{"Args":["123", "222", "Running", "100
 #docker exec -it cli peer chaincode invoke -o ordererhp.healthcare.com:7050 -C healthchannel -n HRecordes-contract --peerAddresses peer0.hprovider.healthcare.com:7051 --peerAddresses peer0.research.healthcare.com:7051 -c '{"Args":["createHealthcareLabs", "1003", "1001","1001","erikson","Labs Records","1217212121"]}'
 #docker exec -it cli peer chaincode invoke -o ordererhp.healthcare.com:7050 -C healthchannel -n HRecords-contract -c '{"Args":["createHealthcareLabs", "1003", "1001","1001","erikson","Labs Records","1217212121"]}'
 
-peer chaincode query -n Health_DICOM -c '{"Args":["123"], "Function":"readHealthcareLabs"}' -C healthchannel
+peer chaincode query -n HRecords-contract -c '{"Args":["123"], "Function":"readHealthcareLabs"}' -C healthchannel
 #peer chaincode query -n HRecordes-contract -c '{"Args":["readRecord","1003"], "Function":}' -C healthchannel

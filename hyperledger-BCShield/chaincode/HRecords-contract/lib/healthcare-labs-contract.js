@@ -7,8 +7,11 @@
 const { Contract } = require('fabric-contract-api');
 
 class HealthcareLabsContract extends Contract {
-
-
+    
+    async init(ctx){
+        return;
+    }
+    
     async healthcareLabsExists(ctx, labsId) {
         const buffer = await ctx.stub.getState(labsId);
         return (!!buffer && buffer.length > 0);
