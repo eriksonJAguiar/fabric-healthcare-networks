@@ -1,0 +1,49 @@
+{
+    "name": "healthcare-chain-fabric",
+    "version": "1.0.0",
+    "client": {
+        "organization": "hprovider",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "hprovider": {
+            "mspid": "HPRoviderMSP",
+            "peers": [
+                "peer0.hprovider.healthcare.com"
+            ],
+            "certificateAuthorities": [
+                "ca.hprovider.healthcare.com"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.hprovider.healthcare.com": {
+            "url": "grpc://localhost:7051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICejCCAiCgAwIBAgIRAPzP9nh986MGgugxwc0kFGMwCgYIKoZIzj0EAwIwgYYx\nCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g\nRnJhbmNpc2NvMSEwHwYDVQQKExhocHJvdmlkZXIuaGVhbHRoY2FyZS5jb20xJzAl\nBgNVBAMTHnRsc2NhLmhwcm92aWRlci5oZWFsdGhjYXJlLmNvbTAeFw0yMDAxMjgy\nMjA2MDBaFw0zMDAxMjUyMjA2MDBaMIGGMQswCQYDVQQGEwJVUzETMBEGA1UECBMK\nQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEhMB8GA1UEChMYaHBy\nb3ZpZGVyLmhlYWx0aGNhcmUuY29tMScwJQYDVQQDEx50bHNjYS5ocHJvdmlkZXIu\naGVhbHRoY2FyZS5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATGIwPLYZkL\nmgpUfPA/E6Vrj3lMWpZV0S2Dx0u0jByrlXAnHfr6znSSlR0w5PnpeeyQlYHXIqS6\n7LG9OhZ2mqebo20wazAOBgNVHQ8BAf8EBAMCAaYwHQYDVR0lBBYwFAYIKwYBBQUH\nAwIGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMBAf8wKQYDVR0OBCIEINQjgYsLdFPR\niQjZQDChLRGoXObpkZ6jCX3OPD+JEC9SMAoGCCqGSM49BAMCA0gAMEUCIQDHwWTy\nRsYEVjoayl+xwqDIl9w7Oh/kvQZbdPxqitZjmwIgCJu0accMhidXVN2de1lgm4ex\nYKWwe0bbEgFbwaOkRtU=\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.hprovider.healthcare.com",
+                "hostnameOverride": "peer0.hprovider.healthcare.com"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.hprovider.healthcare.com": {
+            "url": "http://localhost:7054",
+            "caName": "ca.hprovider.healthcare.com",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICczCCAhqgAwIBAgIRAOQvzLBMxlMisQX5ZaZc0ikwCgYIKoZIzj0EAwIwgYMx\nCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g\nRnJhbmNpc2NvMSEwHwYDVQQKExhocHJvdmlkZXIuaGVhbHRoY2FyZS5jb20xJDAi\nBgNVBAMTG2NhLmhwcm92aWRlci5oZWFsdGhjYXJlLmNvbTAeFw0yMDAxMjgyMjA2\nMDBaFw0zMDAxMjUyMjA2MDBaMIGDMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2Fs\naWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEhMB8GA1UEChMYaHByb3Zp\nZGVyLmhlYWx0aGNhcmUuY29tMSQwIgYDVQQDExtjYS5ocHJvdmlkZXIuaGVhbHRo\nY2FyZS5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASMUMoy0Trub7TCJyFC\n4rOFNKbID0sDk5gI7Ug361YHY3t526NdqbiVK2lcJOaTUFZv6fjP1jgkQjEXd1w4\nN8F1o20wazAOBgNVHQ8BAf8EBAMCAaYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsG\nAQUFBwMBMA8GA1UdEwEB/wQFMAMBAf8wKQYDVR0OBCIEIMUtYgNjd6qSJVmgHqAa\nFQKAxzcD0FsNGlFeGxIDCWSMMAoGCCqGSM49BAMCA0cAMEQCIC5MbcTWKRBXFGim\nk9sw0tAJNKOeJGEp/1USMryskPC7AiAjgvR/MrEY0ry5Q24BCCZbRkB1xM4Eohl6\nvidq28sVkw==\n-----END CERTIFICATE-----\n"
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}

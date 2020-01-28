@@ -1,0 +1,49 @@
+{
+    "name": "healthcare-chain-fabric",
+    "version": "1.0.0",
+    "client": {
+        "organization": "research",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "research": {
+            "mspid": "ResearchMSP",
+            "peers": [
+                "peer0.research.healthcare.com"
+            ],
+            "certificateAuthorities": [
+                "ca.research.healthcare.com"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.research.healthcare.com": {
+            "url": "grpc://localhost:11051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICdTCCAhugAwIBAgIQA7Ihvb8+6TQrHQgfQz2F2DAKBggqhkjOPQQDAjCBhDEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xIDAeBgNVBAoTF3Jlc2VhcmNoLmhlYWx0aGNhcmUuY29tMSYwJAYD\nVQQDEx10bHNjYS5yZXNlYXJjaC5oZWFsdGhjYXJlLmNvbTAeFw0yMDAxMjgyMjA2\nMDBaFw0zMDAxMjUyMjA2MDBaMIGEMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2Fs\naWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEgMB4GA1UEChMXcmVzZWFy\nY2guaGVhbHRoY2FyZS5jb20xJjAkBgNVBAMTHXRsc2NhLnJlc2VhcmNoLmhlYWx0\naGNhcmUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEGbmdEGC0O4RRXdIt\ngIxM4NWlwx7ngfC3bAhuqK9pc1xrWkTrReoOLOtGnGCIXQ2nyjUiJmjEOneYEniP\nGdIZFqNtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggr\nBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1UdDgQiBCDezQBSGRSGr0Sgi+vK\nCxJbtROGr6eRPSw9eQya7i43DzAKBggqhkjOPQQDAgNIADBFAiEAwOtLVJElfZp2\n4NPskBhrHupYyKrUnrkO/VH6LYLmwLwCIFFeewyn89ORxnqFL9XeC1uSYL3e0EA4\n3AO08TnnIHBa\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.research.healthcare.com",
+                "hostnameOverride": "peer0.research.healthcare.com"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.research.healthcare.com": {
+            "url": "http://localhost:8054",
+            "caName": "ca.research.healthcare.com",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICcDCCAhagAwIBAgIRANxZYvyWLfa/litglu4nutUwCgYIKoZIzj0EAwIwgYEx\nCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g\nRnJhbmNpc2NvMSAwHgYDVQQKExdyZXNlYXJjaC5oZWFsdGhjYXJlLmNvbTEjMCEG\nA1UEAxMaY2EucmVzZWFyY2guaGVhbHRoY2FyZS5jb20wHhcNMjAwMTI4MjIwNjAw\nWhcNMzAwMTI1MjIwNjAwWjCBgTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlm\nb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xIDAeBgNVBAoTF3Jlc2VhcmNo\nLmhlYWx0aGNhcmUuY29tMSMwIQYDVQQDExpjYS5yZXNlYXJjaC5oZWFsdGhjYXJl\nLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJynr3gR0ABCaWzuUlovXUJ3\nOJ51CWXEW/lhOYIN/P6M6qziU9A47mr/xf9TYuaA9cWh07GXo0pS62TrkxWN+B2j\nbTBrMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUH\nAwEwDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgeXBYTgdIZtvG9wSRqo8jRmXO\n5l16dzgNyIY+cPAGm10wCgYIKoZIzj0EAwIDSAAwRQIhAINSGtRT/hv3yT4/4XOJ\nRMDznIawN0tT66xt5LwHaxmDAiA/Acq6tw5m4LGPbN06PmhwtvO3ObTuLQIi/dsj\nwJTE0Q==\n-----END CERTIFICATE-----\n"
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}
