@@ -18,7 +18,7 @@ function json_ccp {
 
 
 ORG=hprovider
-ORGMSP=HPRovider
+ORGMSP=HProvider
 P0PORT=7051
 CAPORT=7054
 PEERPEM=../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem

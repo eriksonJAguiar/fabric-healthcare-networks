@@ -7,13 +7,13 @@
 const { FileSystemWallet, Gateway } = require('fabric-network');
 const path = require('path');
 
-const ccpPath = path.resolve(__dirname, '..', 'connections', 'connection-producer.json');
+const ccpPath = path.resolve(__dirname, '..', 'connections', 'connection-hprovider.json');
 
 async function main() {
     try {
 
         // Create a new file system based wallet for managing identities.
-        const walletPath = path.join(process.cwd(), 'wallet');
+        const walletPath = path.join(process.cwd(), 'wallet/wallet-hprovider');
         const wallet = new FileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
 
@@ -30,15 +30,15 @@ async function main() {
         await gateway.connect(ccpPath, { wallet, identity: 'user1', discovery: { enabled: true, asLocalhost: true } });
 
         // Get the network (channel) our contract is deployed to.
-        const network = await gateway.getNetwork('mychannel');
+        const network = await gateway.getNetwork('healthchannel');
 
         // Get the contract from the network.
-        const contract = network.getContract('supcc');
+        const contract = network.getContract('HRecords-contract');
 
         // Evaluate the specified transaction.
         // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
         // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
-        const result = await contract.evaluateTransaction('queryOrder', 'ORDER125');
+        const result = await contract.evaluateTransaction('readHealthcareLabs', '1003');
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
 
     } catch (error) {
