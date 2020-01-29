@@ -12,7 +12,7 @@ RESEARCH_TLS_ROOTCERT_FILE=${CONFIG_ROOT}/crypto-config/peerOrganizations/resear
 ORDERER_TLS_ROOTCERT_FILE=${CONFIG_ROOT}/crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/msp/tlscacerts/tlsca.healthcare.com-cert.pem
 
 CORE_PEER_TLS_ENABLED=true
-ORDERER_CA=${CONFIG_ROOT}/crypto-config/ordererOrganizations/healthcare.com/orderers/orderer.healthcare.com/msp/tlscacerts/tlsca.healthcare.com-cert.pem
+ORDERER_CA=${CONFIG_ROOT}/crypto-config/ordererOrganizations/healthcare.com/orderers/ordererhp.healthcare.com/msp/tlscacerts/tlsca.healthcare.com-cert.pem
 
 PEER0_HPROVIDER="docker exec
 -e CORE_PEER_LOCALMSPID=HProviderMSP
