@@ -1,5 +1,5 @@
 {
-    "name": "healthcare-chain-fabric",
+    "name": "healthcare-chain-${ORG}",
     "version": "1.0.0",
     "client": {
         "organization": "${ORG}",
@@ -24,7 +24,7 @@
     },
     "peers": {
         "peer0.${ORG}.healthcare.com": {
-            "url": "grpc://localhost:${P0PORT}",
+            "url": "grpcs://localhost:${P0PORT}",
             "tlsCACerts": {
                 "pem": "${PEERPEM}"
             },
@@ -36,7 +36,7 @@
     },
     "certificateAuthorities": {
         "ca.${ORG}.healthcare.com": {
-            "url": "http://localhost:${CAPORT}",
+            "url": "https://localhost:${CAPORT}",
             "caName": "ca.${ORG}.healthcare.com",
             "tlsCACerts": {
                 "pem": "${CAPEM}"
