@@ -19,7 +19,7 @@ function json_ccp {
 
 ORG=hprovider
 ORGMSP=HProvider
-P0PORT=7051
+P0PORT=7052
 CAPORT=7054
 PEERPEM=../crypto-config/peerOrganizations/hprovider.healthcare.com/tlsca/tlsca.hprovider.healthcare.com-cert.pem
 CAPEM=../crypto-config/peerOrganizations/hprovider.healthcare.com/ca/ca.hprovider.healthcare.com-cert.pem
@@ -28,7 +28,7 @@ echo "$(json_ccp $ORG $ORGMSP $P0PORT $CAPORT $PEERPEM $CAPEM)" > ./connection-h
 
 ORG=research
 ORGMSP=Research
-P0PORT=11051
+P0PORT=11052
 CAPORT=8054
 PEERPEM=../crypto-config/peerOrganizations/research.healthcare.com/tlsca/tlsca.research.healthcare.com-cert.pem
 CAPEM=../crypto-config/peerOrganizations/research.healthcare.com/ca/ca.research.healthcare.com-cert.pem

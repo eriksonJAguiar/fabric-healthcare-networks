@@ -32,8 +32,7 @@ services:
       - ORDERER_GENERAL_TLS_ENABLED=false
       - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
       - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
-      - ORDERER_GENERAL_TLS_ROOTCAS=/var/hyperledger/orderer/tls/ca.crt
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthNetwork
+      - ORDERER_GENERAL_TLS_ROOTCAS=/var/hyperledger/orderer/tls/ca.crt  
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
     volumes:
       - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
@@ -60,7 +59,6 @@ services:
       #- FABRIC_CA_SERVER_TLS_CLIENTAUTH_CERTFILES=
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/cert.pem
       - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-tls/key.pem
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthNetwork
     ports:
       - 7054:7054
       # -b :bootstrap identity is required to start the Fabric CA server; this identity is the server administrator.
@@ -84,7 +82,7 @@ services:
         # - FABRIC_CA_SERVER_TLS_CLIENTAUTH_CERTFILES=
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/cert.pem
       - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-tls/key.pem
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthNetwork
+      
     ports:
       - 8054:8054
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
@@ -151,7 +149,6 @@ services:
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer1.hprovider:6984
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthNetwork
     volumes:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer1.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
@@ -193,7 +190,7 @@ services:
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer2.hprovider:7984
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthNetwork
+      
     volumes:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer2.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
@@ -234,7 +231,6 @@ services:
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer3.hprovider:8984
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthNetwork
     volumes:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer3.hprovider.healthcare.com/msp:/etc/hyperledger/fabric/msp
@@ -275,7 +271,6 @@ services:
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.research:9984
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthNetwork
     volumes:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
@@ -316,7 +311,6 @@ services:
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer1.research:10984
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthNetwork
     volumes:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer1.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
@@ -357,7 +351,6 @@ services:
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer2.research:11984
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthNetwork
     volumes:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer2.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
@@ -398,7 +391,6 @@ services:
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer3.research:12984
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
       # - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthNetwork
     volumes:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/research.healthcare.com/peers/peer3.research.healthcare.com/msp:/etc/hyperledger/fabric/msp
@@ -441,7 +433,6 @@ services:
       - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/tls/ca.crt
       - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config/peerOrganizations/hprovider.healthcare.com/users/Admin@hprovider.healthcare.com/msp
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthNetwork
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: /bin/bash
     volumes:
