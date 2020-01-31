@@ -1,0 +1,60 @@
+{
+    "name": "first-network-research",
+    "version": "1.0.0",
+    "client": {
+        "organization": "Research",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "Research": {
+            "mspid": "ResearchMSP",
+            "peers": [
+                "peer0.research.healthcare.com",
+                "peer1.research.healthcare.com"
+            ],
+            "certificateAuthorities": [
+                "ca.research.healthcare.com"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.research.healthcare.com": {
+            "url": "grpcs://localhost:9051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICdTCCAhygAwIBAgIRAJsjhwxHpZGyi3ln07nOcw4wCgYIKoZIzj0EAwIwgYQx\nCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g\nRnJhbmNpc2NvMSAwHgYDVQQKExdyZXNlYXJjaC5oZWFsdGhjYXJlLmNvbTEmMCQG\nA1UEAxMddGxzY2EucmVzZWFyY2guaGVhbHRoY2FyZS5jb20wHhcNMjAwMTMxMTI1\nNTAwWhcNMzAwMTI4MTI1NTAwWjCBhDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNh\nbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xIDAeBgNVBAoTF3Jlc2Vh\ncmNoLmhlYWx0aGNhcmUuY29tMSYwJAYDVQQDEx10bHNjYS5yZXNlYXJjaC5oZWFs\ndGhjYXJlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABHaBumKvTJfAiNcU\nkwsuMR0qOStpJ8sYH7AzFfpTxyny6C2+jEU1X/HIPfxLOyJzHhNGQlFcV/SRG3vR\nsPekvbKjbTBrMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYI\nKwYBBQUHAwEwDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgzetA3Fzdx88aXSsZ\ntjgUlbJ62wi1StHLcweSC+i2+pAwCgYIKoZIzj0EAwIDRwAwRAIgaS+4A8Hucfn0\ngEPBQR0cNI0qx3yrRPSAeh8vOPN2s5oCIEANAihSbdPl4AL0apflmWdiD05fwvcA\noZh9dDflRPZe\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.research.healthcare.com",
+                "hostnameOverride": "peer0.research.healthcare.com"
+            }
+        },
+        "peer1.research.healthcare.com": {
+            "url": "grpcs://localhost:10051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICdTCCAhygAwIBAgIRAJsjhwxHpZGyi3ln07nOcw4wCgYIKoZIzj0EAwIwgYQx\nCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g\nRnJhbmNpc2NvMSAwHgYDVQQKExdyZXNlYXJjaC5oZWFsdGhjYXJlLmNvbTEmMCQG\nA1UEAxMddGxzY2EucmVzZWFyY2guaGVhbHRoY2FyZS5jb20wHhcNMjAwMTMxMTI1\nNTAwWhcNMzAwMTI4MTI1NTAwWjCBhDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNh\nbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xIDAeBgNVBAoTF3Jlc2Vh\ncmNoLmhlYWx0aGNhcmUuY29tMSYwJAYDVQQDEx10bHNjYS5yZXNlYXJjaC5oZWFs\ndGhjYXJlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABHaBumKvTJfAiNcU\nkwsuMR0qOStpJ8sYH7AzFfpTxyny6C2+jEU1X/HIPfxLOyJzHhNGQlFcV/SRG3vR\nsPekvbKjbTBrMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYI\nKwYBBQUHAwEwDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgzetA3Fzdx88aXSsZ\ntjgUlbJ62wi1StHLcweSC+i2+pAwCgYIKoZIzj0EAwIDRwAwRAIgaS+4A8Hucfn0\ngEPBQR0cNI0qx3yrRPSAeh8vOPN2s5oCIEANAihSbdPl4AL0apflmWdiD05fwvcA\noZh9dDflRPZe\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1.research.healthcare.com",
+                "hostnameOverride": "peer1.research.healthcare.com"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.research.healthcare.com": {
+            "url": "https://localhost:8054",
+            "caName": "ca.research.healthcare.com",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICbjCCAhWgAwIBAgIQLDelOICcEHf9XTuggqj8nDAKBggqhkjOPQQDAjCBgTEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xIDAeBgNVBAoTF3Jlc2VhcmNoLmhlYWx0aGNhcmUuY29tMSMwIQYD\nVQQDExpjYS5yZXNlYXJjaC5oZWFsdGhjYXJlLmNvbTAeFw0yMDAxMzExMjU1MDBa\nFw0zMDAxMjgxMjU1MDBaMIGBMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZv\ncm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEgMB4GA1UEChMXcmVzZWFyY2gu\naGVhbHRoY2FyZS5jb20xIzAhBgNVBAMTGmNhLnJlc2VhcmNoLmhlYWx0aGNhcmUu\nY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1eMiEjtuW9Mwt8deVGxgQKii\nQi2ENbJdmT0CA3vjzV5p3gvXhhbO0lRgOz6zE34ZmwJU2sLHRzqYittkiDvbUqNt\nMGswDgYDVR0PAQH/BAQDAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcD\nATAPBgNVHRMBAf8EBTADAQH/MCkGA1UdDgQiBCAr8emm8TGB0TVaWYG6YXswH0g+\ncKU5MQ1ne6BKVAoZnDAKBggqhkjOPQQDAgNHADBEAiBvlywyTWcrIx6zE54faFAr\nyQq0gTjy/y8r3qsSLkpW4wIgMc+AnFTHMX4pwKrS8B+IzwBsRzpNvgz1qTKUXaaD\nsg4=\n-----END CERTIFICATE-----\n"
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}

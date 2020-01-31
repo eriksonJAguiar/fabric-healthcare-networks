@@ -1,0 +1,91 @@
+---
+name: first-network-orghprovider
+version: 1.0.0
+client:
+  organization: HProvider
+  connection:
+    timeout:
+      peer:
+        endorser: '300'
+organizations:
+  HProvider:
+    mspid: HProviderMSP
+    peers:
+    - peer0.hprovider.healthcare.com
+    - peer1.hprovider.healthcare.com
+    certificateAuthorities:
+    - ca.hprovider.healthcare.com
+peers:
+  peer0.hprovider.healthcare.com:
+    url: grpcs://localhost:7051
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICejCCAiCgAwIBAgIRAL4zYQJnOQ119CEwyow4tK4wCgYIKoZIzj0EAwIwgYYx
+        CzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g
+        RnJhbmNpc2NvMSEwHwYDVQQKExhocHJvdmlkZXIuaGVhbHRoY2FyZS5jb20xJzAl
+        BgNVBAMTHnRsc2NhLmhwcm92aWRlci5oZWFsdGhjYXJlLmNvbTAeFw0yMDAxMzEx
+        MjU1MDBaFw0zMDAxMjgxMjU1MDBaMIGGMQswCQYDVQQGEwJVUzETMBEGA1UECBMK
+        Q2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEhMB8GA1UEChMYaHBy
+        b3ZpZGVyLmhlYWx0aGNhcmUuY29tMScwJQYDVQQDEx50bHNjYS5ocHJvdmlkZXIu
+        aGVhbHRoY2FyZS5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAS0kNXYHkFS
+        oAqbo/DYn5nKSG/QHGksOKNN4l/oujz8L/9T0SUtvhymr6up9Qm4S62n7VFueoI+
+        7k29+7QHzq2Ko20wazAOBgNVHQ8BAf8EBAMCAaYwHQYDVR0lBBYwFAYIKwYBBQUH
+        AwIGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMBAf8wKQYDVR0OBCIEIBRH8NcB2iHW
+        +3Z0JJxwn4f8YwvvZ2zakdrG3D+peJ7WMAoGCCqGSM49BAMCA0gAMEUCIQCYXiGh
+        2QXzaLpnDITjNeQhgNlnvF1/2rq8VZEs8SyXOgIgMKwVzw4n3KExCHD0v39j81CG
+        p7g7E/BOtEh21oruJH8=
+        -----END CERTIFICATE-----
+        
+    grpcOptions:
+      ssl-target-name-override: peer0.hprovider.healthcare.com
+      hostnameOverride: peer0.hprovider.healthcare.com
+  peer1.hprovider.healthcare.com:
+    url: grpcs://localhost:8051
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICejCCAiCgAwIBAgIRAL4zYQJnOQ119CEwyow4tK4wCgYIKoZIzj0EAwIwgYYx
+        CzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g
+        RnJhbmNpc2NvMSEwHwYDVQQKExhocHJvdmlkZXIuaGVhbHRoY2FyZS5jb20xJzAl
+        BgNVBAMTHnRsc2NhLmhwcm92aWRlci5oZWFsdGhjYXJlLmNvbTAeFw0yMDAxMzEx
+        MjU1MDBaFw0zMDAxMjgxMjU1MDBaMIGGMQswCQYDVQQGEwJVUzETMBEGA1UECBMK
+        Q2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEhMB8GA1UEChMYaHBy
+        b3ZpZGVyLmhlYWx0aGNhcmUuY29tMScwJQYDVQQDEx50bHNjYS5ocHJvdmlkZXIu
+        aGVhbHRoY2FyZS5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAS0kNXYHkFS
+        oAqbo/DYn5nKSG/QHGksOKNN4l/oujz8L/9T0SUtvhymr6up9Qm4S62n7VFueoI+
+        7k29+7QHzq2Ko20wazAOBgNVHQ8BAf8EBAMCAaYwHQYDVR0lBBYwFAYIKwYBBQUH
+        AwIGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMBAf8wKQYDVR0OBCIEIBRH8NcB2iHW
+        +3Z0JJxwn4f8YwvvZ2zakdrG3D+peJ7WMAoGCCqGSM49BAMCA0gAMEUCIQCYXiGh
+        2QXzaLpnDITjNeQhgNlnvF1/2rq8VZEs8SyXOgIgMKwVzw4n3KExCHD0v39j81CG
+        p7g7E/BOtEh21oruJH8=
+        -----END CERTIFICATE-----
+        
+    grpcOptions:
+      ssl-target-name-override: peer1.{ORG}.healthcare.com
+      hostnameOverride: peer1.hprovider.healthcare.com
+certificateAuthorities:
+  ca.hprovider.healthcare.com:
+    url: https://localhost:7054
+    caName: ca.hprovider.healthcare.com
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICczCCAhmgAwIBAgIQXXyavDSFH2trX3T+LHmRxzAKBggqhkjOPQQDAjCBgzEL
+        MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+        cmFuY2lzY28xITAfBgNVBAoTGGhwcm92aWRlci5oZWFsdGhjYXJlLmNvbTEkMCIG
+        A1UEAxMbY2EuaHByb3ZpZGVyLmhlYWx0aGNhcmUuY29tMB4XDTIwMDEzMTEyNTUw
+        MFoXDTMwMDEyODEyNTUwMFowgYMxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxp
+        Zm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMSEwHwYDVQQKExhocHJvdmlk
+        ZXIuaGVhbHRoY2FyZS5jb20xJDAiBgNVBAMTG2NhLmhwcm92aWRlci5oZWFsdGhj
+        YXJlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABMHNHY+Sb+7RtTTkmqwO
+        FtB5Pi7JSYfEJVUAffzHbQOybuLvWH92BYf18ECCzYn6H+BcmL6MWqe2WUN6Kdus
+        EfejbTBrMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYB
+        BQUHAwEwDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgH3nkhBNpaYvtUZxZx1+T
+        1MMMaO3i1oyftkegoHmKPeEwCgYIKoZIzj0EAwIDSAAwRQIhAJuuA00IDeu3xsNa
+        TZD+afmZl5zeGTaUvBlVYrvbfeDpAiBGoM7xP278b2sx94EnTHNGtl8qLP2tDajt
+        Xo+1aELk7A==
+        -----END CERTIFICATE-----
+        
+    httpOptions:
+      verify: false

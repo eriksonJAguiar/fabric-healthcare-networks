@@ -1,0 +1,91 @@
+---
+name: first-network-orgresearch
+version: 1.0.0
+client:
+  organization: Research
+  connection:
+    timeout:
+      peer:
+        endorser: '300'
+organizations:
+  Research:
+    mspid: ResearchMSP
+    peers:
+    - peer0.research.healthcare.com
+    - peer1.research.healthcare.com
+    certificateAuthorities:
+    - ca.research.healthcare.com
+peers:
+  peer0.research.healthcare.com:
+    url: grpcs://localhost:9051
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICdTCCAhygAwIBAgIRAJsjhwxHpZGyi3ln07nOcw4wCgYIKoZIzj0EAwIwgYQx
+        CzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g
+        RnJhbmNpc2NvMSAwHgYDVQQKExdyZXNlYXJjaC5oZWFsdGhjYXJlLmNvbTEmMCQG
+        A1UEAxMddGxzY2EucmVzZWFyY2guaGVhbHRoY2FyZS5jb20wHhcNMjAwMTMxMTI1
+        NTAwWhcNMzAwMTI4MTI1NTAwWjCBhDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNh
+        bGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xIDAeBgNVBAoTF3Jlc2Vh
+        cmNoLmhlYWx0aGNhcmUuY29tMSYwJAYDVQQDEx10bHNjYS5yZXNlYXJjaC5oZWFs
+        dGhjYXJlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABHaBumKvTJfAiNcU
+        kwsuMR0qOStpJ8sYH7AzFfpTxyny6C2+jEU1X/HIPfxLOyJzHhNGQlFcV/SRG3vR
+        sPekvbKjbTBrMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYI
+        KwYBBQUHAwEwDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgzetA3Fzdx88aXSsZ
+        tjgUlbJ62wi1StHLcweSC+i2+pAwCgYIKoZIzj0EAwIDRwAwRAIgaS+4A8Hucfn0
+        gEPBQR0cNI0qx3yrRPSAeh8vOPN2s5oCIEANAihSbdPl4AL0apflmWdiD05fwvcA
+        oZh9dDflRPZe
+        -----END CERTIFICATE-----
+        
+    grpcOptions:
+      ssl-target-name-override: peer0.research.healthcare.com
+      hostnameOverride: peer0.research.healthcare.com
+  peer1.research.healthcare.com:
+    url: grpcs://localhost:10051
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICdTCCAhygAwIBAgIRAJsjhwxHpZGyi3ln07nOcw4wCgYIKoZIzj0EAwIwgYQx
+        CzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g
+        RnJhbmNpc2NvMSAwHgYDVQQKExdyZXNlYXJjaC5oZWFsdGhjYXJlLmNvbTEmMCQG
+        A1UEAxMddGxzY2EucmVzZWFyY2guaGVhbHRoY2FyZS5jb20wHhcNMjAwMTMxMTI1
+        NTAwWhcNMzAwMTI4MTI1NTAwWjCBhDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNh
+        bGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xIDAeBgNVBAoTF3Jlc2Vh
+        cmNoLmhlYWx0aGNhcmUuY29tMSYwJAYDVQQDEx10bHNjYS5yZXNlYXJjaC5oZWFs
+        dGhjYXJlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABHaBumKvTJfAiNcU
+        kwsuMR0qOStpJ8sYH7AzFfpTxyny6C2+jEU1X/HIPfxLOyJzHhNGQlFcV/SRG3vR
+        sPekvbKjbTBrMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYI
+        KwYBBQUHAwEwDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgzetA3Fzdx88aXSsZ
+        tjgUlbJ62wi1StHLcweSC+i2+pAwCgYIKoZIzj0EAwIDRwAwRAIgaS+4A8Hucfn0
+        gEPBQR0cNI0qx3yrRPSAeh8vOPN2s5oCIEANAihSbdPl4AL0apflmWdiD05fwvcA
+        oZh9dDflRPZe
+        -----END CERTIFICATE-----
+        
+    grpcOptions:
+      ssl-target-name-override: peer1.{ORG}.healthcare.com
+      hostnameOverride: peer1.research.healthcare.com
+certificateAuthorities:
+  ca.research.healthcare.com:
+    url: https://localhost:8054
+    caName: ca.research.healthcare.com
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICbjCCAhWgAwIBAgIQLDelOICcEHf9XTuggqj8nDAKBggqhkjOPQQDAjCBgTEL
+        MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+        cmFuY2lzY28xIDAeBgNVBAoTF3Jlc2VhcmNoLmhlYWx0aGNhcmUuY29tMSMwIQYD
+        VQQDExpjYS5yZXNlYXJjaC5oZWFsdGhjYXJlLmNvbTAeFw0yMDAxMzExMjU1MDBa
+        Fw0zMDAxMjgxMjU1MDBaMIGBMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZv
+        cm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEgMB4GA1UEChMXcmVzZWFyY2gu
+        aGVhbHRoY2FyZS5jb20xIzAhBgNVBAMTGmNhLnJlc2VhcmNoLmhlYWx0aGNhcmUu
+        Y29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1eMiEjtuW9Mwt8deVGxgQKii
+        Qi2ENbJdmT0CA3vjzV5p3gvXhhbO0lRgOz6zE34ZmwJU2sLHRzqYittkiDvbUqNt
+        MGswDgYDVR0PAQH/BAQDAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcD
+        ATAPBgNVHRMBAf8EBTADAQH/MCkGA1UdDgQiBCAr8emm8TGB0TVaWYG6YXswH0g+
+        cKU5MQ1ne6BKVAoZnDAKBggqhkjOPQQDAgNHADBEAiBvlywyTWcrIx6zE54faFAr
+        yQq0gTjy/y8r3qsSLkpW4wIgMc+AnFTHMX4pwKrS8B+IzwBsRzpNvgz1qTKUXaaD
+        sg4=
+        -----END CERTIFICATE-----
+        
+    httpOptions:
+      verify: false
