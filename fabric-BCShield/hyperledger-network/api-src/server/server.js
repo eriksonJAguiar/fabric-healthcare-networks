@@ -4,12 +4,10 @@ var app = express();
 const fabricNetwork = require('./fabricNetwork')
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+urlencoder = bodyParser.urlencoded({ extended: true});
 
 
-app.post('/api/createLabs', async function (req, res) {
+app.post('/api/createLabs', urlencoder, async function (req, res) {
 
   try {
     const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../wallet/wallet-hprovider');
@@ -22,11 +20,12 @@ app.post('/api/createLabs', async function (req, res) {
     //         documentType: req.body.documentType,
     //         timestamp:Date.now().toString()
     // };
-    //let tx = await contract.submitTransaction('createHealthcareLabs',JSON.stringify(records));
+    let tx = await contract.submitTransaction('createHealthcareLabs', req.body.labsId, req.body.refDocument, req.body.refIFPS, req.body.documentType, req.body.documentType, Date.now().toString());
     res.json({
       status: 'OK - Transaction has been submitted',
       txid: tx.toString()
     });
+    console.log('OK - Transaction has been submitted');
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
     res.status(500).json({
@@ -42,6 +41,7 @@ app.get('/api/readLabs/:id', async function (req, res) {
     const result = await contract.evaluateTransaction('readHealthcareLabs', req.params.id.toString());
     let response = JSON.parse(result.toString());
     res.json({result:response});
+    console.log('OK - Query Successful');
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
     res.status(500).json({
