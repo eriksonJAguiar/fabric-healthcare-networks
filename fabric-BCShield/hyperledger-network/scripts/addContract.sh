@@ -23,14 +23,14 @@ LANGUAGE="$3"
 TIMEOUT="$4"
 VERBOSE="$5"
 NO_CHAINCODE="$6"
-UPGRADE_CHAINCODE="$7"
+NEW_VERSION_CHAINCODE="$7"
 : ${CHANNEL_NAME:="healthchannel"}
 : ${DELAY:="3"}
 : ${LANGUAGE:="node"}
 : ${TIMEOUT:="10"}
 : ${VERBOSE:="false"}
 : ${NO_CHAINCODE:="false"}
-: ${UPGRADE_CHAINCODE:="false"}
+: ${NEW_VERSION_CHAINCODE:="1.0"}
 LANGUAGE=`echo "$LANGUAGE" | tr [:upper:] [:lower:]`
 COUNTER=1
 MAX_RETRY=10
@@ -126,8 +126,9 @@ installChaincode() {
 instantiateChaincode() {
   PEER=$1
   ORG=$2
+  VER=$3
   setGlobals $PEER $ORG
-  VERSION=${3:-1.0}
+  VERSION=${3:-${VER}}
 
   # while 'peer chaincode' command can get the orderer endpoint from the peer
   # (if join was successful), let's supply it directly as we know it using
@@ -152,12 +153,12 @@ instantiateChaincode() {
 upgradeChaincode() {
   PEER=$1
   ORG=$2
-  VER = $3
+  VER=$3
   setGlobals $PEER $ORG
   VERSION=${3:-${VER}}
 
   set -x
-  peer chaincode upgrade -o orderer.healthcare.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n hrecords -v ${VERSION} -c '{"Args":["init","a","90","b","210"]}' -P "AND ('HProviderMSP.peer','ResearchMSP.peer','Org3MSP.peer')"
+  peer chaincode upgrade -o orderer.healthcare.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n ${CONTRACT} -v ${VERSION} -c '{"Args":[]}' -P "AND ('HProviderMSP.peer','ResearchMSP.peer','Org3MSP.peer')"
   res=$?
   set +x
   cat log.txt
@@ -166,47 +167,47 @@ upgradeChaincode() {
   echo
 }
 
-if [ "${NO_CHAINCODE}" != "true" -a "${UPGRADE_CHAINCODE}" != true ]; then
+if [ "${NO_CHAINCODE}" != "true" -a "${NEW_VERSION_CHAINCODE}" == 1.0 ]; then
 
   echo "Installing chaincode on peer0.hprivider..."
-  installChaincode 0 1
+  installChaincode 0 1 $NEW_VERSION_CHAINCODE
 
   echo "Installing chaincode on peer1.hprivider..."
-  installChaincode 1 1
+  installChaincode 1 1 $NEW_VERSION_CHAINCODE
 
   echo "Installing chaincode on peer2.hprivider..."
-  installChaincode 2 1
+  installChaincode 2 1 $NEW_VERSION_CHAINCODE
 
 
   echo "Installing chaincode on peer3.hprivider..."
-  installChaincode 3 1
+  installChaincode 3 1 $NEW_VERSION_CHAINCODE
 
 
   echo "Installing chaincode on peer4.hprivider..."
-  installChaincode 4 1
+  installChaincode 4 1 $NEW_VERSION_CHAINCODE
     
     
   echo "Install chaincode on peer0.research..."
-  installChaincode 0 2
+  installChaincode 0 2 $NEW_VERSION_CHAINCODE
 
   echo "Install chaincode on peer1.research..."
-  installChaincode 1 2
+  installChaincode 1 2 $NEW_VERSION_CHAINCODE
 
   echo "Install chaincode on peer2.research..."
-  installChaincode 2 2
+  installChaincode 2 2 $NEW_VERSION_CHAINCODE
 
   echo "Install chaincode on peer3.research..."
-  installChaincode 3 2
+  installChaincode 3 2 $NEW_VERSION_CHAINCODE
 
   echo "Install chaincode on peer3.research..."
-  installChaincode 4 2
+  installChaincode 4 2 $NEW_VERSION_CHAINCODE
 
 
   echo "Instantiating chaincode on peer0.hprovider..."
   instantiateChaincode 0 1
 fi
 
-if [ "${NO_CHAINCODE}" != "true" -a "${UPGRADE_CHAINCODE}" ]; then
+if [ "${NO_CHAINCODE}" != "true" -a "${NEW_VERSION_CHAINCODE}" > 1.0 ]; then
 
   # echo "Installing chaincode on peer0.hprivider..."
   # installChaincode 0 1
@@ -243,7 +244,7 @@ if [ "${NO_CHAINCODE}" != "true" -a "${UPGRADE_CHAINCODE}" ]; then
 
 
   echo "Instantiating chaincode on peer0.hprovider..."
-  upgradeChaincode 0 1 3.0
+  upgradeChaincode 0 1 $NEW_VERSION_CHAINCODE
 fi
 
 

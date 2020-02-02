@@ -71,6 +71,7 @@ function printHelp() {
   echo "	byfn.sh down"
   echo "Use byfn.sh -s couchdb -a true (set up CA and Couchdb)"
   echo "For install new contract use 'newcontract -a true' "
+  echo "For upgrade contract use 'upgradecontract -e VERSION' "
 }
 
 # Ask user for confirmation to proceed
@@ -484,8 +485,12 @@ function generateChannelArtifacts() {
 }
 
 function newContract(){
+  docker exec cli scripts/addContract.sh $CHANNEL_NAME $CLI_DELAY $LANGUAGE $CLI_TIMEOUT $VERBOSE 1.0
 
-  docker exec cli scripts/addContract.sh $CHANNEL_NAME $CLI_DELAY $LANGUAGE $CLI_TIMEOUT $VERBOSE $NO_CHAINCODE $UPGRADE_CHAINCODE
+}
+
+function upgradeContract(){
+  docker exec cli scripts/addContract.sh $CHANNEL_NAME $CLI_DELAY $LANGUAGE $CLI_TIMEOUT $VERBOSE $NEW_VERSION_CHAINCODE
 
 }
 
@@ -539,14 +544,14 @@ elif [ "$MODE" == "upgrade" ]; then
   EXPMODE="Upgrading the network"
 elif [ "$MODE" == "newcontract" ]; then
   EXPMODE="Installing new contract"
-elif [ "$MODE" == "upgradechaicode" ]; then
-  EXPMODE="Installing new contract"
+elif [ "$MODE" == "upgradecontract" ]; then
+  EXPMODE="upgrade new contract"
 else
   printHelp
   exit 1
 fi
 
-while getopts "h?c:t:d:f:s:l:i:o:anvu" opt; do
+while getopts "h?c:t:d:f:s:l:i:o:e:anv" opt; do
   case "$opt" in
   h | \?)
     printHelp
@@ -576,6 +581,8 @@ while getopts "h?c:t:d:f:s:l:i:o:anvu" opt; do
   o)
     CONSENSUS_TYPE=$OPTARG
     ;;
+  e) 
+    NEW_VERSION_CHAINCODE=$OPTARG
   a)
     CERTIFICATE_AUTHORITIES=true
     ;;
@@ -584,9 +591,6 @@ while getopts "h?c:t:d:f:s:l:i:o:anvu" opt; do
     ;;
   v)
     VERBOSE=true
-    ;;
-  u)
-    UPGRADE_CHAINCODE=false
     ;;
   esac
 done
@@ -619,6 +623,8 @@ elif [ "${MODE}" == "upgrade" ]; then ## Upgrade the network from version 1.2.x 
   upgradeNetwork
 elif [ "${MODE}" == "newcontract" ]; then ## Install new contract
   newContract
+elif [ "${MODE}" == "upgradecontract" ]; then ## Install new contract
+    docker exec cli scripts/addContract.sh $CHANNEL_NAME $CLI_DELAY $LANGUAGE $CLI_TIMEOUT $VERBOSE $NEW_VERSION_CHAINCODE
 else
   printHelp
   exit 1
