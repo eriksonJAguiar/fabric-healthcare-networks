@@ -5,12 +5,14 @@ const fabricNetwork = require('./fabricNetwork')
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 urlencoder = bodyParser.urlencoded({ extended: true});
+const args = process.argv.slice(2);
+const org = args[0];
 
 
 app.post('/api/createLabs', urlencoder, async function (req, res) {
 
   try {
-    const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../../wallet/wallet-hprovider');
+    const contract = await fabricNetwork.connectNetwork(`connection-${org}.json`, `../../wallet/wallet-${org}`);
     console.log(req.body);  
     // let records = {
     //         labsId: req.body.labsId, 
@@ -37,7 +39,7 @@ app.post('/api/createLabs', urlencoder, async function (req, res) {
 
 app.get('/api/readLabs/:id', async function (req, res) {
   try {
-    const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../../wallet/wallet-hprovider');
+    const contract = await fabricNetwork.connectNetwork(`connection-${org}.json`, `../../wallet/wallet-${org}`);
     const result = await contract.evaluateTransaction('readHealthcareLabs', req.params.id.toString());
     let response = JSON.parse(result.toString());
     res.json({result:response});
@@ -72,7 +74,7 @@ app.get('/api/readLabs/:id', async function (req, res) {
 
 // app.get('/api/getHistorySushi/:id', async function (req, res) {
 //   try {
-//     const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', 'wallet/wallet-hprovider');
+//     const contract = await fabricNetwork.connectNetwork(`connection-${org}.json`, 'wallet/wallet-${org}');
 //     const historySushi = JSON.parse((await contract.evaluateTransaction('getHistory', req.params.id.toString())).toString());
 //     const actualSushi = JSON.parse((await contract.evaluateTransaction('querySushi', req.params.id.toString())).toString());
 //     historySushi.unshift(actualSushi);
