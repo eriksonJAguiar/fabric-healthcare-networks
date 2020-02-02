@@ -506,6 +506,8 @@ CLI_DELAY=3
 SYS_CHANNEL="health-sys-channel"
 # channel name defaults to "healthchannel"
 CHANNEL_NAME="healthchannel"
+#Version chaicode defaults to 1.0
+NEW_VERSION_CHAINCODE=1.0
 # use this as the default docker-compose yaml definition
 COMPOSE_FILE=docker-compose-cli.yaml
 #
@@ -625,7 +627,7 @@ elif [ "${MODE}" == "upgrade" ]; then ## Upgrade the network from version 1.2.x 
 elif [ "${MODE}" == "newcontract" ]; then ## Install new contract
   newContract
 elif [ "${MODE}" == "upgradecontract" ]; then ## Install new contract
-    docker exec cli scripts/addContract.sh $CHANNEL_NAME $CLI_DELAY $LANGUAGE $CLI_TIMEOUT $VERBOSE $NEW_VERSION_CHAINCODE
+    upgradeContract
 else
   printHelp
   exit 1

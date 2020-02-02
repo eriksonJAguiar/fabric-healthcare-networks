@@ -35,6 +35,10 @@ LANGUAGE=`echo "$LANGUAGE" | tr [:upper:] [:lower:]`
 COUNTER=1
 MAX_RETRY=10
 
+echo $NEW_VERSION_CHAINCODE
+
+exit 0
+
 CC_SRC_PATH="github.com/chaincode/Dicom-contract"
 if [ "$LANGUAGE" = "node" ]; then
 	CC_SRC_PATH="/opt/gopath/src/github.com/chaincode/Dicom-contract"
@@ -111,8 +115,9 @@ setGlobals() {
 installChaincode() {
   PEER=$1
   ORG=$2
+  VER=$3
   setGlobals $PEER $ORG
-  VERSION=${3:-1.0}
+  VERSION=${3:-${VER}}
   set -x
   peer chaincode install -n ${CONTRACT} -v ${VERSION} -l ${LANGUAGE} -p ${CC_SRC_PATH} >&log.txt
   res=$?
@@ -153,7 +158,7 @@ instantiateChaincode() {
 upgradeChaincode() {
   PEER=$1
   ORG=$2
-  VER= $3
+  VER=$3
   setGlobals $PEER $ORG
   VERSION=${3:-${VER}}
 
@@ -211,39 +216,39 @@ if [ "${NO_CHAINCODE}" != "true" -a "${NEW_VERSION_CHAINCODE}" = "1.0" ]; then
   echo
 
 elif [ "${NO_CHAINCODE}" != "true" -a "${NEW_VERSION_CHAINCODE}" > "1.0" ]; then
-  
-  # echo "Installing chaincode on peer0.hprivider..."
-  # installChaincode 0 1
 
-  # echo "Installing chaincode on peer1.hprivider..."
-  # installChaincode 1 1
+  echo "Installing chaincode on peer0.hprivider..."
+  installChaincode 0 1 $NEW_VERSION_CHAINCODE
 
-  # echo "Installing chaincode on peer2.hprivider..."
-  # installChaincode 2 1
+  echo "Installing chaincode on peer1.hprivider..."
+  installChaincode 1 1 $NEW_VERSION_CHAINCODE
 
-
-  # echo "Installing chaincode on peer3.hprivider..."
-  # installChaincode 3 1
+  echo "Installing chaincode on peer2.hprivider..."
+  installChaincode 2 1 $NEW_VERSION_CHAINCODE
 
 
-  # echo "Installing chaincode on peer4.hprivider..."
-  # installChaincode 4 1
+  echo "Installing chaincode on peer3.hprivider..."
+  installChaincode 3 1 $NEW_VERSION_CHAINCODE
+
+
+  echo "Installing chaincode on peer4.hprivider..."
+  installChaincode 4 1 $NEW_VERSION_CHAINCODE
     
     
-  # echo "Install chaincode on peer0.research..."
-  # installChaincode 0 2
+  echo "Install chaincode on peer0.research..."
+  installChaincode 0 2 $NEW_VERSION_CHAINCODE
 
-  # echo "Install chaincode on peer1.research..."
-  # installChaincode 1 2
+  echo "Install chaincode on peer1.research..."
+  installChaincode 1 2 $NEW_VERSION_CHAINCODE
 
-  # echo "Install chaincode on peer2.research..."
-  # installChaincode 2 2
+  echo "Install chaincode on peer2.research..."
+  installChaincode 2 2 $NEW_VERSION_CHAINCODE
 
-  # echo "Install chaincode on peer3.research..."
-  # installChaincode 3 2
+  echo "Install chaincode on peer3.research..."
+  installChaincode 3 2 $NEW_VERSION_CHAINCODE
 
-  # echo "Install chaincode on peer3.research..."
-  # installChaincode 4 2
+  echo "Install chaincode on peer3.research..."
+  installChaincode 4 2 $NEW_VERSION_CHAINCODE
 
 
   echo "Instantiating chaincode on peer0.hprovider..."
