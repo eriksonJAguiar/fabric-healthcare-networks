@@ -49,7 +49,7 @@ app.post('/api/shareDicom', urlencoder, async function (req, res) {
   try {
     const contract = await fabricNetwork.connectNetwork(`connection-${org}.json`, `../../wallet/wallet-${org}`);
     console.log(req.body);  
-    let tx = await contract.submitTransaction('shareDicom', req.body.tokenDicom, req.body.to, req.body.to, Date.now.time());
+    let tx = await contract.submitTransaction('shareDicom', req.body.tokenDicom, req.body.to, req.body.toOrganization, Date.now.time());
     res.json({
       status: 'OK - Transaction has been submitted',
       txid: tx.toString()
