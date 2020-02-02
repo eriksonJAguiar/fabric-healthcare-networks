@@ -6,7 +6,7 @@ PEER0_RESEARCH_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peer
 PEER0_ORG3_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.healthcare.com/peers/peer0.org3.healthcare.com/tls/ca.crt
 
 LANGUAGE=node
-CC_SRC_PATH=./chaincode/Contract-Dicom
+CC_SRC_PATH=./chaincode/Dicom-contract
 CORE_PEER_TLS_ENABLED=true
 CONTRACT=dicom
 org_name=(hprovider research)
