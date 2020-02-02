@@ -42,6 +42,17 @@ if [ "$LANGUAGE" = "java" ]; then
 	CC_SRC_PATH="/opt/gopath/src/github.com/chaincode/Dicom-contract"
 fi
 
+
+verifyResult() {
+  if [ $1 -ne 0 ]; then
+    echo "!!!!!!!!!!!!!!! "$2" !!!!!!!!!!!!!!!!"
+    echo "========= ERROR !!! FAILED to execute End-2-End Scenario ==========="
+    echo
+    exit 1
+  fi
+}
+
+
 echo "Channel name : "$CHANNEL_NAME
 setGlobals() {
   PEER=$1
@@ -99,7 +110,7 @@ installChaincode() {
   PEER=$1
   ORG=$2
   setGlobals $PEER $ORG
-  VERSION=${3:-1.0}
+  VERSION=${3:-2.0}
   set -x
   peer chaincode install -n ${CONTRACT} -v ${VERSION} -l ${LANGUAGE} -p ${CC_SRC_PATH} >&log.txt
   res=$?
@@ -114,7 +125,7 @@ instantiateChaincode() {
   PEER=$1
   ORG=$2
   setGlobals $PEER $ORG
-  VERSION=${3:-1.0}
+  VERSION=${3:-2.0}
 
   # while 'peer chaincode' command can get the orderer endpoint from the peer
   # (if join was successful), let's supply it directly as we know it using

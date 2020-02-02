@@ -70,6 +70,7 @@ function printHelp() {
   echo "	byfn.sh up"
   echo "	byfn.sh down"
   echo "Use byfn.sh -s couchdb -a true (set up CA and Couchdb)"
+  echo "For install new contract use 'newcontract -a true' "
 }
 
 # Ask user for confirmation to proceed

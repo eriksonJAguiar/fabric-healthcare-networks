@@ -13,7 +13,7 @@ class DicomContract extends Contract {
         return (!!buffer && buffer.length > 0);
     }
 
-    async createDicom(ctx, dicomId, typeExam, owner, to, toOrganization, hashDicom, tokenDicom) {
+    async createDicom(ctx, dicomId, typeExam, owner) {
         const exists = await this.dicomExists(ctx, dicomId);
         if (exists) {
             throw new Error(`The dicom ${dicomId} already exists`);
