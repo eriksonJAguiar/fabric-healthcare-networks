@@ -1,16 +1,48 @@
 #!/bin/bash
 
+echo
+echo " ____    _____      _      ____    _____ "
+echo "/ ___|  |_   _|    / \    |  _ \  |_   _|"
+echo "\___ \    | |     / _ \   | |_) |   | |  "
+echo " ___) |   | |    / ___ \  |  _ <    | |  "
+echo "|____/    |_|   /_/   \_\ |_| \_\   |_|  "
+echo
+echo "Installing new contract ...."
+echo
+
 ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/healthcare.com/orderers/orderer.healthcare.com/msp/tlscacerts/tlsca.healthcare.com-cert.pem
 PEER0_HPROVIDER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hprovider.healthcare.com/peers/peer0.hprovider.healthcare.com/tls/ca.crt
 PEER0_RESEARCH_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/research.healthcare.com/peers/peer0.research.healthcare.com/tls/ca.crt
 PEER0_ORG3_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.healthcare.com/peers/peer0.org3.healthcare.com/tls/ca.crt
 
-LANGUAGE=node
-CC_SRC_PATH=./chaincode/Dicom-contract
-CORE_PEER_TLS_ENABLED=true
 CONTRACT=dicom
-org_name=(hprovider research)
+rg_name=(hprovider research)
+CHANNEL_NAME="$1"
+DELAY="$2"
+LANGUAGE="$3"
+TIMEOUT="$4"
+VERBOSE="$5"
+NO_CHAINCODE="$6"
+: ${CHANNEL_NAME:="healthchannel"}
+: ${DELAY:="3"}
+: ${LANGUAGE:="node"}
+: ${TIMEOUT:="10"}
+: ${VERBOSE:="false"}
+: ${NO_CHAINCODE:="false"}
+LANGUAGE=`echo "$LANGUAGE" | tr [:upper:] [:lower:]`
+COUNTER=1
+MAX_RETRY=10
 
+CC_SRC_PATH="github.com/chaincode/Dicom-contract"
+if [ "$LANGUAGE" = "node" ]; then
+	CC_SRC_PATH="/opt/gopath/src/github.com/chaincode/Dicom-contract"
+fi
+
+if [ "$LANGUAGE" = "java" ]; then
+	CC_SRC_PATH="/opt/gopath/src/github.com/chaincode/Dicom-contract"
+fi
+
+echo "Channel name : "$CHANNEL_NAME
 setGlobals() {
   PEER=$1
   ORG=$2
@@ -104,45 +136,45 @@ instantiateChaincode() {
   echo
 }
 
+if [ "${NO_CHAINCODE}" != "true" ]; then
+
+  echo "Installing chaincode on peer0.hprivider..."
+  installChaincode 0 1
+
+  echo "Installing chaincode on peer1.hprivider..."
+  installChaincode 1 1
+
+  echo "Installing chaincode on peer2.hprivider..."
+  installChaincode 2 1
 
 
-echo "Installing chaincode on peer0.hprivider..."
-installChaincode 0 1
-
-echo "Installing chaincode on peer1.hprivider..."
-installChaincode 1 1
-
-echo "Installing chaincode on peer2.hprivider..."
-installChaincode 2 1
+  echo "Installing chaincode on peer3.hprivider..."
+  installChaincode 3 1
 
 
-echo "Installing chaincode on peer3.hprivider..."
-installChaincode 3 1
+  echo "Installing chaincode on peer4.hprivider..."
+  installChaincode 4 1
+    
+    
+  echo "Install chaincode on peer0.research..."
+  installChaincode 0 2
+
+  echo "Install chaincode on peer1.research..."
+  installChaincode 1 2
+
+  echo "Install chaincode on peer2.research..."
+  installChaincode 2 2
+
+  echo "Install chaincode on peer3.research..."
+  installChaincode 3 2
+
+  echo "Install chaincode on peer3.research..."
+  installChaincode 4 2
 
 
-echo "Installing chaincode on peer4.hprivider..."
-installChaincode 4 1
-	
-	
-echo "Install chaincode on peer0.research..."
-installChaincode 0 2
-
-echo "Install chaincode on peer1.research..."
-installChaincode 1 2
-
-echo "Install chaincode on peer2.research..."
-installChaincode 2 2
-
-echo "Install chaincode on peer3.research..."
-installChaincode 3 2
-
-echo "Install chaincode on peer3.research..."
-installChaincode 4 2
-
-
-echo "Instantiating chaincode on peer0.hprovider..."
-instantiateChaincode 0 1
-
+  echo "Instantiating chaincode on peer0.hprovider..."
+  instantiateChaincode 0 1
+fi
 
 echo
 echo "========= All GOOD, New Contract added =========== "
