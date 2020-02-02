@@ -485,7 +485,7 @@ function generateChannelArtifacts() {
 
 function newContract(){
 
-  docker exec cli scripts/addContract.sh $CHANNEL_NAME $CLI_DELAY $LANGUAGE $CLI_TIMEOUT $VERBOSE $NO_CHAINCODE
+  docker exec cli scripts/addContract.sh $CHANNEL_NAME $CLI_DELAY $LANGUAGE $CLI_TIMEOUT $VERBOSE $NO_CHAINCODE $UPGRADE_CHAINCODE
 
 }
 
@@ -539,12 +539,14 @@ elif [ "$MODE" == "upgrade" ]; then
   EXPMODE="Upgrading the network"
 elif [ "$MODE" == "newcontract" ]; then
   EXPMODE="Installing new contract"
+elif [ "$MODE" == "upgradechaicode" ]; then
+  EXPMODE="Installing new contract"
 else
   printHelp
   exit 1
 fi
 
-while getopts "h?c:t:d:f:s:l:i:o:anv" opt; do
+while getopts "h?c:t:d:f:s:l:i:o:anvu" opt; do
   case "$opt" in
   h | \?)
     printHelp
@@ -582,6 +584,9 @@ while getopts "h?c:t:d:f:s:l:i:o:anv" opt; do
     ;;
   v)
     VERBOSE=true
+    ;;
+  u)
+    UPGRADE_CHAINCODE=false
     ;;
   esac
 done

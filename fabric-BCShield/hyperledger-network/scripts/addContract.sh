@@ -23,12 +23,14 @@ LANGUAGE="$3"
 TIMEOUT="$4"
 VERBOSE="$5"
 NO_CHAINCODE="$6"
+UPGRADE_CHAINCODE="$7"
 : ${CHANNEL_NAME:="healthchannel"}
 : ${DELAY:="3"}
 : ${LANGUAGE:="node"}
 : ${TIMEOUT:="10"}
 : ${VERBOSE:="false"}
 : ${NO_CHAINCODE:="false"}
+: ${UPGRADE_CHAINCODE:="false"}
 LANGUAGE=`echo "$LANGUAGE" | tr [:upper:] [:lower:]`
 COUNTER=1
 MAX_RETRY=10
@@ -110,7 +112,7 @@ installChaincode() {
   PEER=$1
   ORG=$2
   setGlobals $PEER $ORG
-  VERSION=${3:-3.0}
+  VERSION=${3:-1.0}
   set -x
   peer chaincode install -n ${CONTRACT} -v ${VERSION} -l ${LANGUAGE} -p ${CC_SRC_PATH} >&log.txt
   res=$?
@@ -125,7 +127,7 @@ instantiateChaincode() {
   PEER=$1
   ORG=$2
   setGlobals $PEER $ORG
-  VERSION=${3:-3.0}
+  VERSION=${3:-1.0}
 
   # while 'peer chaincode' command can get the orderer endpoint from the peer
   # (if join was successful), let's supply it directly as we know it using
@@ -147,7 +149,24 @@ instantiateChaincode() {
   echo
 }
 
-if [ "${NO_CHAINCODE}" != "true" ]; then
+upgradeChaincode() {
+  PEER=$1
+  ORG=$2
+  VER = $3
+  setGlobals $PEER $ORG
+  VERSION=${3:-${VER}}
+
+  set -x
+  peer chaincode upgrade -o orderer.healthcare.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n hrecords -v ${VERSION} -c '{"Args":["init","a","90","b","210"]}' -P "AND ('HProviderMSP.peer','ResearchMSP.peer','Org3MSP.peer')"
+  res=$?
+  set +x
+  cat log.txt
+  verifyResult $res "Chaincode upgrade on peer${PEER}.${org_name[$ORG-1]} has failed"
+  echo "===================== Chaincode is upgraded on peer${PEER}.${org_name[$ORG-1]} on channel '$CHANNEL_NAME' ===================== "
+  echo
+}
+
+if [ "${NO_CHAINCODE}" != "true" && "${UPGRADE_CHAINCODE}" != true ]; then
 
   echo "Installing chaincode on peer0.hprivider..."
   installChaincode 0 1
@@ -186,6 +205,47 @@ if [ "${NO_CHAINCODE}" != "true" ]; then
   echo "Instantiating chaincode on peer0.hprovider..."
   instantiateChaincode 0 1
 fi
+
+if [ "${NO_CHAINCODE}" != "true" && "${UPGRADE_CHAINCODE}" ]; then
+
+  # echo "Installing chaincode on peer0.hprivider..."
+  # installChaincode 0 1
+
+  # echo "Installing chaincode on peer1.hprivider..."
+  # installChaincode 1 1
+
+  # echo "Installing chaincode on peer2.hprivider..."
+  # installChaincode 2 1
+
+
+  # echo "Installing chaincode on peer3.hprivider..."
+  # installChaincode 3 1
+
+
+  # echo "Installing chaincode on peer4.hprivider..."
+  # installChaincode 4 1
+    
+    
+  # echo "Install chaincode on peer0.research..."
+  # installChaincode 0 2
+
+  # echo "Install chaincode on peer1.research..."
+  # installChaincode 1 2
+
+  # echo "Install chaincode on peer2.research..."
+  # installChaincode 2 2
+
+  # echo "Install chaincode on peer3.research..."
+  # installChaincode 3 2
+
+  # echo "Install chaincode on peer3.research..."
+  # installChaincode 4 2
+
+
+  echo "Instantiating chaincode on peer0.hprovider..."
+  upgradeChaincode 0 1 3.0
+fi
+
 
 echo
 echo "========= All GOOD, New Contract added =========== "
