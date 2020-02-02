@@ -490,7 +490,8 @@ function newContract(){
 }
 
 function upgradeContract(){
-  docker exec cli scripts/addContract.sh $CHANNEL_NAME $CLI_DELAY $LANGUAGE $CLI_TIMEOUT $VERBOSE $NEW_VERSION_CHAINCODE
+  echo $NEW_VERSION_CHAINCODE
+  #docker exec cli scripts/addContract.sh $CHANNEL_NAME $CLI_DELAY $LANGUAGE $CLI_TIMEOUT $VERBOSE $NEW_VERSION_CHAINCODE
 
 }
 
@@ -553,7 +554,7 @@ else
   exit 1
 fi
 
-while getopts "h?c:t:d:f:s:l:i:o:e:anv" opt; do
+while getopts "h?c:t:d:f:s:l:i:o:eanv" opt; do
   case "$opt" in
   h | \?)
     printHelp
