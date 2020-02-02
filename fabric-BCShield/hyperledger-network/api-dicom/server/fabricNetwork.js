@@ -1,6 +1,6 @@
 // Setting for Hyperledger Fabric
 const {  FileSystemWallet,  Gateway} = require('fabric-network');
-const IDENTITY = 'user1';
+const IDENTITY = 'erikson';
 const CHANNEL = 'healthchannel';
 const CONTRACT = 'dicom';
 const path = require('path');
