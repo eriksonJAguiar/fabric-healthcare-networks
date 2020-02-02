@@ -24,18 +24,21 @@ TIMEOUT="$4"
 VERBOSE="$5"
 NO_CHAINCODE="$6"
 NEW_VERSION_CHAINCODE="$7"
+echo $NEW_VERSION_CHAINCODE
 : ${CHANNEL_NAME:="healthchannel"}
 : ${DELAY:="3"}
 : ${LANGUAGE:="node"}
 : ${TIMEOUT:="10"}
 : ${VERBOSE:="false"}
 : ${NO_CHAINCODE:="false"}
+: ${NEW_VERSION_CHAINCODE:=$NEW_VERSION_CHAINCODE}
 LANGUAGE=`echo "$LANGUAGE" | tr [:upper:] [:lower:]`
 COUNTER=1
 MAX_RETRY=10
 
 echo $NEW_VERSION_CHAINCODE
 
+exit 0
 
 CC_SRC_PATH="github.com/chaincode/Dicom-contract"
 if [ "$LANGUAGE" = "node" ]; then
