@@ -61,7 +61,7 @@ setGlobals() {
   if [ "$VERBOSE" == "true" ]; then
     env | grep CORE
   fi
-
+}
 
 installChaincode() {
   PEER=$1
