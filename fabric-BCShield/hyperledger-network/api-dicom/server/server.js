@@ -13,7 +13,7 @@ app.post('/api/createDicom', urlencoder, async function (req, res) {
 
   try {
     const contract = await fabricNetwork.connectNetwork(`connection-${org}.json`, `../../wallet/wallet-${org}`); 
-    //agrs = [req.body.dicomId, req.body.typeExam, req.body.owner]
+    console.log(req.body);
     let tx = await contract.submitTransaction('createDicom', req.body.dicomId, req.body.typeExam, req.body.owner);
     res.json({
       status: 'OK - Transaction has been submitted',
@@ -49,8 +49,7 @@ app.post('/api/shareDicom', urlencoder, async function (req, res) {
   try {
     const contract = await fabricNetwork.connectNetwork(`connection-${org}.json`, `../../wallet/wallet-${org}`);
     console.log(req.body);  
-    agrs = [req.body.tokenDicom, req.body.to, req.body.to, Date.now.time()]
-    let tx = await contract.submitTransaction('shareDicom', args);
+    let tx = await contract.submitTransaction('shareDicom', req.body.tokenDicom, req.body.to, req.body.to, Date.now.time());
     res.json({
       status: 'OK - Transaction has been submitted',
       txid: tx.toString()
