@@ -211,7 +211,7 @@ if [ "${NO_CHAINCODE}" != "true" -a "${NEW_VERSION_CHAINCODE}" = "1.0" ]; then
   echo
 
 elif [ "${NO_CHAINCODE}" != "true" -a "${NEW_VERSION_CHAINCODE}" > "1.0" ]; then
-
+  
   # echo "Installing chaincode on peer0.hprivider..."
   # installChaincode 0 1
 
