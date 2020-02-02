@@ -583,6 +583,7 @@ while getopts "h?c:t:d:f:s:l:i:o:e:anv" opt; do
     ;;
   e) 
     NEW_VERSION_CHAINCODE=$OPTARG
+    ;;
   a)
     CERTIFICATE_AUTHORITIES=true
     ;;
