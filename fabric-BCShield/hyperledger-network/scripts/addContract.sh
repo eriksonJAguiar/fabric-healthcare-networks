@@ -166,7 +166,7 @@ upgradeChaincode() {
   echo
 }
 
-if [ [ "${NO_CHAINCODE}" != "true" && "${UPGRADE_CHAINCODE}" != true ] ]; then
+if [ "${NO_CHAINCODE}" != "true" -a "${UPGRADE_CHAINCODE}" != true ]; then
 
   echo "Installing chaincode on peer0.hprivider..."
   installChaincode 0 1
@@ -206,7 +206,7 @@ if [ [ "${NO_CHAINCODE}" != "true" && "${UPGRADE_CHAINCODE}" != true ] ]; then
   instantiateChaincode 0 1
 fi
 
-if [ [ "${NO_CHAINCODE}" != "true" && "${UPGRADE_CHAINCODE}" ] ]; then
+if [ "${NO_CHAINCODE}" != "true" -a "${UPGRADE_CHAINCODE}" ]; then
 
   # echo "Installing chaincode on peer0.hprivider..."
   # installChaincode 0 1
