@@ -153,7 +153,7 @@ instantiateChaincode() {
 upgradeChaincode() {
   PEER=$1
   ORG=$2
-  VER=$3
+  VER= $3
   setGlobals $PEER $ORG
   VERSION=${3:-${VER}}
 
@@ -167,7 +167,7 @@ upgradeChaincode() {
   echo
 }
 
-if [ "${NO_CHAINCODE}" != "true" -a "${NEW_VERSION_CHAINCODE}" == 1.0 ]; then
+if [ "${NO_CHAINCODE}" != "true" -a "${NEW_VERSION_CHAINCODE}" = "1.0" ]; then
 
   echo "Installing chaincode on peer0.hprivider..."
   installChaincode 0 1 $NEW_VERSION_CHAINCODE
@@ -205,9 +205,12 @@ if [ "${NO_CHAINCODE}" != "true" -a "${NEW_VERSION_CHAINCODE}" == 1.0 ]; then
 
   echo "Instantiating chaincode on peer0.hprovider..."
   instantiateChaincode 0 1
-fi
 
-if [ "${NO_CHAINCODE}" != "true" -a "${NEW_VERSION_CHAINCODE}" > 1.0 ]; then
+  echo
+  echo "========= All GOOD, New Contract added =========== "
+  echo
+
+elif [ "${NO_CHAINCODE}" != "true" -a "${NEW_VERSION_CHAINCODE}" > "1.0" ]; then
 
   # echo "Installing chaincode on peer0.hprivider..."
   # installChaincode 0 1
@@ -245,12 +248,17 @@ if [ "${NO_CHAINCODE}" != "true" -a "${NEW_VERSION_CHAINCODE}" > 1.0 ]; then
 
   echo "Instantiating chaincode on peer0.hprovider..."
   upgradeChaincode 0 1 $NEW_VERSION_CHAINCODE
+
+  echo
+  echo "========= All GOOD, New Contract added =========== "
+  echo
+
+else
+  echo
+  echo "========= ERROR, New Contract Not added =========== "
+  echo
 fi
 
-
-echo
-echo "========= All GOOD, New Contract added =========== "
-echo
 
 echo
 echo " _____   _   _   ____   "
