@@ -10,10 +10,9 @@ urlencoder = bodyParser.urlencoded({ extended: true});
 app.post('/api/createDicom', urlencoder, async function (req, res) {
 
   try {
-    const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../../api-src/wallet/wallet-hprovider');
-    console.log(req.body);  
-    agrs = [req.body.dicomId, req.body.typeExam, req.body.owner]
-    let tx = await contract.submitTransaction('createDicom', args);
+    const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../../api-src/wallet/wallet-hprovider'); 
+    //agrs = [req.body.dicomId, req.body.typeExam, req.body.owner]
+    let tx = await contract.submitTransaction('createDicom', req.body.dicomId, req.body.typeExam, req.body.owner);
     res.json({
       status: 'OK - Transaction has been submitted',
       txid: tx.toString()
