@@ -137,7 +137,7 @@ instantiateChaincode() {
     set +x
   else
     set -x
-    peer chaincode instantiate -o orderer.healthcare.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n ${CONTRACT} -l ${LANGUAGE} -v 1.0 -c '{"Args":[]}' -P "AND ('HProviderMSP.peer','ResearchMSP.peer')" >&log.txt
+    peer chaincode instantiate -o orderer.healthcare.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n ${CONTRACT} -l ${LANGUAGE} -v ${VERSION} -c '{"Args":[]}' -P "AND ('HProviderMSP.peer','ResearchMSP.peer')" >&log.txt
     res=$?
     set +x
   fi
