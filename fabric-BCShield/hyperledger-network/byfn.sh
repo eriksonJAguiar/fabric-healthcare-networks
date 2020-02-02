@@ -71,7 +71,7 @@ function printHelp() {
   echo "	byfn.sh down"
   echo "Use byfn.sh -s couchdb -a true (set up CA and Couchdb)"
   echo "For install new contract use 'newcontract -a true' "
-  echo "For upgrade contract use 'upgradecontract -e VERSION' "
+  echo "For upgrade contract use 'upgradecontract -e VERSION -a true' "
 }
 
 # Ask user for confirmation to proceed
@@ -490,8 +490,7 @@ function newContract(){
 }
 
 function upgradeContract(){
-  echo $NEW_VERSION_CHAINCODE
-  #docker exec cli scripts/addContract.sh $CHANNEL_NAME $CLI_DELAY $LANGUAGE $CLI_TIMEOUT $VERBOSE $NEW_VERSION_CHAINCODE
+  docker exec cli scripts/addContract.sh $CHANNEL_NAME $CLI_DELAY $LANGUAGE $CLI_TIMEOUT $VERBOSE $NEW_VERSION_CHAINCODE
 
 }
 
