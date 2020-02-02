@@ -14,7 +14,7 @@ async function main() {
         const org = args[0];
         const ccpPath = path.resolve(__dirname, '..', 'connections',`connection-${org}.json`);
         // Create a new file system based wallet for managing identities.
-        const walletPath = path.join(process.cwd(), `wallet/wallet-${org}`);
+        const walletPath = path.join(process.cwd(), `../wallet/wallet-${org}`);
         const wallet = new FileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
 

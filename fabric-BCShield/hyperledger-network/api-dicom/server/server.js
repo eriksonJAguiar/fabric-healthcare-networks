@@ -10,7 +10,7 @@ urlencoder = bodyParser.urlencoded({ extended: true});
 app.post('/api/createDicom', urlencoder, async function (req, res) {
 
   try {
-    const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../wallet/wallet-hprovider');
+    const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../../api-src/wallet/wallet-hprovider');
     console.log(req.body);  
     agrs = [req.body.dicomId, req.body.typeExam, req.body.owner]
     let tx = await contract.submitTransaction('createDicom', args);
@@ -30,7 +30,7 @@ app.post('/api/createDicom', urlencoder, async function (req, res) {
 
 app.get('/api/readDicom/:dicomId', async function (req, res) {
   try {
-    const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../wallet/wallet-hprovider');
+    const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../../api-src/wallet/wallet-hprovider');
     const result = await contract.evaluateTransaction('readDicom', req.params.dicomId.toString());
     let response = JSON.parse(result.toString());
     res.json({result:response});
@@ -46,7 +46,7 @@ app.get('/api/readDicom/:dicomId', async function (req, res) {
 app.post('/api/shareDicom', urlencoder, async function (req, res) {
 
   try {
-    const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../wallet/wallet-hprovider');
+    const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../../api-src/wallet/wallet-hprovider');
     console.log(req.body);  
     agrs = [req.body.tokenDicom, req.body.to, req.body.to, Date.now.time()]
     let tx = await contract.submitTransaction('shareDicom', args);
@@ -66,7 +66,7 @@ app.post('/api/shareDicom', urlencoder, async function (req, res) {
 
 app.get('/api/readAccessLog/:tokenDicom', async function (req, res) {
   try {
-    const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../wallet/wallet-hprovider');
+    const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../../api-src/wallet/wallet-hprovider');
     const result = await contract.evaluateTransaction('readAccessLog', req.params.tokenDicom.toString());
     let response = JSON.parse(result.toString());
     res.json({result:response});

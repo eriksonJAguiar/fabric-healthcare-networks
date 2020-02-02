@@ -10,7 +10,7 @@ urlencoder = bodyParser.urlencoded({ extended: true});
 app.post('/api/createLabs', urlencoder, async function (req, res) {
 
   try {
-    const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../wallet/wallet-hprovider');
+    const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../../wallet/wallet-hprovider');
     console.log(req.body);  
     // let records = {
     //         labsId: req.body.labsId, 
@@ -37,7 +37,7 @@ app.post('/api/createLabs', urlencoder, async function (req, res) {
 
 app.get('/api/readLabs/:id', async function (req, res) {
   try {
-    const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../wallet/wallet-hprovider');
+    const contract = await fabricNetwork.connectNetwork('connection-hprovider.json', '../../wallet/wallet-hprovider');
     const result = await contract.evaluateTransaction('readHealthcareLabs', req.params.id.toString());
     let response = JSON.parse(result.toString());
     res.json({result:response});
