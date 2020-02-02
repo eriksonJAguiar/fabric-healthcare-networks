@@ -30,14 +30,12 @@ NEW_VERSION_CHAINCODE="$7"
 : ${TIMEOUT:="10"}
 : ${VERBOSE:="false"}
 : ${NO_CHAINCODE:="false"}
-: ${NEW_VERSION_CHAINCODE:="1.0"}
 LANGUAGE=`echo "$LANGUAGE" | tr [:upper:] [:lower:]`
 COUNTER=1
 MAX_RETRY=10
 
 echo $NEW_VERSION_CHAINCODE
 
-exit 0
 
 CC_SRC_PATH="github.com/chaincode/Dicom-contract"
 if [ "$LANGUAGE" = "node" ]; then

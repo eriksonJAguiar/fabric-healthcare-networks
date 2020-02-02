@@ -554,7 +554,6 @@ else
 fi
 
 while getopts "h?c:t:d:f:s:l:i:o:e:anv" opt; do
-  echo $opt
   case "$opt" in
   h | \?)
     printHelp
