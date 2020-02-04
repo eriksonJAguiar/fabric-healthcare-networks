@@ -207,7 +207,7 @@ if [ "${NO_CHAINCODE}" != "true" -a "${NEW_VERSION_CHAINCODE}" = "1.0" ]; then
 
 
   echo "Instantiating chaincode on peer0.hprovider..."
-  instantiateChaincode 0 1
+  instantiateChaincode 0 1 $NEW_VERSION_CHAINCODE
 
   echo
   echo "========= All GOOD, New Contract added =========== "

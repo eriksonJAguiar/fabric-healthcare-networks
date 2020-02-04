@@ -41,15 +41,9 @@ async function main() {
         const ca = gateway.getClient().getCertificateAuthority();
         const adminIdentity = gateway.getCurrentIdentity();
 
-        MSP = "";
-        if($org == 'hprovider'){
-            MSP = "HProviderMSP";
-        }else{
-            MSP = "ResearchMSP";
-        }
         const secret = await ca.register({enrollmentID: user, role: 'client' }, adminIdentity);
         const enrollment = await ca.enroll({ enrollmentID: user, enrollmentSecret: secret });
-        const userIdentity = X509WalletMixin.createIdentity(MSP, enrollment.certificate, enrollment.key.toBytes());
+        const userIdentity = X509WalletMixin.createIdentity("HProviderMSP", enrollment.certificate, enrollment.key.toBytes());
         await wallet.import(user, userIdentity);
         console.log(`Successfully registered and enrolled admin user "${user}" and imported it into the wallet`);
 
